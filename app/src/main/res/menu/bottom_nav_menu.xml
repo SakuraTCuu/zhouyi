@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home1"
+        android:title="@string/title_home"  />
+    <item
+        android:id="@+id/navigation_bazi"
+        android:icon="@mipmap/bazi1"
+        android:title="@string/title_bazi" />
+
+    <item
+        android:id="@+id/navigation_qiming"
+        android:icon="@mipmap/qiming1"
+        android:title="@string/title_qiming" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/mine1"
+        android:title="@string/title_mine" />
+
+</menu>
