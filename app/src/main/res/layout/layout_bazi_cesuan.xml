@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/bazi_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/analysis_biaoti"
+        android:gravity="center"
+        android:text="2020最新测算" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_yunshi_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年运势"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_yunshi_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_yunshi_1"
+                    android:layout_marginTop="10dp"
+                    android:text="琢玉郎" />
+
+                <TextView
+                    android:id="@+id/text_yunshi_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_yunshi_2"
+                    android:layout_marginTop="5dp"
+                    android:text="为你精批" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_yunshi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginRight="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_caiyun_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年运势"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_caiyun_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_caiyun_1"
+                    android:layout_marginTop="10dp"
+                    android:text="发财机遇" />
+
+                <TextView
+                    android:id="@+id/text_caiyun_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_caiyun_2"
+                    android:layout_marginTop="5dp"
+                    android:text="不再错过" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_caiyun" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_weiji_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年危机"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_weiji_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_weiji_1"
+                    android:layout_marginTop="10dp"
+                    android:text="预知未来" />
+
+                <TextView
+                    android:id="@+id/text_weiji_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_weiji_2"
+                    android:layout_marginTop="5dp"
+                    android:text="十年风险" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_weiji" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginRight="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_yinyuan_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年姻缘"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_yinyuan_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_yinyuan_1"
+                    android:layout_marginTop="10dp"
+                    android:text="能否与TA" />
+
+                <TextView
+                    android:id="@+id/text_yinyuan_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_yinyuan_2"
+                    android:layout_marginTop="5dp"
+                    android:text="修成正果" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_yinyuan" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_hehun_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年合婚"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_hehun_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_hehun_1"
+                    android:layout_marginTop="10dp"
+                    android:text="婚前必测" />
+
+                <TextView
+                    android:id="@+id/text_hehun_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_hehun_2"
+                    android:layout_marginTop="5dp"
+                    android:text="婚后幸福" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_hehun" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginRight="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/text_haoming_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020年好名"
+                    android:textColor="#4D6F71"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/text_haoming_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_haoming_1"
+                    android:layout_marginTop="10dp"
+                    android:text="送宝宝" />
+
+                <TextView
+                    android:id="@+id/text_haomingn_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_haoming_2"
+                    android:layout_marginTop="5dp"
+                    android:text="终身吉祥礼" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/index_haoming" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

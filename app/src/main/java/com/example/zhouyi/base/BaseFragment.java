@@ -42,11 +42,14 @@ public abstract class BaseFragment extends Fragment {
         //绑定控件
         unbinder = ButterKnife.bind(this,view);
         mContext = getActivity();
+        initView();
         initData();
         return view;
     }
 
     protected abstract int setLayoutId();
+
+    protected abstract void initView();
 
     protected abstract void initData();
 
