@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_yunshi_1"
                     android:layout_marginTop="10dp"
-                    android:text="琢玉郎" />
+                    android:text="预知未来" />
 
                 <TextView
                     android:id="@+id/text_yunshi_3"
@@ -55,11 +55,14 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_yunshi_2"
                     android:layout_marginTop="5dp"
-                    android:text="为你精批" />
+                    android:text="十年风险" />
 
             </RelativeLayout>
 
             <ImageView
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/index_yunshi" />
@@ -81,7 +84,7 @@
                     android:id="@+id/text_caiyun_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2020年运势"
+                    android:text="2020年财运"
                     android:textColor="#4D6F71"
                     android:textSize="18dp" />
 
@@ -112,6 +115,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -207,6 +211,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
