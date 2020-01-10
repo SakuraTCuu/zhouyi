@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.zhouyi.ui.Fragment.home.HomeFragment"
+        android:name="com.qicheng.zhouyi.ui.Fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_bazi"
-        android:name="com.example.zhouyi.ui.Fragment.bazi.BaziFragment"
+        android:name="com.qicheng.zhouyi.ui.Fragment.bazi.BaziFragment"
         android:label="@string/title_bazi"
         tools:layout="@layout/fragment_bazi" />
 
     <fragment
         android:id="@+id/navigation_qiming"
-        android:name="com.example.zhouyi.ui.Fragment.qiming.QimingFragment"
+        android:name="com.qicheng.zhouyi.ui.Fragment.qiming.QimingFragment"
         android:label="@string/title_qiming"
         tools:layout="@layout/fragment_qiming" />
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.example.zhouyi.ui.Fragment.mine.MineFragment"
+        android:name="com.qicheng.zhouyi.ui.Fragment.mine.MineFragment"
         android:label="@string/title_mine"
         tools:layout="@layout/fragment_mine" />
 </navigation>

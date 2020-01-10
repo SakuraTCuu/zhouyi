@@ -5,22 +5,47 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.zhouyi"
+        applicationId "com.qicheng.zhouyi"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file("E:\\APK\\zhouyi_sign.jks")
+            storePassword "123456"
+            keyAlias "qicheng"
+            keyPassword "123456"
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //加上以下两句
+            debuggable true
+            signingConfig signingConfigs.release
+        }
+        //添加以下
+        debug {
+            signingConfig signingConfigs.release
         }
     }
-    compileOptions{
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+repositories {
+    flatDir {
+        dirs '../app/libs'
     }
 }
 
@@ -42,4 +67,19 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     /*BottomNavigation导航栏*/
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    //日期选择控件
+//    implementation 'jsc.kit.wheel:wheel-view:_latestVersion'
+    compile 'com.github.codbking:PickTime:v1.0.1'
+
+    /**  微信开发工具包*/
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    /*网络请求*/
+    implementation 'com.zhousf.lib:okhttp3:2.9.2.1'
+    /*显示网络请求Log*/
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    //引入闪验aar包
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+
 }

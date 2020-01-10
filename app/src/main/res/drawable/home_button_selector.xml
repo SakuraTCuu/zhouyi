@@ -1,9 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_window_focused="false"
-        android:drawable="@mipmap/home1"/>
-    <item android:state_focused="true"
-        android:drawable="@mipmap/home"/>
-    <item android:state_pressed="true"
-        android:drawable="@mipmap/home"/>
-    <item android:drawable="@mipmap/home1"/>
-</selector>

@@ -33,6 +33,7 @@
     <!--        app:navGraph="@navigation/mobile_navigation" />-->
     <ScrollView
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="0dp"
         android:layout_weight="1">
 
