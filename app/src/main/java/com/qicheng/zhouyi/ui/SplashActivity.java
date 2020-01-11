@@ -14,6 +14,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        hideTitleBar();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

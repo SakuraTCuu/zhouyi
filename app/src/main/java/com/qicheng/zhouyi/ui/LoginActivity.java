@@ -54,6 +54,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        hideTitleBar();
         time = new TimeCount(60000, 1000);
     }
 

@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10b9dc8a-4d16-4792-ba63-9720260d9465" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/adapter/MineBeiyongAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/adapter/QimingDetailAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/bean/MineBeiyongBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineBeiyongActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/ChooseNameFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/DashiQimingFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingBaziFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingDetailActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/bazi_line_h.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_base.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_mine_beiyong.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_qiming_detail.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_choosename.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dashi_qiming.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_qiming_bazi.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/layout_mine_beiyong_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/layout_title_bar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/InterfaceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/InterfaceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/OkHttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/OkHttpManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/ResourcesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/ResourcesManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/Fragment/bazi/BaziFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/bazi/BaziFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/Fragment/home/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/home/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/Fragment/mine/MineFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/mine/MineFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/Fragment/qiming/QimingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/qiming/QimingFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineUserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineUserActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/SplashActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/DataCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/DataCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/LogUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/LogUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/SPUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/SPUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/TimeCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/TimeCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/ToastUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/utils/ToastUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/widget/CustomToast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/widget/CustomToast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/anim/fade_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/anim/fade_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/anim/fade_out.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/anim/fade_out.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/circle_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/circle_icon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/icon_shape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/icon_shape.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/login_bottom_border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/login_bottom_border.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/login_btn_border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/login_btn_border.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/login_getccode_shape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/login_getccode_shape.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/mine_border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/mine_border.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/qiming_bg_shape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/qiming_bg_shape.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/qiming_bg_unshape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/qiming_bg_unshape.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/qiming_border.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/qiming_border.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/shape_custom_toast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/drawable/shape_custom_toast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_mine_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_mine_user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_splash.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_bazi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_bazi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_mine.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_mine.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_qiming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_qiming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_bazi_cesuan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_bazi_cesuan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_bazi_hehun.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_bazi_hehun.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_custom_toast.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_custom_toast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_dashi_wenda.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_dashi_wenda.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_home_top.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_home_top.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/layout_home_top_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/layout_home_top_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/styles.xml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/../.gradle/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="bdfe06677d24" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_qiming_bazi.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1562">
+              <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+              <folding>
+                <element signature="e#6063#7506#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingDetailActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="69" column="57" lean-forward="true" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="resourceFile" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>MEDIA_TYPE_PNG</find>
+      <find>rl_title_bar</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/OkHttpManager.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_mine_aboutme.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/common/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/fragment_mine.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/Fragment/mine/MineFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/bean/MineBeiyongBean.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/adapter/MineBeiyongAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/layout_mine_beiyong_item.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_mine_beiyong.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_mine_feedback.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_mine_user.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/layout_title_bar.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/SplashActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineAboutMeActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineBeiyongActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineFeedbackActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineKeFuActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineOrderActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MineUserActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_base.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineUserActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/QimingBaziFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/ui/test/TestViewModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/TestActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/fragment_dashi_qiming.xml" />
+        <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/qiming/QimingFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/adapter/QimingDetailAdapter.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/fragment_choosename.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/ChooseNameFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/DashiQimingFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_qiming_detail.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingDetailActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/drawable/bazi_line_h.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/fragment_qiming_bazi.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="187" />
+    <option name="y" value="63" />
+    <option name="width" value="1370" />
+    <option name="height" value="951" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="ui" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="ui" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qiming" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="ui" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="E:\code\Android\zhouyi" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qicheng" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="zhouyi" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="ui" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="qiming" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="zhouyi" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="zhouyi" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="zhouyi" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="qiming" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="zhouyi" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="redmi_6-bdfe06677d24" />
+    <property name="DEBUGGABLE_PROCESS" value="com.qicheng.zhouyi" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android.sdk.path" value="E:/software/android_sdk" />
+    <property name="last_opened_file_path" value="E:/Project2/zhaocaimao" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="com.qicheng.zhouyi.ui.bazi" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.qicheng.zhouyi.ui.qiming" />
+      <recent name="com.qicheng.zhouyi.adapter" />
+      <recent name="com.qicheng.zhouyi.bean" />
+      <recent name="com.qicheng.zhouyi.ui" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10b9dc8a-4d16-4792-ba63-9720260d9465" name="Default Changelist" comment="" />
+      <created>1578704675960</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578704675960</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" order="0" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22547974" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Resources Explorer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Captures" order="7" side_tool="true" weight="0.25" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="TODO" order="0" />
+      <window_info anchor="bottom" id="Android Profiler" order="1" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="2" visible="true" weight="0.5893971" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43139294" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.510395" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32952183" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.41787943" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="right" id="Gradle" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="right" id="Preview" order="3" weight="0.2782516" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineFeedbackActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineKeFuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineOrderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/mine/MineUserActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#2790#2791#0" expanded="true" />
+            <element signature="e#2840#2841#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/ui/test/TestFragment.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/ui/test/TestViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/bazi/TestActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/test_fragment.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://E:/software/android_sdk/sources/android-29/android/content/Intent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9003" column="27" selection-start-line="9003" selection-start-column="27" selection-end-line="9003" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+          <folding>
+            <element signature="e#1782#1800#0" expanded="true" />
+            <element signature="e#1892#1910#0" expanded="true" />
+            <element signature="e#2011#2029#0" expanded="true" />
+            <element signature="e#2131#2149#0" expanded="true" />
+            <element signature="e#2250#2268#0" expanded="true" />
+            <element signature="e#2373#2391#0" expanded="true" />
+            <element signature="e#2495#2513#0" expanded="true" />
+            <element signature="e#2618#2636#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://E:/software/android_sdk/sources/android-29/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="23385" selection-start-line="23385" selection-end-line="23385" />
+          <folding>
+            <element signature="e#637215#637216#0" expanded="true" />
+            <element signature="e#637245#637246#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/home/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.0.0/bcd167792ec03e930d5c8345c99ae07b2627de84/fragment-1.0.0-sources.jar!/androidx/fragment/app/FragmentPagerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="46" column="30" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.0.0/bcd167792ec03e930d5c8345c99ae07b2627de84/fragment-1.0.0-sources.jar!/androidx/fragment/app/BackStackRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="400" column="36" selection-start-line="400" selection-start-column="36" selection-end-line="400" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.0.0/bcd167792ec03e930d5c8345c99ae07b2627de84/fragment-1.0.0-sources.jar!/androidx/fragment/app/FragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="727" column="26" selection-start-line="727" selection-start-column="11" selection-end-line="727" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/fragment/qiming/QimingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="664">
+          <caret line="164" column="41" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/base/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="e#2014#2015#0" expanded="true" />
+            <element signature="e#2053#2054#0" expanded="true" />
+            <element signature="e#2502#2503#0" expanded="true" />
+            <element signature="e#2556#2557#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="64" column="20" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/captures/com.qicheng.zhouyi_2020.01.11_17.31.li">
+      <provider selected="true" editor-type-id="capture-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/DashiQimingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingBaziFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#268#269#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/adapter/QimingDetailAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="25" column="58" selection-start-line="25" selection-start-column="58" selection-end-line="25" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/ChooseNameFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#215#216#0" expanded="true" />
+            <element signature="e#266#267#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_choosename.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="11" column="15" lean-forward="true" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/layout_bazi_hehun.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/layout_home_top.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/layout_bazi_cesuan.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_mine.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_home.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="26" column="36" lean-forward="true" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_bazi.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/commom_loading_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_splash.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_mine_order.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_base.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_login.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_dashi_qiming.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_qiming_detail.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324">
+          <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_mine_user.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_qiming.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="249" column="17" lean-forward="true" selection-start-line="249" selection-start-column="17" selection-end-line="249" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/software/android_sdk/platforms/android-29/data/res/values/colors_holo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/bazi_line_h.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/fragment_qiming_bazi.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1562">
+          <caret line="142" column="45" lean-forward="true" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
+          <folding>
+            <element signature="e#6063#7506#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/qicheng/zhouyi/ui/qiming/QimingDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="69" column="57" lean-forward="true" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

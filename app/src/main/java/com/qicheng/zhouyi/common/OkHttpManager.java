@@ -5,13 +5,18 @@ import android.util.Log;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.OkHttpUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class OkHttpManager {
@@ -73,6 +78,24 @@ public class OkHttpManager {
         okHttpClient.newCall(request).enqueue(callback);
     }
 
+
+    public static void uploadImg(String URL, File file, Callback callback) {
+        MediaType MEDIA_TYPE_PNG = MediaType.parse("multipart/form-data");
+        //2.创建RequestBody
+        RequestBody fileBody = RequestBody.create(MEDIA_TYPE_PNG, file);
+
+        //3.构建MultipartBody
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("image", "testImage.png", fileBody)
+                .addFormDataPart("user_id", "48")
+                .build();
+        //4.构建请求
+        //传到服务器
+        Request request = new Request.Builder().url(URL).post(requestBody).build();
+        //5.发送请求
+        okHttpClient.newCall(request).enqueue(callback);
+    }
 
     public static void sendMultipart(String urlAddress, RequestBody requestBody, Callback callback) {
         //这里根据需求传，不需要可以注释掉

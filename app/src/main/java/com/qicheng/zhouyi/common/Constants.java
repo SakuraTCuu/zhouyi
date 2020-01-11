@@ -52,5 +52,9 @@ public class Constants {
 
         //修改用户头像
         public static final String UPDATEUSERICON = URL + "index/user/updateUserHeadImg";
+
+        //添加用户反馈
+        public static final String USERREPORT = URL + "index/user/userReport";
+
     }
 }

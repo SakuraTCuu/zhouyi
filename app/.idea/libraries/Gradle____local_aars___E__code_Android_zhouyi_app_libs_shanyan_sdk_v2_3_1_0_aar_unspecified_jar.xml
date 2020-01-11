@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: __local_aars__:E.\code\Android\zhouyi\app\libs\shanyan_sdk_v2.3.1.0.aar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/017053db859bf646f0b0828e74839d94/jetified-shanyan_sdk_v2.3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/017053db859bf646f0b0828e74839d94/jetified-shanyan_sdk_v2.3.1.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

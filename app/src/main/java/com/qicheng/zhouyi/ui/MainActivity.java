@@ -11,10 +11,10 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
-import com.qicheng.zhouyi.ui.Fragment.bazi.BaziFragment;
-import com.qicheng.zhouyi.ui.Fragment.home.HomeFragment;
-import com.qicheng.zhouyi.ui.Fragment.mine.MineFragment;
-import com.qicheng.zhouyi.ui.Fragment.qiming.QimingFragment;
+import com.qicheng.zhouyi.ui.fragment.bazi.BaziFragment;
+import com.qicheng.zhouyi.ui.fragment.home.HomeFragment;
+import com.qicheng.zhouyi.ui.fragment.mine.MineFragment;
+import com.qicheng.zhouyi.ui.fragment.qiming.QimingFragment;
 
 import butterknife.BindView;
 
@@ -43,6 +43,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void initView() {
+        hideTitleBar();
+
         instances = this;
         //设置Mode
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qicheng.zhouyi">
-
     <!-- 访问互联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -17,17 +15,16 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
-        android:name="com.qicheng.zhouyi.ui.MyApplication"
+        android:name=".ui.MyApplication"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/NoActionTheme">
-        <activity android:name="com.qicheng.zhouyi.ui.SplashActivity">
+        android:theme="@style/NoActionTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,14 +32,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.qicheng.zhouyi.ui.LoginActivity"
-            android:label="@string/app_name"></activity>
+            android:name=".ui.LoginActivity"
+            android:label="@string/app_name" />
         <activity
-            android:name="com.qicheng.zhouyi.ui.MainActivity"
-            android:label="@string/app_name"></activity>
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name" />
         <activity
-            android:name="com.qicheng.zhouyi.ui.MineUserActivity"
-            android:label="@string/app_name"></activity>
+            android:name=".ui.mine.MineUserActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.mine.MineOrderActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.mine.MineKeFuActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.mine.MineFeedbackActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.mine.MineAboutMeActivity"
+            android:label="@string/app_name" />
+        <!--        起名-> 八字-->
+        <activity
+            android:name=".ui.qiming.QimingDetailActivity"
+            android:label="@string/app_name" />
+
 
         <!-- **********************移动授权⻚activity************************** -->
         <activity
@@ -56,21 +70,19 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
-            android:theme="@style/dialogStyle" />
-        <!-- **********************电信授权⻚activity************************* -->
+            android:theme="@style/dialogStyle" /> <!-- **********************电信授权⻚activity************************* -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:theme="@style/dialogStyle" />
-        <!-- **********************协议⻚activity************************** -->
+            android:theme="@style/dialogStyle" /> <!-- **********************协议⻚activity************************** -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="behind"
             android:theme="@style/dialogStyle" />
-
+        <activity android:name=".ui.mine.MineBeiyongActivity" />
     </application>
 
 </manifest>

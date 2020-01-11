@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.zhousf.lib:okhttp3:2.9.2.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b32071d97e2bb726540b9a120eb6dbd/jetified-okhttp3-2.9.2.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b32071d97e2bb726540b9a120eb6dbd/jetified-okhttp3-2.9.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b32071d97e2bb726540b9a120eb6dbd/jetified-okhttp3-2.9.2.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zhousf.lib/okhttp3/2.9.2.1/575d0de9351d3b3fb2769eb33200333e44cfe31a/okhttp3-2.9.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zhousf.lib/okhttp3/2.9.2.1/6a86cb6d398bf62ff2128ece0f21ae1398cc16cd/okhttp3-2.9.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

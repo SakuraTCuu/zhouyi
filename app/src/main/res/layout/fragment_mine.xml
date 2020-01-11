@@ -13,14 +13,13 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/parent_linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <LinearLayout
-        android:background="#F4F9FF"
         android:id="@+id/parent_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#F4F9FF"
         android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,18 +27,17 @@
         app:layout_constraintTop_toBottomOf="@+id/top_view">
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
-        
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
+
         <LinearLayout
             android:id="@+id/user_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/mine_border"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@drawable/mine_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -48,21 +46,45 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/mine_01"/>
+                android:background="@mipmap/mine_01" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="账号信息"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_beiyong"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/mine_border"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/user_beiyong_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/mine_01" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="备用名字"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
 
         <LinearLayout
             android:id="@+id/order_view"
@@ -78,22 +100,21 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/mine_02"/>
+                android:background="@mipmap/mine_02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="订单信息"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
 
         </LinearLayout>
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
 
         <LinearLayout
             android:id="@+id/feedback_view"
@@ -109,21 +130,20 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/mine_03"/>
+                android:background="@mipmap/mine_03" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="用户反馈"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
         </LinearLayout>
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
 
         <LinearLayout
             android:id="@+id/kefu_view"
@@ -139,22 +159,21 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/mine_04"/>
+                android:background="@mipmap/mine_04" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="在线客服"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
         </LinearLayout>
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
-        
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
+
         <LinearLayout
             android:id="@+id/about_view"
             android:layout_width="match_parent"
@@ -169,21 +188,20 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:background="@mipmap/mine_05"/>
+                android:background="@mipmap/mine_05" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="关于我们"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
         </LinearLayout>
 
         <View
-            android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#EEEBEB"
-            />
+            android:layout_height="1dp"
+            android:background="#EEEBEB" />
     </LinearLayout>
 
     <Button
@@ -196,6 +214,6 @@
         android:text="退出登录"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parent_linearLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/parent_linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

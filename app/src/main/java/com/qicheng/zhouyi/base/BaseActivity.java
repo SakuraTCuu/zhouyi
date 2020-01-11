@@ -1,18 +1,36 @@
 package com.qicheng.zhouyi.base;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.qicheng.zhouyi.R;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private FrameLayout fl_content;
+    private RelativeLayout rl_title_bar;
+    private TextView text_title;
+    private ImageView img_exit;
 
     protected Context mContext;
     protected Bundle mSavedInstanceState;       //防止出现Fragment重叠时使用
@@ -20,12 +38,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //添加一个title bar
         // 隐藏状态栏  标题栏
         this.hideActionBar();
         this.setFullScreen();
-        setContentView(setLayoutId());
 
+        setContentView(R.layout.activity_base);
         //绑定View控件
+        fl_content = findViewById(R.id.fl_content);
+        rl_title_bar = findViewById(R.id.rl_title_bar);
+        text_title = findViewById(R.id.tv_title_text);
+        img_exit = findViewById(R.id.iv_title_exit);
+
+        View view = getLayoutInflater().inflate(setLayoutId(), null);
+        fl_content.addView(view);
+
         ButterKnife.bind(this);
 
         mContext = this;
@@ -37,7 +65,38 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
         //设置监听
         setListener();
-        setStatusBar();
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+    }
+
+    protected void setTitleText(String str) {
+        text_title.setText(str);
+    }
+
+    /**
+     * 隐藏整个title
+     */
+    protected void hideTitleBar() {
+        if (rl_title_bar.getVisibility() == View.VISIBLE) {
+            rl_title_bar.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 展示整个title
+     */
+    protected void showTitleBar() {
+        if (rl_title_bar.getVisibility() != View.VISIBLE) {
+            rl_title_bar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //隐藏 退出 img
+    protected void hideExitImg() {
+        img_exit.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -56,6 +115,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private void setFullScreen() {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     protected abstract int setLayoutId();
@@ -65,30 +128,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initData();
 
     protected abstract void setListener();
-
-    protected void setStatusBar() {
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.app_zhuce));
-
-//        StatusBarUtil.setTranslucent(this);
-
-//        String ss =  SystemUtils.getSystemVersion();
-//        String i =  ss.substring(0,1);
-//        StatusBarUtil.setColor(this, getResources().getColor(R.color.app_zhuce));
-//        StatusBarUtil.setTranslucent(this,50);
-//        if(Integer.valueOf(i)>6){
-//            StatusBarUtil.setTranslucent(this, 0);
-//
-////            StatusUtils.setLightStatusBar(this,true);
-//        }else {
-//
-//            StatusBarUtil.setTranslucent(this, 50);
-//        }
-    }
-
-    protected void setStatusBar2() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//隐藏状态栏但不隐藏状态栏字体
-        }
-
-    }
 }
