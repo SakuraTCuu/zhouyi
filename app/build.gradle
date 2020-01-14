@@ -84,5 +84,6 @@ dependencies {
 
     //引入闪验aar包
     implementation fileTree(include: ['*.aar'], dir: 'libs')
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 }

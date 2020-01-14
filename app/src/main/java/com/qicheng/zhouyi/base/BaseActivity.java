@@ -73,6 +73,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setTitleText(String str) {
+        if (!isShowBar()) {
+            showTitleBar();
+        }
         text_title.setText(str);
     }
 
@@ -83,6 +86,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (rl_title_bar.getVisibility() == View.VISIBLE) {
             rl_title_bar.setVisibility(View.GONE);
         }
+    }
+
+    protected boolean isShowBar() {
+        return rl_title_bar.getVisibility() == View.VISIBLE;
     }
 
     /**

@@ -31,33 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.LoginActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.mine.MineUserActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.mine.MineOrderActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.mine.MineKeFuActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.mine.MineFeedbackActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.mine.MineAboutMeActivity"
-            android:label="@string/app_name" />
-        <!--        起名-> 八字-->
-        <activity
-            android:name=".ui.qiming.QimingDetailActivity"
-            android:label="@string/app_name" />
-
-
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.mine.MineUserActivity" />
+        <activity android:name=".ui.mine.MineOrderActivity" />
+        <activity android:name=".ui.mine.MineKeFuActivity" />
+        <activity android:name=".ui.mine.MineFeedbackActivity" />
+        <activity android:name=".ui.mine.MineAboutMeActivity" /> <!-- 起名-> 八字 -->
+        <activity android:name=".ui.qiming.QimingDetailActivity" />
+        <activity android:name=".ui.bazi.BaziHehunActivity" />
         <!-- **********************移动授权⻚activity************************** -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"

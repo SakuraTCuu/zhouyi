@@ -127,7 +127,7 @@ public class SPUtils {
     }
 
     /**
-     * 创建   一个解决SharedPreferencesCompat.apply方法的一个兼容类
+     * 创建   一个解决SharedPrefeencesCompat.apply方法的一r个兼容类
      *
      * @author zhy
      */

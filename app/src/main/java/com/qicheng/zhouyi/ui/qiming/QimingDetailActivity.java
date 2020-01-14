@@ -8,10 +8,19 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.QimingDetailAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.base.BaseFragment;
+import com.qicheng.zhouyi.bean.NameListItemBean;
+import com.qicheng.zhouyi.bean.QimingUserInfoBean;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +48,10 @@ public class QimingDetailActivity extends BaseActivity {
     private QimingBaziFragment qimingBaziFragment;
     private FragmentManager fm;
 
+    private JSONArray nameList;
+    private JSONObject userInfo;
+    private String nongliStr;
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_qiming_detail;
@@ -46,16 +59,27 @@ public class QimingDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         setTitleText("起名改名");
-        //设置ViewPager中两页之间的距离
+
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
+        Log.d("data-->>", data);
+        try {
+            JSONObject jsondata = new JSONObject(data);
+            nameList = jsondata.getJSONArray("name_list");
+            userInfo = jsondata.getJSONObject("info");
+            nongliStr = jsondata.getString("nongli_day");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //将 data 传递给 fragment
+
         //绑定点击事件
-        viewPager.setOnPageChangeListener(new MyPagerChangeListener());
-        //把Fragment添加到List集合里面
+        viewPager.addOnPageChangeListener(new MyPagerChangeListener());
         list = new ArrayList<>();
         dashiQimingFragment = new DashiQimingFragment();
-        chooseNameFragment = new ChooseNameFragment();
-        qimingBaziFragment = new QimingBaziFragment();
+        chooseNameFragment = new ChooseNameFragment(nameList);
+        qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr);
 
         list.add(qimingBaziFragment);
         list.add(chooseNameFragment);
@@ -73,9 +97,7 @@ public class QimingDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        Log.d("name-->>", name);
+
     }
 
     @Override
@@ -90,10 +112,12 @@ public class QimingDetailActivity extends BaseActivity {
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
+
         }
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
+
         }
 
         @Override
@@ -115,7 +139,6 @@ public class QimingDetailActivity extends BaseActivity {
                     tv_qiming_dashi_title.setTextColor(Color.GREEN);
                     break;
             }
-
         }
     }
 }

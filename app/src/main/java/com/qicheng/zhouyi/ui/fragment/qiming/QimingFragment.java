@@ -161,11 +161,6 @@ public class QimingFragment extends BaseFragment {
     }
 
     public void getDataFromServer() {
-        Log.d("user_name--->>", input_name);
-        Log.d("birthday--->>", birthday);
-        Log.d("gender--->>", gender + "");
-        Log.d("date_type--->>", date_type);
-
         Map map = new HashMap<String, String>();
         map.put("user_name", input_name);
         map.put("birthday", birthday);
@@ -176,13 +171,18 @@ public class QimingFragment extends BaseFragment {
             @Override
             public void Success(HttpInfo info) {
                 getMainHandler().sendEmptyMessage(BASE_END);
+
                 try {
-                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Intent intent = new Intent(mContext, QimingDetailActivity.class);
-                    intent.putExtra("name", "带参数传送");
-                    mContext.startActivity(intent);
-                    Log.d("jsonObject---->>", jsonObject.toString());
-//                            Log.d("data---->>", data);
+                    JSONObject json = new JSONObject(info.getRetDetail());
+                    if (json.getBoolean("code")) {
+                        //请求成功
+                        Intent intent = new Intent(mContext, QimingDetailActivity.class);
+                        intent.putExtra("data", json.get("data").toString());
+                        mContext.startActivity(intent);
+                    } else {
+                        ToastUtils.showShortToast(json.get("message").toString());
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

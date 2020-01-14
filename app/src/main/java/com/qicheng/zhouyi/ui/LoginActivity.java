@@ -16,6 +16,7 @@ import com.okhttplib.annotation.RequestType;
 import com.okhttplib.callback.Callback;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.utils.DataCheck;
@@ -54,6 +55,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ActivityManager.getInstance().push(this);
         hideTitleBar();
         time = new TimeCount(60000, 1000);
     }
@@ -66,6 +68,11 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+    }
+
+    public void startActivity() {
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        ActivityManager.getInstance().finishActivity(this);
     }
 
     @OnClick({R.id.btn_code_login, R.id.ll_sylogin, R.id.ll_wxlogin, R.id.text_login_getcode})
@@ -142,7 +149,7 @@ public class LoginActivity extends BaseActivity {
 
         // debug测试
         if (true) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity();
             finish();
             return;
         }
@@ -226,7 +233,7 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 Log.d("jsonObject---->>", jsonObject.toString());
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity();
                 finish();
             }
 
@@ -262,7 +269,7 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 Log.d("jsonObject---->>", jsonObject.toString());
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity();
                 finish();
             }
 

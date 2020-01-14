@@ -1,12 +1,15 @@
 package com.qicheng.zhouyi.ui;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Environment;
 import android.util.Log;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.GetPhoneInfoListener;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
+import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.utils.HttpInterceptor;
 import com.okhttplib.OkHttpUtil;
@@ -16,6 +19,7 @@ import com.okhttplib.cookie.PersistentCookieJar;
 import com.okhttplib.cookie.cache.SetCookieCache;
 import com.okhttplib.cookie.persistence.SharedPrefsCookiePersistor;
 import com.qicheng.zhouyi.utils.LogUtils;
+import com.qicheng.zhouyi.utils.SPUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 public class MyApplication extends Application {
@@ -26,20 +30,36 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
         init();
     }
 
-
     public void init() {
-        shanyanInit();
+        initShanyan();
+        initUser();
     }
 
+    /* 未登录 跳转登录界面*/
+    public void startActivity() {
+        Activity act = ActivityManager.getInstance().getCurrentActivity();
+        startActivity(new Intent(act, LoginActivity.class));
+    }
+
+    /**
+     * 初始化user
+     */
+    public void initUser() {
+        //userid
+        String userId = (String) SPUtils.get(instance, "uid", "");
+        if (userId != "") {
+            Constants.isLogin = true;
+            Constants.userId = userId;
+        }
+    }
 
     /**
      * 闪验初始化
      */
-    public void shanyanInit() {
+    public void initShanyan() {
         //闪验SDK配置debug开关 （必须放在初始化之前，开启后可打印闪验SDK更加详细日志信息）
         OneKeyLoginManager.getInstance().setDebug(true);
 

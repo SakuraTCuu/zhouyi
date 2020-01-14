@@ -8,6 +8,9 @@ public class Constants {
 
     public static final String Filename = "zhouyi";       //shaperpager保存文件
 
+    public static String userId = ""; //用户id
+    public static boolean isLogin = false;
+
     public static String getUid() {
         return (String) SPUtils.get(MyApplication.getInstance(), "uid", "");
     }
@@ -55,6 +58,9 @@ public class Constants {
 
         //添加用户反馈
         public static final String USERREPORT = URL + "index/user/userReport";
+
+        //添加用户收藏
+        public static final String NAMECOLLECT = URL + "index/user/userReport";
 
     }
 }
