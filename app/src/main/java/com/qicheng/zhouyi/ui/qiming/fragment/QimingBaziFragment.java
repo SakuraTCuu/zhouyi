@@ -1,4 +1,4 @@
-package com.qicheng.zhouyi.ui.qiming;
+package com.qicheng.zhouyi.ui.qiming.fragment;
 
 import android.widget.TextView;
 
@@ -32,6 +32,10 @@ public class QimingBaziFragment extends BaseFragment {
 
     private JSONObject userInfo;
     private String nongliStr;
+
+    public QimingBaziFragment() {
+        super();
+    }
 
     public QimingBaziFragment(JSONObject userInfo, String nongliStr) {
         this.userInfo = userInfo;

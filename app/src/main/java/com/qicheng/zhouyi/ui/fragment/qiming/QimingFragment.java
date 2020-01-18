@@ -149,8 +149,10 @@ public class QimingFragment extends BaseFragment {
         long curTime = cl.getTimeInMillis();
         if (birthState == 1 && cDate.getTimeInMillis() > curTime) {
             ToastUtils.showShortToast("请选择正确的时间");
+            return;
         } else if (birthState == 0 && cDate.getTimeInMillis() < curTime) {
             ToastUtils.showShortToast("请选择正确的时间");
+            return;
         }
 
         String month = String.valueOf(cDate.get(Calendar.MONTH) + 1);

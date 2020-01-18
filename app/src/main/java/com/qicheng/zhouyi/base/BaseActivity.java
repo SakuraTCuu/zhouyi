@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.qicheng.zhouyi.R;
+import com.qicheng.zhouyi.common.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +51,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         rl_title_bar = findViewById(R.id.rl_title_bar);
         text_title = findViewById(R.id.tv_title_text);
         img_exit = findViewById(R.id.iv_title_exit);
+
+        img_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ActivityManager.getInstance().pop();
+                finish();
+            }
+        });
 
         View view = getLayoutInflater().inflate(setLayoutId(), null);
         fl_content.addView(view);

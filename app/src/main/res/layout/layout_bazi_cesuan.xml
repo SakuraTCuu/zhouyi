@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFF"
@@ -20,9 +18,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_mid_yunshi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,18 +60,19 @@
             </RelativeLayout>
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@mipmap/index_yunshi" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginRight="0dp"
+            android:id="@+id/ll_mid_caiyun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -107,20 +108,21 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@mipmap/index_caiyun" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_mid_weiji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -158,16 +160,17 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@mipmap/index_weiji" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginRight="0dp"
+            android:id="@+id/ll_mid_yinyuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -203,21 +206,22 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@mipmap/index_yinyuan" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_mid_hehun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -255,16 +259,17 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@mipmap/index_hehun" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginRight="0dp"
+            android:id="@+id/ll_mid_qiming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -300,9 +305,9 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:background="@mipmap/index_haoming" />
         </LinearLayout>
     </LinearLayout>

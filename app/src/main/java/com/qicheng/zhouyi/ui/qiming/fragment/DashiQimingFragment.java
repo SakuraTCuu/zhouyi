@@ -1,4 +1,4 @@
-package com.qicheng.zhouyi.ui.qiming;
+package com.qicheng.zhouyi.ui.qiming.fragment;
 
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseFragment;

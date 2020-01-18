@@ -1,4 +1,4 @@
-package com.qicheng.zhouyi.ui.qiming;
+package com.qicheng.zhouyi.ui.qiming.fragment;
 
 import android.content.Intent;
 import android.util.Log;
@@ -62,6 +62,9 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     private JSONArray nameList;
     private int currentPos;
 
+    public ChooseNameFragment(){
+        super();
+    }
 
     public ChooseNameFragment(JSONArray nameList) {
         this.nameList = nameList;

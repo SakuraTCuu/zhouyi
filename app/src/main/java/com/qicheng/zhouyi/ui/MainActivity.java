@@ -11,6 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.base.BaseFragment;
 import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.ui.fragment.bazi.BaziFragment;
 import com.qicheng.zhouyi.ui.fragment.home.HomeFragment;
@@ -65,7 +66,25 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.setAutoHideEnabled(true);
         manager = getSupportFragmentManager();
 
-        homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment(new skipFragment() {
+            @Override
+            public void skipQiming() {
+                hideAllFragment();
+                manager.beginTransaction().show(qimingFragment).commit();
+            }
+
+            @Override
+            public void skipBazi() {
+                hideAllFragment();
+                manager.beginTransaction().show(baziFragment).commit();
+            }
+
+            @Override
+            public void skipMine() {
+                hideAllFragment();
+                manager.beginTransaction().show(mineFragment).commit();
+            }
+        });
         baziFragment = new BaziFragment();
         qimingFragment = new QimingFragment();
         mineFragment = new MineFragment();
@@ -80,7 +99,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .commit();
     }
 
-
     @Override
     protected void initData() {
 
@@ -89,6 +107,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void setListener() {
         bottomNavigationBar.setTabSelectedListener(this);
+    }
+
+    private void hideAllFragment() {
+        manager.beginTransaction().hide(qimingFragment)
+                .hide(baziFragment)
+                .hide(mineFragment)
+                .hide(homeFragment)
+                .commit();
     }
 
     @Override
@@ -143,6 +169,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void onTabReselected(int position) {
         //重复选中
         Log.e("onTabReselected", String.valueOf(position));
+    }
+
+    public interface skipFragment {
+        void skipQiming();
+
+        void skipBazi();
+
+        void skipMine();
     }
 
     @Override

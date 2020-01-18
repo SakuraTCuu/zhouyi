@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     android:scrollbars="none">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F93D4B"
-        android:orientation="vertical"
-        tools:context=".ui.bazi.BaziHehunActivity">
+        android:orientation="vertical">
 
 
         <ImageView
@@ -56,6 +55,8 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -73,6 +74,7 @@
                         android:id="@+id/et_input_man_name"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="40dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="center"
@@ -98,18 +100,18 @@
                         android:gravity="center"
                         android:text="出生日期" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tv_man_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@null"
                         android:gravity="center"
-                        android:hint="请选择出生日期" />
+                        android:text="请选择出生日期" />
 
                     <ImageView
                         android:id="@+id/iv__man_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="40dp"
                         android:layout_marginRight="20dp"
                         android:src="@mipmap/yuelao_date" />
 
@@ -171,6 +173,7 @@
                         android:id="@+id/et_input_women_name"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="40dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="center"
@@ -196,18 +199,18 @@
                         android:gravity="center"
                         android:text="出生日期" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tv_women_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@null"
                         android:gravity="center"
                         android:hint="请选择出生日期" />
 
                     <ImageView
                         android:id="@+id/iv__woman_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="40dp"
                         android:layout_marginRight="20dp"
                         android:src="@mipmap/yuelao_date" />
 

@@ -8,15 +8,13 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.QimingDetailAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.base.BaseFragment;
-import com.qicheng.zhouyi.bean.NameListItemBean;
-import com.qicheng.zhouyi.bean.QimingUserInfoBean;
+import com.qicheng.zhouyi.ui.qiming.fragment.ChooseNameFragment;
+import com.qicheng.zhouyi.ui.qiming.fragment.DashiQimingFragment;
+import com.qicheng.zhouyi.ui.qiming.fragment.QimingBaziFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;

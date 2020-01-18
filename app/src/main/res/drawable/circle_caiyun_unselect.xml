@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 图层1(oval) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- oval_inner[内部] -->
+    <!-- oval_outer[边线] ，使用时改成父控件颜色即可-->
+    <stroke
+        android:width="1dp"
+        android:color="#f00" />
+    <!-- oval_inner_size[大小(除去边线)] ，也是最终裸露出来的圆形图像区域-->
+    <size
+        android:width="30dp"
+        android:height="30dp" />
+    <!-- 使oval_inner透明，裸露出将来设置的背景图片 -->
+
+</shape>
