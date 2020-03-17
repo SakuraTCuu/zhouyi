@@ -185,8 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/bazijingpi_bg" />
+            android:src="@mipmap/bazijingpi_bg" />
 
     </LinearLayout>
 </ScrollView>

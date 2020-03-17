@@ -1,6 +1,7 @@
 package com.qicheng.zhouyi.ui.qiming.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import com.qicheng.zhouyi.bean.NameListItemBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.common.ResourcesManager;
+import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
@@ -58,6 +60,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     TextView tv_collect;
 
     private List<ChooseNameBean> data = new ArrayList<>();
+    private String userData;
     private ChooseNameListAdapter adapter;
     private JSONArray nameList;
     private int currentPos;
@@ -66,8 +69,9 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
         super();
     }
 
-    public ChooseNameFragment(JSONArray nameList) {
+    public ChooseNameFragment(JSONArray nameList,String data) {
         this.nameList = nameList;
+        this.userData = data;
     }
 
     @Override
@@ -77,6 +81,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
 
     @Override
     protected void initView() {
+        Log.d("nameList-->>",nameList.toString());
         for (int i = 0; i < nameList.length(); i++) {
             try {
                 JSONObject json = nameList.getJSONObject(i);
@@ -131,14 +136,14 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                 tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
                 tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
                 //是否解锁
-                getNameList(1);
+                getNameList(2);
                 break;
             case R.id.tv_namebar_big:
                 tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
                 tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
                 tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
                 //是否解锁
-                getNameList(2);
+                getNameList(3);
                 break;
             case R.id.iv_collect:
                 //请求服务器 收藏
@@ -173,12 +178,47 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     }
 
     public void getNameList(int type) {
-//                user_id: userId,
-//                gender: gender,
-//                name_type: type,
-//                user_name: surName
+        JSONObject jsondata = null;
+        try {
+                jsondata = new JSONObject(this.userData);
+                JSONObject userInfo = jsondata.getJSONObject("info");
+                String genderStr = userInfo.getString("gender");
+                String surName = userInfo.getString("name");
+                 Log.e("err---->>",  genderStr);
+                String gender = genderStr.equals("男") ? "1" : "0";
 
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("user_name", surName);
+                map.put("gender", gender);
+                map.put("name_type", type+"");
 
+        Log.e("map-->>",map.toString());
+        //请求数据
+        OkHttpManager.request(Constants.getApi.GETJIMING, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("err---->>",  e.toString());
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("err---->>",  e.toString());
+        }
     }
 
     public void requestOrderUrl() {

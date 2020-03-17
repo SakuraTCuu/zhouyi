@@ -36,6 +36,7 @@ public class OkHttpManager {
         OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
                         .setUrl(url)
                         .setRequestType(type)//设置请求方式
+                        .addParam("user_id","48")
                         .addParams(params)
                         .build(),
                 new com.okhttplib.callback.Callback() {
@@ -64,7 +65,6 @@ public class OkHttpManager {
         okHttpClient.newCall(request).enqueue(callback);
     }
 
-
     /**
      * 发送OkHttp POST 请求的方法
      *
@@ -77,7 +77,6 @@ public class OkHttpManager {
         Request request = new Request.Builder().url(urlAddress).post(requestBody).build();
         okHttpClient.newCall(request).enqueue(callback);
     }
-
 
     public static void uploadImg(String URL, File file, Callback callback) {
         MediaType MEDIA_TYPE_PNG = MediaType.parse("multipart/form-data");

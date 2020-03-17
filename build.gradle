@@ -2,8 +2,11 @@
 
 buildscript {
     repositories {
+        mavenCentral()
+        mavenLocal()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
-        jcenter()
+        jcenter(){url 'https://maven.aliyun.com/repository/jcenter'}
         
     }
     dependencies {
@@ -17,8 +20,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        jcenter(){url 'https://maven.aliyun.com/repository/jcenter'}
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
+        maven {url 'https://dl.bintray.com/jetbrains/anko'}
     }
 }
 

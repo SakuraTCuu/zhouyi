@@ -1,6 +1,9 @@
 package com.qicheng.zhouyi.ui.bazijingpi;
 
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,11 +13,25 @@ import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.okhttplib.HttpInfo;
+import com.okhttplib.OkHttpUtil;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
+import com.qicheng.zhouyi.utils.LogUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,6 +98,9 @@ public class BaziJingPiActivity extends BaseActivity {
 
     private void onClickBtn() {
         String userName = et_bazijingpi_inputname.getText().toString().trim();
+        LogUtils.d("Bazijingpi-->>", "");
+        LogUtils.d("user_name", userName);
+        LogUtils.d("gender", gender);
         if (!DataCheck.isHanzi(userName)) {
             ToastUtils.showShortToast("请输入正确的名字");
             return;
@@ -99,13 +119,72 @@ public class BaziJingPiActivity extends BaseActivity {
         Map map = new HashMap<String, String>();
         map.put("user_name", userName);
         map.put("gender", gender);
-        map.put("date", dateStr);
+        map.put("birthday", dateStr);
+        map.put("user_id", "48");
 
-        this.getDataFromServer(map);
+        Log.d("birthday", dateStr);
+        String url_data = "?user_name="+userName+"&gender="+gender+"&birthday="+dateStr+"&user_id=48";
+        Log.d("url_data-------->", url_data);
+
+        this.getDataFromServer(map,url_data);
     }
 
-    private void getDataFromServer(Map params) {
+    private void getDataFromServer(Map params,String urlData) {
 
+        //类型1  八字精批
+        Map map = new HashMap<String, String>();
+        map.put("type", "1");
+
+//        OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
+//                        .setUrl(Constants.getApi.GETH5URL)
+//                        .setRequestType(RequestType.POST)//设置请求方式
+//                        .addParam("user_id","48")
+//                        .addParams(params)
+//                        .addParam("type","1")
+//                        .build(),
+//                new com.okhttplib.callback.Callback() {
+//                    @Override
+//                    public void onSuccess(HttpInfo info) throws IOException {
+//                        Log.d("onSuccess--->", info.getRetDetail());
+////                        requestListener.Success(info);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(HttpInfo info) throws IOException {
+//                        Log.d("onFailure--->", info.getRetDetail());
+////                        requestListener.Fail(info);
+//                    }
+//                });
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                     JSONObject  jsonObject = new JSONObject(info.getRetDetail());
+                     Log.d("jsonObject---->>",  jsonObject.toString());
+                     String url = jsonObject.getJSONObject("data").getString("url");
+                     url +=urlData;
+                     Log.d("url---->>", url);
+
+                    Intent intent = new Intent(BaziJingPiActivity.this, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url",url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
     }
 
     /**

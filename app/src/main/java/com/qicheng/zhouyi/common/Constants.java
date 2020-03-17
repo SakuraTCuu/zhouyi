@@ -62,5 +62,12 @@ public class Constants {
         //添加用户收藏
         public static final String NAMECOLLECT = URL + "index/user/userReport";
 
+        //获取 小吉名 大吉名列表  未解锁跳转支付，解锁展示
+        public static final String GETJIMING = URL + "index/names/getJiNameList";
+
+        //八字精批 接口
+//        public static final String BAZIJINGPI = URL + "index/order/bazijp";
+//        public static final String BAZIJINGPI = URL + "index/order/test_bzjp";
+        public static final String GETH5URL = URL + "index/order/bzh5_url";
     }
 }

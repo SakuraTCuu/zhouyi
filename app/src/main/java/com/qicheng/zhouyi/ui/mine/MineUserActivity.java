@@ -210,7 +210,8 @@ public class MineUserActivity extends BaseActivity {
                 Log.d("info---->>", info.toString());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>", jsonObject.toString());
+                    Log.d("jsonObject---->>",  jsonObject.getString("msg"));
+                    ToastUtils.showShortToast("修改成功");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

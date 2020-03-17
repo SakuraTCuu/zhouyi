@@ -3,6 +3,7 @@ package com.qicheng.zhouyi.ui.qiming;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class QimingDetailActivity extends BaseActivity {
 
@@ -76,7 +78,7 @@ public class QimingDetailActivity extends BaseActivity {
         viewPager.addOnPageChangeListener(new MyPagerChangeListener());
         list = new ArrayList<>();
         dashiQimingFragment = new DashiQimingFragment();
-        chooseNameFragment = new ChooseNameFragment(nameList);
+        chooseNameFragment = new ChooseNameFragment(nameList,data);
         qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr);
 
         list.add(qimingBaziFragment);
@@ -91,6 +93,11 @@ public class QimingDetailActivity extends BaseActivity {
         tv_qiming_bazi_title.setTextColor(Color.GREEN);
         tv_qiming_choose_title.setTextColor(Color.BLACK);
         tv_qiming_dashi_title.setTextColor(Color.BLACK);
+
+//        tv_qiming_bazi_title.setOnClickListener();
+//        tv_qiming_choose_title.setOnClickListener(Color.BLACK);
+//        tv_qiming_dashi_title.setOnClickListener(Color.BLACK);
+
     }
 
     @Override
@@ -101,6 +108,44 @@ public class QimingDetailActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+    }
+
+    @OnClick({R.id.tv_qiming_bazi_title, R.id.tv_qiming_choose_title, R.id.tv_qiming_dashi_title})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_qiming_bazi_title:
+                viewPager.setCurrentItem(0);
+                onPageChange(0);
+                break;
+            case R.id.tv_qiming_choose_title:
+                viewPager.setCurrentItem(1);
+                onPageChange(1);
+                break;
+            case R.id.tv_qiming_dashi_title:
+                viewPager.setCurrentItem(2);
+                onPageChange(2);
+                break;
+        }
+    }
+
+    public void onPageChange(int arg0){
+        switch (arg0) {//状态改变时底部对应的字体颜色改变
+            case 0:
+                tv_qiming_bazi_title.setTextColor(Color.GREEN);
+                tv_qiming_choose_title.setTextColor(Color.BLACK);
+                tv_qiming_dashi_title.setTextColor(Color.BLACK);
+                break;
+            case 1:
+                tv_qiming_bazi_title.setTextColor(Color.BLACK);
+                tv_qiming_choose_title.setTextColor(Color.GREEN);
+                tv_qiming_dashi_title.setTextColor(Color.BLACK);
+                break;
+            case 2:
+                tv_qiming_bazi_title.setTextColor(Color.BLACK);
+                tv_qiming_choose_title.setTextColor(Color.BLACK);
+                tv_qiming_dashi_title.setTextColor(Color.GREEN);
+                break;
+        }
     }
 
     /**
@@ -120,23 +165,7 @@ public class QimingDetailActivity extends BaseActivity {
 
         @Override
         public void onPageSelected(int arg0) {
-            switch (arg0) {//状态改变时底部对应的字体颜色改变
-                case 0:
-                    tv_qiming_bazi_title.setTextColor(Color.GREEN);
-                    tv_qiming_choose_title.setTextColor(Color.BLACK);
-                    tv_qiming_dashi_title.setTextColor(Color.BLACK);
-                    break;
-                case 1:
-                    tv_qiming_bazi_title.setTextColor(Color.BLACK);
-                    tv_qiming_choose_title.setTextColor(Color.GREEN);
-                    tv_qiming_dashi_title.setTextColor(Color.BLACK);
-                    break;
-                case 2:
-                    tv_qiming_bazi_title.setTextColor(Color.BLACK);
-                    tv_qiming_choose_title.setTextColor(Color.BLACK);
-                    tv_qiming_dashi_title.setTextColor(Color.GREEN);
-                    break;
-            }
+            onPageChange(arg0);
         }
     }
 }

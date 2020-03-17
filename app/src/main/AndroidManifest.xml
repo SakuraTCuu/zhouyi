@@ -40,7 +40,9 @@
         <activity android:name=".ui.mine.MineFeedbackActivity" />
         <activity android:name=".ui.mine.MineAboutMeActivity" /> <!-- 起名-> 八字 -->
         <activity android:name=".ui.qiming.QimingDetailActivity" />
-        <activity android:name=".ui.bazi.BaziHehunActivity" /> <!-- **********************移动授权⻚activity************************** -->
+        <activity android:name=".ui.bazi.BaziHehunActivity" />
+        <activity android:name=".ui.webView.NamePayActivity" />
+        <!-- **********************移动授权⻚activity************************** -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

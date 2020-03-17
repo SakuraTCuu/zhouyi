@@ -1,6 +1,8 @@
 package com.qicheng.zhouyi.ui.bazi;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -14,12 +16,21 @@ import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.okhttplib.HttpInfo;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.HehunAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.HehunListBean;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -183,8 +194,47 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
 //        map.put("",manName);
 //        map.put("",manName);
 
+//        this.getDataFromServer(map,url_data);
 
     }
+
+    private void getDataFromServer(Map params,String urlData) {
+
+        //类型1  八字精批
+        Map map = new HashMap<String, String>();
+        map.put("type", 2);
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+                    url +=urlData;
+                    Log.d("url---->>", url);
+
+                    Intent intent = new Intent(BaziHehunActivity.this, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url",url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+    }
+
 
     /**
      * 展示日期
