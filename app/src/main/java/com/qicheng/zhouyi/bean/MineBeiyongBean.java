@@ -1,21 +1,38 @@
 package com.qicheng.zhouyi.bean;
 
 public class MineBeiyongBean {
-    private String userName;
+    private int rname_id;
+    private int user_id;
+    private String xing;
+    private String ming;
 
-    public MineBeiyongBean() {
-        userName = "";
+    public MineBeiyongBean(int rid,String xing,String ming) {
+        this.rname_id = rid;
+        this.xing = xing;
+        this.ming = ming;
     }
 
-    public MineBeiyongBean(String userName) {
-        this.userName = userName;
+    public String getXing() {
+        return xing;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setXing(String xing) {
+        this.xing = xing;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getMing() {
+        return ming;
+    }
+
+    public void setMing(String ming) {
+        this.ming = ming;
+    }
+
+    public int getRname_id() {
+        return rname_id;
+    }
+
+    public void setRname_id(int rname_id) {
+        this.rname_id = rname_id;
     }
 }

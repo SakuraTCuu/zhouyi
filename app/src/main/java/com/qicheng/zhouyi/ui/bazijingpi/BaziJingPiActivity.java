@@ -20,9 +20,11 @@ import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.common.UserManager;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.LogUtils;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONException;
@@ -105,6 +107,10 @@ public class BaziJingPiActivity extends BaseActivity {
             ToastUtils.showShortToast("请输入正确的名字");
             return;
         }
+        if(cDate ==null){
+            ToastUtils.showShortToast("请输入时间");
+            return;
+        }
         long dateMillis = cDate.getTimeInMillis();
         if (dateMillis >= new Date().getTime()) {
             ToastUtils.showShortToast("请输入正确的时间");
@@ -116,45 +122,24 @@ public class BaziJingPiActivity extends BaseActivity {
 
         String dateStr = year + "-" + month + "-" + date;
 
-        Map map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap();
         map.put("user_name", userName);
         map.put("gender", gender);
         map.put("birthday", dateStr);
-        map.put("user_id", "48");
-
+        map.put("user_id", Constants.userId);
         Log.d("birthday", dateStr);
-        String url_data = "?user_name="+userName+"&gender="+gender+"&birthday="+dateStr+"&user_id=48";
-        Log.d("url_data-------->", url_data);
 
+//        String url_data = "?user_name="+userName+"&gender="+gender+"&birthday="+dateStr+"&user_id=48";
+        String url_data = MapUtils.Map2String(map);
+        Log.d("url_data-------->", url_data);
         this.getDataFromServer(map,url_data);
     }
 
     private void getDataFromServer(Map params,String urlData) {
 
         //类型1  八字精批
-        Map map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap();
         map.put("type", "1");
-
-//        OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
-//                        .setUrl(Constants.getApi.GETH5URL)
-//                        .setRequestType(RequestType.POST)//设置请求方式
-//                        .addParam("user_id","48")
-//                        .addParams(params)
-//                        .addParam("type","1")
-//                        .build(),
-//                new com.okhttplib.callback.Callback() {
-//                    @Override
-//                    public void onSuccess(HttpInfo info) throws IOException {
-//                        Log.d("onSuccess--->", info.getRetDetail());
-////                        requestListener.Success(info);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(HttpInfo info) throws IOException {
-//                        Log.d("onFailure--->", info.getRetDetail());
-////                        requestListener.Fail(info);
-//                    }
-//                });
 
         //跳转到webView 界面
         OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {

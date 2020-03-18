@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String Filename = "zhouyi";       //shaperpager保存文件
 
-    public static String userId = ""; //用户id
+    public static String userId = "48"; //用户id
     public static boolean isLogin = false;
 
     public static String getUid() {
@@ -26,8 +26,8 @@ public class Constants {
 
 
     public static class getApi {
-        //  public static final String URL = "http://zhouyi999.cn/";
-        public static final String URL = "http://app.nyqicheng.cn/"; //临时域名
+          public static final String URL = "http://app.zhouyi999.cn/";
+//        public static final String URL = "http://app.nyqicheng.cn/"; //临时域名
 
         // 起名接口
         public static final String QIMING = URL + "index/names/addQiMing";
@@ -60,10 +60,19 @@ public class Constants {
         public static final String USERREPORT = URL + "index/user/userReport";
 
         //添加用户收藏
-        public static final String NAMECOLLECT = URL + "index/user/userReport";
+        public static final String NAMECOLLECT = URL + "index/names/collentName";
+
+        //删除用户收藏
+        public static final String NAMECOLLECTDEL = URL + "index/names/collectNameDel";
 
         //获取 小吉名 大吉名列表  未解锁跳转支付，解锁展示
         public static final String GETJIMING = URL + "index/names/getJiNameList";
+
+        //获取备用姓名
+        public static final String GETCOLLECTNAME = URL + "index/names/myCollectName";
+
+        //获取订单列表
+        public static final String GETORDERLIST = URL + "index/order/orderList";
 
         //八字精批 接口
 //        public static final String BAZIJINGPI = URL + "index/order/bazijp";

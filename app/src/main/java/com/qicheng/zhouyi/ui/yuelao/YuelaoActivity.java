@@ -1,6 +1,8 @@
 package com.qicheng.zhouyi.ui.yuelao;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,12 +18,23 @@ import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.okhttplib.HttpInfo;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.HehunAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.HehunListBean;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.common.UserManager;
+import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -116,7 +129,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
 
         //随机订单号
         String[] words = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-        //  开吹
+        // 开吹
         String[] contentList = new String[]{"这个网站可以信赖 挺好的!",
                 "会推荐给其他人,我觉得挺准的",
                 "看着同龄人小孩都可以打酱油了,家里人也开始催了,我会听大师建议好好抓住机会的,谢谢指导",
@@ -155,9 +168,14 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
             ToastUtils.showShortToast("请输入正确的名字");
             return;
         }
+        if(cDate ==null){
+            ToastUtils.showShortToast("请输入时间");
+            return;
+        }
         long dateMillis = cDate.getTimeInMillis();
         if (dateMillis >= new Date().getTime()) {
             ToastUtils.showShortToast("请输入正确的时间");
+            return;
         }
 
         int year = cDate.get(Calendar.YEAR);
@@ -166,11 +184,54 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
 
         String dateStr = year + "-" + month + "-" + date;
 
-        Map map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap();
         map.put("user_name", userName);
-        map.put("gender", gender);
-        map.put("date", dateStr);
+        map.put("gender", gender+"");
+        map.put("birthday", dateStr);
+        map.put("user_id", Constants.userId);
+
+        String url_data = MapUtils.Map2String(map);
+        Log.d("url_data-------->", url_data);
+        this.getDataFromServer(url_data);
     }
+
+    private void getDataFromServer(String urlData) {
+
+        //类型1  八字精批
+        Map<String, String> map = new HashMap();
+        map.put("type", "4");
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+                    url +=urlData;
+                    Log.d("url---->>", url);
+
+                    Intent intent = new Intent(YuelaoActivity.this, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url",url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+    }
+
 
     /**
      * 点击女图标

@@ -95,6 +95,9 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
         adapter = new ChooseNameListAdapter(mContext, data);
         lv_namelist.setAdapter(adapter);
         lv_namelist.setOnItemClickListener(this);
+
+        //确定第一个是否标记
+        initSignName(0);
     }
 
     @Override
@@ -106,8 +109,15 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
         tv_first_word.setText(String.valueOf(data.get(position).getName().charAt(0)));
         tv_second_word.setText(String.valueOf(data.get(position).getName().charAt(1)));
         tv_third_word.setText(String.valueOf(data.get(position).getName().charAt(2)));
+        initSignName(position);
+    }
 
-        //确定是否标记
+    @Override
+    protected void initData() {
+
+    }
+
+    public void initSignName(int position){
         boolean isCollect = data.get(position).isCollect();
         if (isCollect) {
             tv_collect.setText("已标记");
@@ -116,11 +126,6 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
             tv_collect.setText("标记");
             iv_collect.setImageDrawable(ResourcesManager.getDrawable(mContext, R.mipmap.name_weibiao));
         }
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     @OnClick({R.id.tv_namebar_normal, R.id.tv_namebar_small, R.id.tv_namebar_big, R.id.iv_collect})
@@ -156,17 +161,22 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
      * 点击收藏/已收藏按钮
      */
     public void onClickCollect() {
-        ChooseNameBean info = data.get(currentPos);
-        boolean isCollect = info.isCollect();
+        ChooseNameBean NameInfo = data.get(currentPos);
+        boolean isCollect = NameInfo.isCollect();
 
-        Map map = new HashMap<String, String>();
-        map.put("isCollect", String.valueOf(isCollect));
+        Map<String, String> map = new HashMap();
+        map.put("is_collent", String.valueOf(isCollect));
+        map.put("xing", NameInfo.getName().substring(0,1));
+        map.put("ming", NameInfo.getName().substring(1));
 
         OkHttpManager.request(Constants.getApi.NAMECOLLECT, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 String str = isCollect ? "取消收藏" : "收藏成功";
                 ToastUtils.showShortToast(str);
+                //收藏成功后更改状态
+                NameInfo.setCollect(!isCollect);
+                initSignName(currentPos);
             }
 
             @Override

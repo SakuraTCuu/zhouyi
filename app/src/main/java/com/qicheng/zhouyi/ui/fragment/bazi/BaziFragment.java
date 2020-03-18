@@ -1,6 +1,8 @@
 package com.qicheng.zhouyi.ui.fragment.bazi;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +18,10 @@ import com.qicheng.zhouyi.base.BaseFragment;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.common.ResourcesManager;
+import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
@@ -112,23 +117,83 @@ public class BaziFragment extends BaseFragment {
         this.getDataFromServer();
     }
 
-    public void getDataFromServer() {
-        Log.d("user_name--->>", input_name);
-        Log.d("birthday--->>", birthday);
-        Log.d("gender--->>", gender + "");
+//    public void getDataFromServer() {
+//        Log.d("user_name--->>", input_name);
+//        Log.d("birthday--->>", birthday);
+//        Log.d("gender--->>", gender + "");
+//
+//        Map<String, Object> map = new HashMap();
+//        map.put("user_name", input_name);
+//        map.put("birthday", birthday);
+//        map.put("gender", gender + "");
+//        map.put("user_id", Constants.userId);
+//
+//        String url_data = MapUtils.Map2String(map);
+//        Log.d("url_data-------->", url_data);
+//        this.getDataFromServer(map,url_data);
 
-        Map map = new HashMap<String, String>();
+//        OkHttpManager.request(Constants.getApi.BAZI, RequestType.POST, map, new OkHttpManager.RequestListener() {
+//            @Override
+//            public void Success(HttpInfo info) {
+//                getMainHandler().sendEmptyMessage(BASE_END);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+//                    Log.d("jsonObject---->>", jsonObject.toString());
+//
+//                    String url = jsonObject.getJSONObject("data").getString("url");
+//                    url +=urlData;
+//                    Log.d("url---->>", url);
+//
+//                    Intent intent = new Intent(BaziJingPiActivity.this, NamePayActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("url",url);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void Fail(HttpInfo info) {
+//                String result = info.getRetDetail();
+//                getMainHandler().sendEmptyMessage(BASE_END);
+//                ToastUtils.showShortToast(result);
+//            }
+//        });
+//    }
+
+    private void getDataFromServer() {
+        Map<String, Object> map = new HashMap();
         map.put("user_name", input_name);
         map.put("birthday", birthday);
         map.put("gender", gender + "");
+        map.put("user_id", Constants.userId);
 
-        OkHttpManager.request(Constants.getApi.BAZI, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        String urlData = MapUtils.Map2String(map);
+
+        //类型1  八字精批
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("type", "1");
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map2, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
-                getMainHandler().sendEmptyMessage(BASE_END);
+                Log.d("info---->>", info.getRetDetail());
                 try {
-                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>", jsonObject.toString());
+                    JSONObject  jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+                    url +=urlData;
+                    Log.d("url---->>", url);
+
+                    Intent intent = new Intent(mContext, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url",url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -136,12 +201,13 @@ public class BaziFragment extends BaseFragment {
 
             @Override
             public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
                 String result = info.getRetDetail();
-                getMainHandler().sendEmptyMessage(BASE_END);
                 ToastUtils.showShortToast(result);
             }
         });
     }
+
 
     public void onClickWomen() {
         Drawable select_bg = ResourcesManager.getDrawable(getContext(), R.mipmap.bazi_yixuan);

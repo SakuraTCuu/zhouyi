@@ -27,6 +27,7 @@ import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONException;
@@ -163,11 +164,11 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
     public void onClickCeSuan() {
         //judge the input name is right or no;
         String manName = et_input_man_name.getText().toString().trim();
-        String womennName = et_input_women_name.getText().toString().trim();
+        String womenName = et_input_women_name.getText().toString().trim();
         if (!DataCheck.isHanzi(manName)) {
             ToastUtils.showShortToast("请输入正确的男方姓名");
             return;
-        } else if (!DataCheck.isHanzi(womennName)) {
+        } else if (!DataCheck.isHanzi(womenName)) {
             ToastUtils.showShortToast("请输入正确的女方姓名");
             return;
         } else if (manDate == null) {
@@ -188,21 +189,39 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
             return;
         }
 
-        Map map = new HashMap<String, String>();
-        map.put("", manName);
-        map.put("", womennName);
-//        map.put("",manName);
-//        map.put("",manName);
+        int manYear = manDate.get(Calendar.YEAR); ;
+        int manMonth = manDate.get(Calendar.MONTH);
+        int manDay = manDate.get(Calendar.DAY_OF_MONTH);
+        int manHour = manDate.get(Calendar.HOUR_OF_DAY);
 
-//        this.getDataFromServer(map,url_data);
+        int womanYear = womenDate.get(Calendar.YEAR); ;
+        int womanMonth = womenDate.get(Calendar.MONTH);
+        int womanDay = womenDate.get(Calendar.DAY_OF_MONTH);
+        int womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
 
+        Map<String, Object> map = new HashMap();
+        map.put("user_id", Constants.userId);
+        map.put("user_name", manName);
+        map.put("y", manYear);
+        map.put("m", manMonth);
+        map.put("d", manDay);
+        map.put("h", manHour);
+
+        map.put("girl_username", womenName);
+        map.put("y1", womanYear);
+        map.put("m1", womanMonth);
+        map.put("d1", womanDay);
+        map.put("h1", womanHour);
+
+        String url_data = MapUtils.Map2String(map);
+        Log.d("url_data-------->", url_data);
+        this.getDataFromServer(url_data);
     }
 
-    private void getDataFromServer(Map params,String urlData) {
+    private void getDataFromServer(String urlData) {
 
-        //类型1  八字精批
-        Map map = new HashMap<String, String>();
-        map.put("type", 2);
+        Map<String, String> map = new HashMap();
+        map.put("type", "2");
 
         //跳转到webView 界面
         OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {

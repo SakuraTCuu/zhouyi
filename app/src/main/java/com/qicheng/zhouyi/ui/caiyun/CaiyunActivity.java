@@ -2,6 +2,7 @@ package com.qicheng.zhouyi.ui.caiyun;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,21 @@ import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.okhttplib.HttpInfo;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.common.ResourcesManager;
+import com.qicheng.zhouyi.ui.mouseYear.MouseYearActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +53,7 @@ public class CaiyunActivity extends BaseActivity {
 
     private String input_name;
     private Calendar cDate;
-    private String gender = "1";
+    private int gender = 1;
 
     @Override
     protected int setLayoutId() {
@@ -108,21 +119,57 @@ public class CaiyunActivity extends BaseActivity {
         String birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
 
         //请求服务器
-        Map map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap();
         map.put("birthday", birthday);
         map.put("user_name", input_name);
         map.put("gender", gender);
+        map.put("user_id", Constants.userId);
 
-
-//        getDataFromServer(map);
-
+        String url_data = MapUtils.Map2String(map);
+        Log.d("url_data-------->", url_data);
+        this.getDataFromServer(url_data);
     }
 
+    private void getDataFromServer(String urlData) {
+
+        Map<String, String> map = new HashMap();
+        map.put("type", "5");
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+                    url +=urlData;
+                    Log.d("url---->>", url);
+
+                    Intent intent = new Intent(CaiyunActivity.this, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url",url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+    }
     private void onClickWomen() {
-        if (gender == "0") {
+        if (gender == 0) {
             return;
         }
-        gender = "0";
+        gender = 0;
 
         tv_caiyun_women.setTextColor(getResources().getColor(R.color.white));
         tv_caiyun_women.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circle_caiyun_select));
@@ -132,10 +179,10 @@ public class CaiyunActivity extends BaseActivity {
     }
 
     private void onClickMan() {
-        if (gender == "1") {
+        if (gender == 1) {
             return;
         }
-        gender = "1";
+        gender = 1;
         tv_caiyun_man.setTextColor(getResources().getColor(R.color.white));
         tv_caiyun_man.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circle_caiyun_select));
 

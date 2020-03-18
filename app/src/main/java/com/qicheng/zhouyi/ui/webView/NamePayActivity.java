@@ -1,5 +1,7 @@
 package com.qicheng.zhouyi.ui.webView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -80,6 +82,20 @@ public class NamePayActivity extends BaseActivity {
 //                }
 //            }
             return super.shouldInterceptRequest(view, url);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        // 如下方案可在非微信内部WebView的H5页面中调出微信支付
+
+        if (url.startsWith("weixin://wap/pay?")) {
+                 Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+                return true;
+          }
+           return super.shouldOverrideUrlLoading(view, url);
         }
 
         @Override

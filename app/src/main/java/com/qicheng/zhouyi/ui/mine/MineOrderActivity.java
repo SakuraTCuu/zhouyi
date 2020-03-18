@@ -1,16 +1,32 @@
 package com.qicheng.zhouyi.ui.mine;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.okhttplib.HttpInfo;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.MineOrderAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.MineOrderBean;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.mouseYear.MouseYearActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
+import com.qicheng.zhouyi.utils.ToastUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -20,6 +36,7 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     ListView lv_order;
 
     private ArrayList<MineOrderBean> data = new ArrayList<>();
+    private int page=1;
 
     @Override
     protected int setLayoutId() {
@@ -39,6 +56,14 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
             data.add(bean);
         }
 
+        Map<String,String> map = new HashMap<>();
+        map.put("page",page+"");
+
+        this.getDataFromServer(map);
+
+    }
+
+    public void setData(){
         lv_order.setAdapter(new MineOrderAdapter(data, mContext));
         lv_order.setOnItemClickListener(this);
     }
@@ -56,5 +81,40 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Toast.makeText(mContext, "你点击了第" + position + "项", Toast.LENGTH_SHORT).show();
+    }
+
+    public void getDataFromServer(Map map){
+
+        OkHttpManager.request(Constants.getApi.GETORDERLIST, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    String code = jsonObject.getString("code");
+                    String msg = jsonObject.getString("msg");
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    if(code=="false"){
+                         ToastUtils.showShortToast(msg);
+                    }else{
+                        //处理data
+
+                        setData();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+
     }
 }

@@ -2,8 +2,13 @@ package com.qicheng.zhouyi.common;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.OkHttpUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,14 +41,27 @@ public class OkHttpManager {
         OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
                         .setUrl(url)
                         .setRequestType(type)//设置请求方式
-                        .addParam("user_id","48")
+                        .addParam("user_id",Constants.userId)
                         .addParams(params)
                         .build(),
                 new com.okhttplib.callback.Callback() {
                     @Override
                     public void onSuccess(HttpInfo info) throws IOException {
                         Log.d("onSuccess--->", info.getRetDetail());
-                        requestListener.Success(info);
+                        JSONObject jsonObject ;
+                        try {
+                            jsonObject = new JSONObject(info.getRetDetail());
+
+                            if(jsonObject.getString("code") == "false"){
+                                requestListener.Fail(info);
+                            }else{
+                                requestListener.Success(info);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSONException--->", info.getRetDetail());
+                            requestListener.Fail(info);
+                        }
                     }
 
                     @Override

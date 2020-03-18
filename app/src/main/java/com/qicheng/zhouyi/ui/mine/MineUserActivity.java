@@ -85,7 +85,7 @@ public class MineUserActivity extends BaseActivity {
     private static final int IMAGE = 1;
 
     private int gender = 0; //性别
-    private String birthday = new Date().toString();
+    private String birthday;
     private String nickName = "";
     private String work = "";
     //    image/png
@@ -194,12 +194,21 @@ public class MineUserActivity extends BaseActivity {
         nickName = edit_nickname.getText().toString().trim();
         work = edit_work.getText().toString().trim();
 
+        if (!DataCheck.isHanzi(nickName)) {
+            ToastUtils.showShortToast("请输入正确的昵称");
+            return;
+        }
+        if(birthday ==null){
+            ToastUtils.showShortToast("请输入正确的生日");
+            return;
+        }
+
         //  过滤颜文字
         nickName = DataCheck.filterEmoji(nickName);
         work = DataCheck.filterEmoji(work);
 
-        Map map = new HashMap<String, String>();
-        map.put("name", nickName);
+        Map<String, String> map = new HashMap();
+        map.put("nike_name", nickName);
         map.put("job", work);
         map.put("birthday", birthday);
         map.put("gender", gender + "");
