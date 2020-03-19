@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.OneKeyLoginListener;
@@ -22,6 +23,9 @@ import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.TimeCount;
 import com.qicheng.zhouyi.utils.ToastUtils;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +51,10 @@ public class LoginActivity extends BaseActivity {
     private String input_phone;
     private String code; //验证码
     private TimeCount time;                     // 定时器
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
+    // APP_ID 替换为你的应用从官方网站申请到的合法appId
+    public static final String APP_ID = "wx10f0e8af9e8031c3";
 
     @Override
     protected int setLayoutId() {
@@ -58,6 +66,13 @@ public class LoginActivity extends BaseActivity {
         ActivityManager.getInstance().push(this);
         hideTitleBar();
         time = new TimeCount(60000, 1000);
+        initWX();
+    }
+
+    public void initWX(){
+// 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+        api.registerApp(APP_ID);
     }
 
     @Override
@@ -171,6 +186,14 @@ public class LoginActivity extends BaseActivity {
      */
     public void wxLogin() {
 
+        if (!api.isWXAppInstalled()) {
+            Toast.makeText(LoginActivity.this, "您的设备未安装微信客户端", Toast.LENGTH_SHORT).show();
+        } else {
+            final SendAuth.Req req = new SendAuth.Req();
+            req.scope = "snsapi_userinfo";
+            req.state = "wechat_sdk_demo_test";
+            api.sendReq(req);
+        }
     }
 
     /**

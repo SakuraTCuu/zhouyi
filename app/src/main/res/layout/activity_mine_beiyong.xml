@@ -5,7 +5,15 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <ListView
+    <TextView
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/tv_noMore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="暂无名字信息"/>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_beiyong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

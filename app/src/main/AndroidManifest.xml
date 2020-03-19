@@ -67,6 +67,18 @@
             android:screenOrientation="behind"
             android:theme="@style/dialogStyle" />
         <activity android:name=".ui.mine.MineBeiyongActivity" />
+
+        <!--        微信登录页-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx10f0e8af9e8031c3" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

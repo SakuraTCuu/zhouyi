@@ -5,6 +5,14 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <TextView
+        android:gravity="center"
+        android:visibility="visible"
+        android:id="@+id/tv_noOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="暂无订单信息"/>
+
     <ListView
         android:divider="@null"
         android:fadingEdge="none"

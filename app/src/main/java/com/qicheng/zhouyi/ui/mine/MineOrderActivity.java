@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.okhttplib.HttpInfo;
@@ -35,6 +36,10 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     @BindView(R.id.lv_order)
     ListView lv_order;
 
+    @BindView(R.id.tv_noOrder)
+    TextView tv_noOrder;
+
+    private String TAG = MineOrderActivity.class.getSimpleName();
     private ArrayList<MineOrderBean> data = new ArrayList<>();
     private int page=1;
 
@@ -59,11 +64,14 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
         Map<String,String> map = new HashMap<>();
         map.put("page",page+"");
 
+        Log.d("TAG", "tag-->>"+TAG);
+        Log.d(TAG, data.toString());
         this.getDataFromServer(map);
 
     }
 
     public void setData(){
+        Log.d("setData", data.toString());
         lv_order.setAdapter(new MineOrderAdapter(data, mContext));
         lv_order.setOnItemClickListener(this);
     }
@@ -84,35 +92,40 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     }
 
     public void getDataFromServer(Map map){
-
+        Log.d("map---->>", map.toString());
         OkHttpManager.request(Constants.getApi.GETORDERLIST, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
-                Log.d("info---->>", info.getRetDetail());
+                Log.d("info22---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     Log.d("jsonObject---->>",  jsonObject.toString());
-                    String code = jsonObject.getString("code");
+                    boolean code = jsonObject.getBoolean("code");
                     String msg = jsonObject.getString("msg");
                     JSONArray data = jsonObject.getJSONArray("data");
-                    if(code=="false"){
-                         ToastUtils.showShortToast(msg);
+                    if(code){
+                        ToastUtils.showShortToast(msg);
+                        tv_noOrder.setVisibility(View.VISIBLE);
                     }else{
+                        tv_noOrder.setVisibility(View.GONE);
                         //处理data
-
                         setData();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.d("e---->>", e.toString());
                 }
             }
 
             @Override
             public void Fail(HttpInfo info) {
                 Log.d("info---->>", info.toString());
-                String result = info.getRetDetail();
-                ToastUtils.showShortToast(result);
+                try {
+                    String result = new JSONObject(info.getRetDetail()).getString("msg");
+                    ToastUtils.showShortToast(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

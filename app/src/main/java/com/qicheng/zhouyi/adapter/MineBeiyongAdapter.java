@@ -1,6 +1,7 @@
 package com.qicheng.zhouyi.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,9 +91,10 @@ public class MineBeiyongAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.firstWord.setText(String.valueOf(data.get(position).getUserName().charAt(0)));
-        holder.secondWord.setText(String.valueOf(data.get(position).getUserName().charAt(1)));
-        holder.ThirdWord.setText(String.valueOf(data.get(position).getUserName().charAt(2)));
+
+        holder.firstWord.setText(data.get(position).getXing());
+        holder.secondWord.setText(String.valueOf(data.get(position).getMing().charAt(0)));
+        holder.ThirdWord.setText(String.valueOf(data.get(position).getMing().charAt(1)));
         holder.ll_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

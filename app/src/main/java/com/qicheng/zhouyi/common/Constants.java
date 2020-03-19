@@ -45,7 +45,7 @@ public class Constants {
         public static final String SYLOGIN = URL + "index/login/flash_query";
 
         //微信登录
-        public static final String WXLOGIN = URL + "index/login/flash_query";
+        public static final String WXLOGIN = URL + "index/login/wxLogin";
 
         //获取用户信息
         public static final String GETUSERINFO = URL + "index/user/userInfo";

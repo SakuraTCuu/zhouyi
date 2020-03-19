@@ -21,10 +21,16 @@ import com.okhttplib.cookie.persistence.SharedPrefsCookiePersistor;
 import com.qicheng.zhouyi.utils.LogUtils;
 import com.qicheng.zhouyi.utils.SPUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class MyApplication extends Application {
 
     private static MyApplication instance;
+    // APP_ID 替换为你的应用从官方网站申请到的合法appId
+    public static final String APP_ID = "wx10f0e8af9e8031c3";
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
 
     @Override
     public void onCreate() {
@@ -36,6 +42,7 @@ public class MyApplication extends Application {
     public void init() {
         initShanyan();
         initUser();
+//        initWX();
     }
 
     /* 未登录 跳转登录界面*/
@@ -124,5 +131,11 @@ public class MyApplication extends Application {
                 .addExceptionInterceptor(HttpInterceptor.ExceptionInterceptor)//请求链路异常拦截器
                 .setCookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this)))//持久化cookie
                 .build();
+    }
+
+    public void initWX(){
+// 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+        api.registerApp(APP_ID);
     }
 }

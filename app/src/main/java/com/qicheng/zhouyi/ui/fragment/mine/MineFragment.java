@@ -1,6 +1,7 @@
 package com.qicheng.zhouyi.ui.fragment.mine;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 

@@ -52,11 +52,13 @@ public class OkHttpManager {
                         try {
                             jsonObject = new JSONObject(info.getRetDetail());
 
+                            //TODO 哪里处理好呢？
                             if(jsonObject.getString("code") == "false"){
-                                requestListener.Fail(info);
+                                requestListener.Success(info);
                             }else{
                                 requestListener.Success(info);
                             }
+                            requestListener.Success(info);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSONException--->", info.getRetDetail());
