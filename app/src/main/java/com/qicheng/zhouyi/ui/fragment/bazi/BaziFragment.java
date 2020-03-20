@@ -169,7 +169,7 @@ public class BaziFragment extends BaseFragment {
         map.put("user_name", input_name);
         map.put("birthday", birthday);
         map.put("gender", gender + "");
-        map.put("user_id", Constants.userId);
+        map.put("user_id", Constants.userInfo.getUser_id());
 
         String urlData = MapUtils.Map2String(map);
 

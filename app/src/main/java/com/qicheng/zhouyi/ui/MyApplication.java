@@ -9,6 +9,7 @@ import android.util.Log;
 import com.chuanglan.shanyan_sdk.OneKeyLoginManager;
 import com.chuanglan.shanyan_sdk.listener.GetPhoneInfoListener;
 import com.chuanglan.shanyan_sdk.listener.InitListener;
+import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.utils.HttpInterceptor;
@@ -23,6 +24,9 @@ import com.qicheng.zhouyi.utils.SPUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyApplication extends Application {
 
@@ -40,9 +44,15 @@ public class MyApplication extends Application {
     }
 
     public void init() {
-        initShanyan();
-        initUser();
-//        initWX();
+        try {
+            initUser();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            //初始化读取错误，重新登录
+            Constants.isLogin = false;
+            initShanyan();
+            initWX();
+        }
     }
 
     /* 未登录 跳转登录界面*/
@@ -54,12 +64,29 @@ public class MyApplication extends Application {
     /**
      * 初始化user
      */
-    public void initUser() {
+    public void initUser() throws JSONException {
         //userid
-        String userId = (String) SPUtils.get(instance, "uid", "");
-        if (userId != "") {
+//        int userId = (int) SPUtils.get(instance, "uid", "");
+        //初始化用户信息
+//        String userId = (String) SPUtils.get(instance, "uid", "");
+        String userId = Constants.getUid();
+        if (userId == "") {
+            Log.e("userId--->>", "未登录！！！");
+            Constants.isLogin = false;
+            initShanyan();
+            initWX();
+        } else {
             Constants.isLogin = true;
-            Constants.userId = userId;
+            //userInfo 需要初始化
+            String userInfo = Constants.getUserInfo();
+            JSONObject data = new JSONObject(userInfo);
+            String head_img = data.getString("head_img");
+            String nick_name = data.getString("nick_name");
+            String gender = data.getString("gender");
+
+            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender);
+            Log.e("userId--->>", userId);
+            Log.e("userInfo--->>", userInfo);
         }
     }
 
@@ -133,9 +160,9 @@ public class MyApplication extends Application {
                 .build();
     }
 
-    public void initWX(){
+    public void initWX() {
 // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
-        api.registerApp(APP_ID);
+//        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+//        api.registerApp(APP_ID);
     }
 }

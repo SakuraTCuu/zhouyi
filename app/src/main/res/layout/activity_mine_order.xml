@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:text="暂无订单信息"/>
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:divider="@null"
         android:fadingEdge="none"
         android:headerDividersEnabled="false"

@@ -126,7 +126,7 @@ public class BaziJingPiActivity extends BaseActivity {
         map.put("user_name", userName);
         map.put("gender", gender);
         map.put("birthday", dateStr);
-        map.put("user_id", Constants.userId);
+        map.put("user_id", Constants.userInfo.getUser_id());
         Log.d("birthday", dateStr);
 
 //        String url_data = "?user_name="+userName+"&gender="+gender+"&birthday="+dateStr+"&user_id=48";

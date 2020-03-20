@@ -41,7 +41,8 @@ public class OkHttpManager {
         OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
                         .setUrl(url)
                         .setRequestType(type)//设置请求方式
-                        .addParam("user_id",Constants.userId)
+//                        .addParam("user_id",Constants.userInfo.getUser_id())
+                        .addParam("user_id","52")
                         .addParams(params)
                         .build(),
                 new com.okhttplib.callback.Callback() {
@@ -53,11 +54,56 @@ public class OkHttpManager {
                             jsonObject = new JSONObject(info.getRetDetail());
 
                             //TODO 哪里处理好呢？
-                            if(jsonObject.getString("code") == "false"){
-                                requestListener.Success(info);
-                            }else{
-                                requestListener.Success(info);
-                            }
+//                            if(jsonObject.getString("code") == "false"){
+//                                requestListener.Success(info);
+//                            }else{
+//                                requestListener.Success(info);
+//                            }
+                            requestListener.Success(info);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSONException--->", info.getRetDetail());
+                            requestListener.Fail(info);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(HttpInfo info) throws IOException {
+                        Log.d("onFailure--->", info.getRetDetail());
+                        requestListener.Fail(info);
+                    }
+                });
+    }
+
+    /**
+     * 不携带id
+     * @param url
+     * @param type
+     * @param params
+     * @param requestListener
+     */
+    public static void request2(String url, int type, Map<String, String> params, RequestListener requestListener) {
+        Log.d("OkHttp.request2-->>>", "params-->>" + params.toString());
+
+        OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
+                        .setUrl(url)
+                        .setRequestType(type)//设置请求方式
+                        .addParams(params)
+                        .build(),
+                new com.okhttplib.callback.Callback() {
+                    @Override
+                    public void onSuccess(HttpInfo info) throws IOException {
+                        Log.d("onSuccess--->", info.getRetDetail());
+                        JSONObject jsonObject ;
+                        try {
+                            jsonObject = new JSONObject(info.getRetDetail());
+
+                            //TODO 哪里处理好呢？
+//                            if(jsonObject.getString("code") == "false"){
+//                                requestListener.Success(info);
+//                            }else{
+//                                requestListener.Success(info);
+//                            }
                             requestListener.Success(info);
                         } catch (JSONException e) {
                             e.printStackTrace();

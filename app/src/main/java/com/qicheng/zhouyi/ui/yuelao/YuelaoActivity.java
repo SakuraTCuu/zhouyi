@@ -188,7 +188,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         map.put("user_name", userName);
         map.put("gender", gender+"");
         map.put("birthday", dateStr);
-        map.put("user_id", Constants.userId);
+        map.put("user_id", Constants.userInfo.getUser_id());
 
         String url_data = MapUtils.Map2String(map);
         Log.d("url_data-------->", url_data);
@@ -196,7 +196,6 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
     }
 
     private void getDataFromServer(String urlData) {
-
         //类型1  八字精批
         Map<String, String> map = new HashMap();
         map.put("type", "4");

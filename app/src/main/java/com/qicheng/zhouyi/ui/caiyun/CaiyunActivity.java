@@ -123,7 +123,7 @@ public class CaiyunActivity extends BaseActivity {
         map.put("birthday", birthday);
         map.put("user_name", input_name);
         map.put("gender", gender);
-        map.put("user_id", Constants.userId);
+        map.put("user_id", Constants.userInfo.getUser_id());
 
         String url_data = MapUtils.Map2String(map);
         Log.d("url_data-------->", url_data);

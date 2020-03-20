@@ -200,7 +200,7 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
         int womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
 
         Map<String, Object> map = new HashMap();
-        map.put("user_id", Constants.userId);
+        map.put("user_id", Constants.userInfo.getUser_id());
         map.put("user_name", manName);
         map.put("y", manYear);
         map.put("m", manMonth);

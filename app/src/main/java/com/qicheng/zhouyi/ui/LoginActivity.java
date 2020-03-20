@@ -17,12 +17,14 @@ import com.okhttplib.annotation.RequestType;
 import com.okhttplib.callback.Callback;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.TimeCount;
 import com.qicheng.zhouyi.utils.ToastUtils;
+import com.qicheng.zhouyi.wxapi.WXEntryActivity;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -69,7 +71,7 @@ public class LoginActivity extends BaseActivity {
         initWX();
     }
 
-    public void initWX(){
+    public void initWX() {
 // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, APP_ID, false);
         api.registerApp(APP_ID);
@@ -161,7 +163,6 @@ public class LoginActivity extends BaseActivity {
      * 验证码一键登录
      */
     public void codeLogin() {
-
         // debug测试
         if (true) {
             startActivity();
@@ -281,31 +282,48 @@ public class LoginActivity extends BaseActivity {
         map.put("token", token);
         map.put("app_type", "0"); //0 表示android
 
-        OkHttpManager.request(Constants.getApi.SYLOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.request2(Constants.getApi.SYLOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 Log.d("jsonObject---->>", "Success");
-                JSONObject jsonObject = null;
                 try {
-                    jsonObject = new JSONObject(info.getRetDetail());
+                    JSONObject jsonData = new JSONObject(info.getRetDetail());
+                    boolean code = jsonData.getBoolean("code");
+                    if (code) {
+                        JSONObject userData = jsonData.getJSONObject("data").getJSONObject("user_info");
+                        String user_id = userData.getString("user_id");
+                        String head_img = userData.getString("head_img");
+                        String nick_name = userData.getString("nick_name");
+                        String gender = userData.getString("gender");
+                        // String job =  userData.getString("job");
+                        String phone = userData.getString("phone");
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        Constants.userInfo = uModel;
+                        Constants.saveData();
+                        startActivity();
+                    } else {
+                        String msg = jsonData.getString("msg");
+                        ToastUtils.showShortToast(msg);
+                        //返回登录页
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    ToastUtils.showShortToast("未知错误！");
                 }
-                Log.d("jsonObject---->>", jsonObject.toString());
-                startActivity();
-                finish();
+//                finish();
             }
 
             @Override
             public void Fail(HttpInfo info) {
-                Log.d("jsonObject---->>", "Fail");
-                JSONObject jsonObject = null;
+                Log.d("userInfo-->", info.getRetDetail());
                 try {
-                    jsonObject = new JSONObject(info.getRetDetail());
+                    JSONObject jsonData = new JSONObject(info.getRetDetail());
+                    String msg = jsonData.getString("msg");
+                    ToastUtils.showShortToast("msg");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.d("jsonObject---->>", jsonObject.toString());
             }
         });
     }

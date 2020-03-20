@@ -1,7 +1,5 @@
 package com.qicheng.zhouyi.ui.mine;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +7,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
@@ -17,8 +18,6 @@ import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.MineOrderBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
-import com.qicheng.zhouyi.ui.mouseYear.MouseYearActivity;
-import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONArray;
@@ -34,14 +33,17 @@ import butterknife.BindView;
 public class MineOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     @BindView(R.id.lv_order)
-    ListView lv_order;
+    PullToRefreshListView lv_order;
 
     @BindView(R.id.tv_noOrder)
     TextView tv_noOrder;
 
+    private final String DJM = "djm";
+    private final String BZJP = "bzjp";
+
     private String TAG = MineOrderActivity.class.getSimpleName();
     private ArrayList<MineOrderBean> data = new ArrayList<>();
-    private int page=1;
+    private int page = 1;
 
     @Override
     protected int setLayoutId() {
@@ -52,25 +54,33 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     protected void initView() {
         showTitleBar();
         setTitleText("我的订单");
-        //填充假数据
-        for (int i = 0; i < 10; i++) {
-            MineOrderBean bean = new MineOrderBean();
-            bean.setOrderCode("1234569845120232323");
-            bean.setOrderTime("2019-12-21 08:30");
-            bean.setOrderTitle("[八字合婚] xxxxx 公历 2019-12-31");
-            data.add(bean);
-        }
+        lv_order.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        initRefreshListView();
+        lv_order.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                Log.d("PullDown", "PullDown");
+            }
 
-        Map<String,String> map = new HashMap<>();
-        map.put("page",page+"");
-
-        Log.d("TAG", "tag-->>"+TAG);
-        Log.d(TAG, data.toString());
-        this.getDataFromServer(map);
-
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                Log.d("PullUp", "PullUp");
+                //加载数据
+                page += 1;
+                getDataFromServer();
+            }
+        });
+        this.getDataFromServer();
     }
 
-    public void setData(){
+    public void initRefreshListView() {
+        ILoadingLayout Labels = lv_order.getLoadingLayoutProxy(true, true);
+        Labels.setPullLabel("正在加载");
+        Labels.setRefreshingLabel("正在加载");
+        Labels.setReleaseLabel("放开刷新");
+    }
+
+    public void setData() {
         Log.d("setData", data.toString());
         lv_order.setAdapter(new MineOrderAdapter(data, mContext));
         lv_order.setOnItemClickListener(this);
@@ -88,27 +98,52 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(mContext, "你点击了第" + position + "项", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, "你点击了第" + position + "项", Toast.LENGTH_SHORT).show();
     }
 
-    public void getDataFromServer(Map map){
-        Log.d("map---->>", map.toString());
+    public void getDataFromServer() {
+        Map<String, String> map = new HashMap<>();
+        map.put("page", page + "");
+
         OkHttpManager.request(Constants.getApi.GETORDERLIST, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
-                Log.d("info22---->>", info.getRetDetail());
+                Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
-                    boolean code = jsonObject.getBoolean("code");
+                    JSONArray orderList = jsonObject.getJSONObject("data").getJSONArray("order_list");
+                    int type = jsonObject.getJSONObject("data").getInt("type");
                     String msg = jsonObject.getString("msg");
-                    JSONArray data = jsonObject.getJSONArray("data");
-                    if(code){
+                    if (type == -1) {
+                        //暂无更多数据
+//                        tv_noOrder.setVisibility(View.VISIBLE);
+                        ToastUtils.showShortToast(msg);
+                        lv_order.onRefreshComplete();
+                    } else if (type == -2) {
+                        //暂无数据
                         ToastUtils.showShortToast(msg);
                         tv_noOrder.setVisibility(View.VISIBLE);
-                    }else{
+                        lv_order.onRefreshComplete();
+                    } else {
                         tv_noOrder.setVisibility(View.GONE);
-                        //处理data
+                        for (int i = 0; i < orderList.length(); i++) {
+                            JSONObject jdata = orderList.getJSONObject(i);
+                            String key = jdata.getString("classify_key");
+                            String classify_name = jdata.getString("classify_name");
+                            String title = jdata.getString("title");
+                            String order_sn = jdata.getString("order_sn");
+                            String add_time = jdata.getString("add_time");
+                            int pay_status = jdata.getInt("pay_status");
+//                            String user_name = jdata.getString("user_name");
+                            String bigTitle = "[" + classify_name + "]" + title;
+                            MineOrderBean bean;
+                            if (key.equals(DJM)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time);
+                            } else {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time);
+                            }
+                            data.add(bean);
+                        }
                         setData();
                     }
                 } catch (JSONException e) {

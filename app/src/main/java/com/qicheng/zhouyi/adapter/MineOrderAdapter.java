@@ -53,8 +53,8 @@ public class MineOrderAdapter<M> extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.titleText.setText(data.get(position).getOrderTitle());
-        holder.orderText.setText(data.get(position).getOrderCode());
-        holder.orderTimeText.setText(data.get(position).getOrderTime());
+        holder.orderText.setText("订单号：" + data.get(position).getOrderCode());
+        holder.orderTimeText.setText("下单时间：" + data.get(position).getOrderTime());
         return convertView;
     }
 

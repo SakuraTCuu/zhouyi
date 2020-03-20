@@ -50,13 +50,23 @@ public class MineFeedbackActivity extends BaseActivity {
 
     @OnClick({R.id.btn_input})
     public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_input:
+                sendData2Server();
+                break;
+        }
+    }
+
+    public void sendData2Server() {
         //提交
         String content = et_input_content.getText().toString().trim();
         String phone = et_input_phone.getText().toString().trim();
         if (content == "") {
             ToastUtils.showShortToast("请输入反馈信息");
+            return;
         } else if (DataCheck.isCellphone(phone)) {
             ToastUtils.showShortToast("请输入联系方式");
+            return;
         }
 
         Map map = new HashMap<String, String>();

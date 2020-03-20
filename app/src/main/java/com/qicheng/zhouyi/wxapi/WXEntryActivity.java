@@ -1,5 +1,6 @@
 package com.qicheng.zhouyi.wxapi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -8,14 +9,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
+import com.qicheng.zhouyi.R;
+import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.LoginActivity;
+import com.qicheng.zhouyi.ui.MainActivity;
+import com.qicheng.zhouyi.utils.ToastUtils;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +34,11 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     public static final String APP_ID = "wx10f0e8af9e8031c3";
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_wxentry);
+        setContentView(R.layout.activity_wxentry);
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
 //        getSupportActionBar().hide();
         // 隐藏状态栏
@@ -38,6 +48,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         api = WXAPIFactory.createWXAPI(this, "wx10f0e8af9e8031c3", false);
         api.handleIntent(getIntent(), this);
     }
+
     @Override
     public void onReq(BaseReq baseReq) {
     }
@@ -48,10 +59,8 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 String code = ((SendAuth.Resp) baseResp).code;
-                //获取accesstoken
-//                getAccessToken(code);
                 getDataFromServer(code);
-                Log.d("code--->>", code.toString()+ "");
+                Log.d("code--->>", code.toString() + "");
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
                 finish();
@@ -65,21 +74,60 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         }
     }
 
-    private void getDataFromServer(String code){
-        Map<String,String> map = new HashMap<>();
-        map.put("code",code);
+    private void getDataFromServer(String code) {
+        Map<String, String> map = new HashMap<>();
+        map.put("code", code);
 
-        OkHttpManager.request(Constants.getApi.WXLOGIN, RequestType.POST, map,new OkHttpManager.RequestListener(){
+        OkHttpManager.request2(Constants.getApi.WXLOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
 
             @Override
             public void Success(HttpInfo info) {
-                String userInfo = info.getRetDetail();
-                Log.d("userInfo-->",userInfo);
+//                String userInfo = info.getRetDetail();
+                Log.d("userInfo-->", info.getRetDetail());
+                //解析userInfo;
+                try {
+                    JSONObject jsonData = new JSONObject(info.getRetDetail());
+                    boolean code = jsonData.getBoolean("code");
+                    if (code) {
+                        JSONObject userData = jsonData.getJSONObject("data");
+                        String user_id = userData.getString("user_id");
+                        String head_img = userData.getString("head_img");
+                        String nick_name = userData.getString("nick_name");
+                        String gender = userData.getString("gender");
+                        // String job =  userData.getString("job");
+                        String phone = userData.getString("phone");
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        Constants.userInfo = uModel;
+                        Constants.saveData();
+                        startActivity(new Intent(WXEntryActivity.this, MainActivity.class));
+                    } else {
+                        String msg = jsonData.getString("msg");
+                        ToastUtils.showShortToast(msg);
+                        //返回登录页
+                        startActivity(new Intent(WXEntryActivity.this, LoginActivity.class));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    ToastUtils.showShortToast("未知错误！");
+                    //返回登录页
+                    startActivity(new Intent(WXEntryActivity.this, LoginActivity.class));
+                }
+                finish();
             }
 
             @Override
             public void Fail(HttpInfo info) {
-                Log.d("userInfo-->",info.getRetDetail());
+                Log.d("userInfo-->", info.getRetDetail());
+                try {
+                    JSONObject jsonData = new JSONObject(info.getRetDetail());
+                    String msg = jsonData.getString("msg");
+                    ToastUtils.showShortToast("msg");
+                    //返回登录页
+                    startActivity(new Intent(WXEntryActivity.this, LoginActivity.class));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

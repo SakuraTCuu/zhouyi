@@ -1,6 +1,7 @@
 package com.qicheng.zhouyi.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,16 @@ public class ChooseNameListAdapter extends BaseAdapter {
         }
         selectedPosition = pos;
         notifyDataSetChanged();
+    }
+
+    public void setNewData(List<ChooseNameBean> data) {
+        this.data = data;
+//        this.print();
+    }
+
+    public void print() {
+        Log.d("data地址值-->>", System.identityHashCode(this.data) + "");
+        Log.d("data对象值-->>", data.toString());
     }
 
     @Override

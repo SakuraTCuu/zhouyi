@@ -10,9 +10,9 @@
         />
     <!-- android:radius 圆角的半径 -->
     <corners
-        android:topLeftRadius="25dp"
-        android:topRightRadius="25dp"
-        android:bottomRightRadius="25dp"
-        android:bottomLeftRadius="25dp"
+        android:topLeftRadius="15dp"
+        android:topRightRadius="15dp"
+        android:bottomRightRadius="15dp"
+        android:bottomLeftRadius="15dp"
         />
 </shape>

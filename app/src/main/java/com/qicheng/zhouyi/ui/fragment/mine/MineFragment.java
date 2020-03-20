@@ -7,6 +7,8 @@ import android.widget.LinearLayout;
 
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseFragment;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.ui.LoginActivity;
 import com.qicheng.zhouyi.ui.mine.MineAboutMeActivity;
 import com.qicheng.zhouyi.ui.mine.MineBeiyongActivity;
 import com.qicheng.zhouyi.ui.mine.MineFeedbackActivity;
@@ -39,7 +41,7 @@ public class MineFragment extends BaseFragment {
         return R.layout.fragment_mine;
     }
 
-    @OnClick({R.id.about_view, R.id.feedback_view, R.id.user_view, R.id.kefu_view, R.id.order_view, R.id.login_btn, R.id.user_beiyong})
+    @OnClick({R.id.about_view, R.id.feedback_view, R.id.user_view, R.id.kefu_view, R.id.order_view, R.id.logout_btn, R.id.user_beiyong})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_view:
@@ -60,8 +62,9 @@ public class MineFragment extends BaseFragment {
             case R.id.about_view:
                 gotoAboutMeAcitivty();
                 break;
-            case R.id.login_btn:
-
+            case R.id.logout_btn:
+                //退出
+                logoutBtn();
                 break;
         }
     }
@@ -74,6 +77,15 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initData() {
 
+    }
+
+    public void logoutBtn() {
+        //清除存储的数据
+        //跳转到登录界面
+        Constants.removeUserInfo();
+        Constants.isLogin = false;
+        startActivity(new Intent(mContext, LoginActivity.class));
+        getActivity().finish();
     }
 
     public void gotoKeFuAcitivty() {
