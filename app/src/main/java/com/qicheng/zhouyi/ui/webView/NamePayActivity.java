@@ -94,7 +94,6 @@ public class NamePayActivity extends BaseActivity {
 
     }
 
-
     class MyWebViewClient extends WebViewClient {
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
@@ -119,7 +118,6 @@ public class NamePayActivity extends BaseActivity {
                     return true;
                 } else {
                     if (!urlList.contains(url)) {
-                        Log.d("222","222");
                         addWeb(url);
                         urlList.add(url);
                         return true;

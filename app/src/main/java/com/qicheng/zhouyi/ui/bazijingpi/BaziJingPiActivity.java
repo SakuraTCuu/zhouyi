@@ -107,7 +107,7 @@ public class BaziJingPiActivity extends BaseActivity {
             ToastUtils.showShortToast("请输入正确的名字");
             return;
         }
-        if(cDate ==null){
+        if(cDate == null){
             ToastUtils.showShortToast("请输入时间");
             return;
         }

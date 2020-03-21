@@ -31,7 +31,18 @@ public class DataCheck {
         return source;
     }
 
+    //循环判断
     public static boolean isHanzi(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (!isHanzi2(String.valueOf(str.charAt(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //  只能判断开头一个汉字
+    public static boolean isHanzi2(String str) {
         String strPattern = "[\\u4e00-\\u9fa5]";
         Pattern p = Pattern.compile(strPattern);
         Matcher m = p.matcher(str);

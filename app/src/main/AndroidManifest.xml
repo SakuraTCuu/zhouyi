@@ -42,6 +42,9 @@
         <activity android:name=".ui.qiming.QimingDetailActivity" />
         <activity android:name=".ui.bazi.BaziHehunActivity" />
         <activity android:name=".ui.webView.NamePayActivity" />
+        <activity android:name=".ui.jiemeng.JiemengActivity" />
+        <activity android:name=".ui.jiemeng.JiemengListActivity" />
+        <activity android:name=".ui.jiemeng.JiemengDetailActivity" />
         <!-- **********************移动授权⻚activity************************** -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"

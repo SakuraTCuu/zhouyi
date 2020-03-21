@@ -1,5 +1,7 @@
 package com.qicheng.zhouyi.ui.mine;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +20,9 @@ import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.MineOrderBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
+import com.qicheng.zhouyi.ui.qiming.QimingDetailActivity;
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONArray;
@@ -30,6 +35,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 
+import static com.qicheng.zhouyi.base.BaseFragment.BASE_END;
+
 public class MineOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     @BindView(R.id.lv_order)
@@ -38,8 +45,9 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     @BindView(R.id.tv_noOrder)
     TextView tv_noOrder;
 
-    private final String DJM = "djm";
-    private final String BZJP = "bzjp";
+    public interface onClickOrderListener {
+        public void clickBtn(int position);
+    }
 
     private String TAG = MineOrderActivity.class.getSimpleName();
     private ArrayList<MineOrderBean> data = new ArrayList<>();
@@ -82,8 +90,86 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
 
     public void setData() {
         Log.d("setData", data.toString());
-        lv_order.setAdapter(new MineOrderAdapter(data, mContext));
+        onClickOrderListener listener = new onClickOrderListener() {
+            @Override
+            public void clickBtn(int position) {
+                //点击详情页
+                MineOrderBean orderBean = data.get(position);
+                onClickDetailBtn(orderBean);
+            }
+        };
+        lv_order.setAdapter(new MineOrderAdapter(data, mContext, listener));
         lv_order.setOnItemClickListener(this);
+    }
+
+    private void onClickDetailBtn(MineOrderBean orderBean) {
+        switch (orderBean.getType()) {
+            case Constants.getClassifyKey.DJM:
+            case Constants.getClassifyKey.XJM:
+//                    跳转到自选姓名界面  需要先请求
+                getNameDataFromServer(orderBean);
+
+                break;
+            case Constants.getClassifyKey.BZJP:
+                //h5url
+            case Constants.getClassifyKey.BZHH:
+            case Constants.getClassifyKey.YLYY:
+            case Constants.getClassifyKey.CYFX:
+            case Constants.getClassifyKey.CSFX:
+            case Constants.getClassifyKey.HYCS:
+            case Constants.getClassifyKey.WLYS:
+//                index/order/orderInfo?order_sn=2020032109135060032
+                String url = Constants.getApi.URL + "index/order/orderInfo?order_sn=" + orderBean.getOrderCode();
+                Intent intent = new Intent(MineOrderActivity.this, NamePayActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", url);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    private void getNameDataFromServer(MineOrderBean orderBean) {
+        JSONObject userData = orderBean.getUserInfo();
+        try {
+            Log.d("userData---->",userData.getString("birthday"));
+            String user_name = userData.getString("user_name");
+            String birthday = userData.getString("birthday");
+            String gender = userData.getString("gender");
+//    String date_type = "1"; // 日期类型  公历还是农历
+            Map map = new HashMap<String, String>();
+            map.put("user_name", user_name);
+            map.put("birthday", birthday);
+            map.put("gender", gender + "");
+            map.put("date_type", "1");
+
+            OkHttpManager.request(Constants.getApi.QIMING, RequestType.POST, map, new OkHttpManager.RequestListener() {
+                @Override
+                public void Success(HttpInfo info) {
+                    try {
+                        JSONObject json = new JSONObject(info.getRetDetail());
+                        if (json.getBoolean("code")) {
+                            //请求成功
+                            Intent intent = new Intent(mContext, QimingDetailActivity.class);
+                            intent.putExtra("data", json.get("data").toString());
+                            mContext.startActivity(intent);
+                        } else {
+                            ToastUtils.showShortToast(json.get("message").toString());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void Fail(HttpInfo info) {
+                    String result = info.getRetDetail();
+                    ToastUtils.showShortToast(result);
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -128,23 +214,41 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                         tv_noOrder.setVisibility(View.GONE);
                         for (int i = 0; i < orderList.length(); i++) {
                             JSONObject jdata = orderList.getJSONObject(i);
+
+                            JSONObject userInfo = jdata.getJSONObject("data");
                             String key = jdata.getString("classify_key");
                             String classify_name = jdata.getString("classify_name");
                             String title = jdata.getString("title");
                             String order_sn = jdata.getString("order_sn");
                             String add_time = jdata.getString("add_time");
                             int pay_status = jdata.getInt("pay_status");
-//                            String user_name = jdata.getString("user_name");
                             String bigTitle = "[" + classify_name + "]" + title;
-                            MineOrderBean bean;
-                            if (key.equals(DJM)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time);
-                            } else {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time);
+                            MineOrderBean bean = null;
+//                            跳转到不同的页面
+                            if (key.equals(Constants.getClassifyKey.DJM)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.XJM)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.CYFX)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.BZHH)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.YLYY)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.WLYS)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            } else if (key.equals(Constants.getClassifyKey.HYCS)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            }else if (key.equals(Constants.getClassifyKey.BZJP)) {
+                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            }  else {
+                                Log.d("key--->>", key);
                             }
                             data.add(bean);
+                            if (i == orderList.length() - 1) {
+                                setData();
+                            }
                         }
-                        setData();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

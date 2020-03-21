@@ -42,7 +42,6 @@ android {
     }
 }
 
-
 repositories {
     flatDir {
         dirs '../app/libs'
@@ -87,5 +86,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation project(path: ':pullToRefreshLibrary')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    //流式布局
+    implementation 'com.github.1002326270xc:FlowView-master:v1.1'
 
 }

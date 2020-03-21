@@ -254,7 +254,6 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
         });
     }
 
-
     /**
      * 展示日期
      */

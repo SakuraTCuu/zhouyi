@@ -12,6 +12,7 @@ import com.qicheng.zhouyi.ui.MainActivity;
 import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
 import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
 import com.qicheng.zhouyi.ui.caiyun.CaiyunActivity;
+import com.qicheng.zhouyi.ui.jiemeng.JiemengActivity;
 import com.qicheng.zhouyi.ui.mouseYear.MouseYearActivity;
 import com.qicheng.zhouyi.ui.yuelao.YuelaoActivity;
 
@@ -101,7 +102,7 @@ public class HomeFragment extends BaseFragment {
                 StartActivity(YuelaoActivity.class);
                 break;
             case R.id.ll_top_zhougong:
-                StartActivity(YuelaoActivity.class);
+                StartActivity(JiemengActivity.class);
                 break;
             case R.id.ll_mid_caiyun:
                 StartActivity(CaiyunActivity.class);

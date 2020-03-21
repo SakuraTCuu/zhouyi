@@ -179,7 +179,7 @@ public class QimingFragment extends BaseFragment {
                     if (json.getBoolean("code")) {
                         //请求成功
                         Intent intent = new Intent(mContext, QimingDetailActivity.class);
-                        intent.putExtra("data", json.get("data").toString());
+                        intent.putExtra("data", json.getJSONObject("data").toString());
                         mContext.startActivity(intent);
                     } else {
                         ToastUtils.showShortToast(json.get("message").toString());

@@ -17,24 +17,25 @@ public class Constants {
         return (String) SPUtils.get(MyApplication.getInstance(), "uid", "");
     }
 
-    public static void removeUserInfo(){
-       if(SPUtils.contains(MyApplication.getInstance(),"uid")){
-           SPUtils.remove(MyApplication.getInstance(),"uid");
-       }
-        if(SPUtils.contains(MyApplication.getInstance(),"userInfo")){
-            SPUtils.remove(MyApplication.getInstance(),"userInfo");
+    public static void removeUserInfo() {
+        if (SPUtils.contains(MyApplication.getInstance(), "uid")) {
+            SPUtils.remove(MyApplication.getInstance(), "uid");
+        }
+        if (SPUtils.contains(MyApplication.getInstance(), "userInfo")) {
+            SPUtils.remove(MyApplication.getInstance(), "userInfo");
         }
     }
+
     public static String getUserInfo() {
         return (String) SPUtils.get(MyApplication.getInstance(), "userInfo", "");
     }
 
     public static void saveData() {
         isLogin = true;
-        if(userInfo !=null){
+        if (userInfo != null) {
             saveUserId(userInfo.getUser_id());
             saveUserInfo(userInfo);
-        }else{
+        } else {
 
         }
 
@@ -57,6 +58,19 @@ public class Constants {
     //      appid
     public static final String shanyanAppId = "3c3LQ33b";
 
+    public static class getClassifyKey {
+        public static final String DJM = "djm"; //大吉名
+        public static final String XJM = "xjm"; //小吉名
+        public static final String BZJP = "bzjp";//八字精批
+        public static final String HYCS = "hycs";//婚姻测算
+        public static final String CYFX = "cyfx";//财运分析
+        public static final String BZHH = "bzhh";//八字合婚
+        public static final String ZWDS = "zwds";//紫微斗数
+        public static final String WLYS = "wlys";//未来运势
+        public static final String XMXP = "xmxp";//姓名详批
+        public static final String YLYY = "ylyy";//月老姻缘
+        public static final String CSFX = "csfx";//测试分类
+    }
 
     public static class getApi {
         public static final String URL = "http://app.zhouyi999.cn/";
@@ -111,5 +125,13 @@ public class Constants {
 //        public static final String BAZIJINGPI = URL + "index/order/bazijp";
 //        public static final String BAZIJINGPI = URL + "index/order/test_bzjp";
         public static final String GETH5URL = URL + "index/order/bzh5_url";
+
+        //         解梦大列表
+        public static final String JIEMENGLIST = URL + "index/jmeng/getMengFl";
+        //解梦小列表
+        public static final String JIEMENGLISTSMALL = URL + "index/jmeng/mengFlList";
+        //解梦具体内容
+        public static final String JIEMENGDETAIL = URL + "index/jmeng/mengInfo";
+
     }
 }

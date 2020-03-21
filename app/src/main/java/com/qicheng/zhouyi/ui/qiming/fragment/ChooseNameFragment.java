@@ -21,6 +21,7 @@ import com.qicheng.zhouyi.bean.NameListItemBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.common.ResourcesManager;
+import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
 import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.LoadingDialog;
@@ -208,7 +209,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
 
     public void getNameList(int type) {
 //         显示loading 加载框
-        LoadingDialog loading =   new LoadingDialog(mContext);
+        LoadingDialog loading = new LoadingDialog(mContext);
         loading.showDialog();
 //        ll_root.addView(loading);
         if (type == -1) {
@@ -247,6 +248,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                         int types = jsonData.getInt("types");
                         if (types == -1) { //未支付，跳转到支付
                             //请求h5界面 跳转到webview,
+                            gotoH5();
                             loading.dismiss();
                         } else {
                             JSONArray jar = jsonData.getJSONArray("name_list");
@@ -293,6 +295,42 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
             loading.dismiss();
             Log.e("err---->>", e.toString());
         }
+    }
+
+
+    private void gotoH5() {
+        Map<String, String> map = new HashMap();
+        map.put("type", "6");
+
+        //跳转到webView 界面
+        OkHttpManager.request(Constants.getApi.GETH5URL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>", jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+//                    url += urlData;
+                    Log.d("url---->>", url);
+
+                    Intent intent = new Intent(mContext, NamePayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
     }
 
     public void requestOrderUrl() {

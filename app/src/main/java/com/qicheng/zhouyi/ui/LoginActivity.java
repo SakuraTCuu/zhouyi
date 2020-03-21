@@ -164,12 +164,11 @@ public class LoginActivity extends BaseActivity {
      */
     public void codeLogin() {
         // debug测试
-        if (true) {
-            startActivity();
-            finish();
-            return;
-        }
-
+//        if (true) {
+//            startActivity();
+//            finish();
+//            return;
+//        }
         input_phone = edit_text_phone.getEditableText().toString().trim();
         code = edit_text_code.getEditableText().toString().trim();
 
@@ -186,7 +185,6 @@ public class LoginActivity extends BaseActivity {
      * 微信一键登录
      */
     public void wxLogin() {
-
         if (!api.isWXAppInstalled()) {
             Toast.makeText(LoginActivity.this, "您的设备未安装微信客户端", Toast.LENGTH_SHORT).show();
         } else {
@@ -250,15 +248,32 @@ public class LoginActivity extends BaseActivity {
         OkHttpManager.request(Constants.getApi.CODELOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
-                JSONObject jsonObject = null;
                 try {
-                    jsonObject = new JSONObject(info.getRetDetail());
+                    JSONObject jsonData = new JSONObject(info.getRetDetail());
+                    boolean code = jsonData.getBoolean("code");
+                    if (code) {
+                        JSONObject userData1 = jsonData.getJSONObject("data");
+                        JSONObject userData = userData1.getJSONObject("user_info");
+                        String user_id = userData.getString("user_id");
+                        String head_img = userData.getString("head_img");
+                        String nick_name = userData.getString("nick_name");
+                        String gender = userData.getString("gender");
+                        // String job =  userData.getString("job");
+                        String phone = userData.getString("phone");
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        Constants.userInfo = uModel;
+                        Constants.saveData();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    } else {
+                        String msg = jsonData.getString("msg");
+                        ToastUtils.showShortToast(msg);
+                        //返回登录页
+//                        startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    ToastUtils.showShortToast("未知错误!");
                 }
-                Log.d("jsonObject---->>", jsonObject.toString());
-                startActivity();
-                finish();
             }
 
             @Override
