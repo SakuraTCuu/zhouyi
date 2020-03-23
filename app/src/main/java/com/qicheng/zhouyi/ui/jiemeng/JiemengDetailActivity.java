@@ -2,6 +2,7 @@ package com.qicheng.zhouyi.ui.jiemeng;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -51,7 +52,8 @@ public class JiemengDetailActivity extends BaseActivity {
         String bigText = intent.getStringExtra("bigText");
         setTitleText(bigText);
 
-        tv_jieming_detail.setText(text);
+        tv_jieming_detail.setText(Html.fromHtml(text));
+
     }
 
     private void setData() {

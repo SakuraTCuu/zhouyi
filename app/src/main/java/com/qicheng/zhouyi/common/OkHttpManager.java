@@ -42,29 +42,20 @@ public class OkHttpManager {
                         .setUrl(url)
                         .setRequestType(type)//设置请求方式
 //                        .addParam("user_id",Constants.userInfo.getUser_id())
-                        .addParam("user_id","52")
+                        .addParam("user_id", Constants.userInfo.getUser_id())
                         .addParams(params)
                         .build(),
                 new com.okhttplib.callback.Callback() {
                     @Override
                     public void onSuccess(HttpInfo info) throws IOException {
                         Log.d("onSuccess--->", info.getRetDetail());
-                        JSONObject jsonObject ;
-                        try {
-                            jsonObject = new JSONObject(info.getRetDetail());
-
-                            //TODO 哪里处理好呢？
+                        //TODO 哪里处理好呢？
 //                            if(jsonObject.getString("code") == "false"){
 //                                requestListener.Success(info);
 //                            }else{
 //                                requestListener.Success(info);
 //                            }
-                            requestListener.Success(info);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSONException--->", info.getRetDetail());
-                            requestListener.Fail(info);
-                        }
+                        requestListener.Success(info);
                     }
 
                     @Override
@@ -77,6 +68,7 @@ public class OkHttpManager {
 
     /**
      * 不携带id
+     *
      * @param url
      * @param type
      * @param params
@@ -94,7 +86,7 @@ public class OkHttpManager {
                     @Override
                     public void onSuccess(HttpInfo info) throws IOException {
                         Log.d("onSuccess--->", info.getRetDetail());
-                        JSONObject jsonObject ;
+                        JSONObject jsonObject;
                         try {
                             jsonObject = new JSONObject(info.getRetDetail());
 

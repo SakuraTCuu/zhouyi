@@ -3,6 +3,7 @@ package com.qicheng.zhouyi.ui.fragment.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.qicheng.zhouyi.R;
@@ -56,6 +57,8 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.ll_bottom_yunshi)
     LinearLayout ll_bottom_yunshi;
 
+    @BindView(R.id.iv_home_bazi)
+    ImageView iv_home_bazi;
 
     public HomeFragment() {
         super();
@@ -89,26 +92,17 @@ public class HomeFragment extends BaseFragment {
             R.id.ll_mid_qiming, R.id.ll_mid_weiji, R.id.ll_mid_yinyuan,
             R.id.ll_mid_yunshi, R.id.ll_bottom_aiqing, R.id.ll_bottom_caifu, R.id.ll_bottom_ganqing,
             R.id.ll_bottom_hehun,
-            R.id.ll_bottom_taohua, R.id.ll_bottom_yunshi})
+            R.id.ll_bottom_taohua, R.id.ll_bottom_yunshi, R.id.iv_home_bazi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ll_top_bazi:
-                StartActivity(BaziJingPiActivity.class);
-                break;
             case R.id.ll_top_qiming:
                 StartQimingFragment();
-                break;
-            case R.id.ll_top_yuelao:
-                StartActivity(YuelaoActivity.class);
                 break;
             case R.id.ll_top_zhougong:
                 StartActivity(JiemengActivity.class);
                 break;
             case R.id.ll_mid_caiyun:
                 StartActivity(CaiyunActivity.class);
-                break;
-            case R.id.ll_mid_hehun:
-                StartActivity(BaziHehunActivity.class);
                 break;
             case R.id.ll_mid_qiming:
                 StartQimingFragment();
@@ -117,27 +111,23 @@ public class HomeFragment extends BaseFragment {
                 StartActivity(MouseYearActivity.class);
                 break;
             case R.id.ll_mid_yinyuan:
+            case R.id.ll_bottom_taohua:
+            case R.id.ll_bottom_aiqing:
+            case R.id.ll_bottom_ganqing:
+            case R.id.ll_top_yuelao:
                 StartActivity(YuelaoActivity.class);
                 break;
             case R.id.ll_mid_yunshi:
-                StartActivity(CaiyunActivity.class);
-                break;
-            case R.id.ll_bottom_aiqing:
-                StartActivity(YuelaoActivity.class);
-                break;
             case R.id.ll_bottom_caifu:
                 StartActivity(CaiyunActivity.class);
                 break;
-            case R.id.ll_bottom_ganqing:
-                StartActivity(YuelaoActivity.class);
-                break;
             case R.id.ll_bottom_hehun:
+            case R.id.ll_mid_hehun:
                 StartActivity(BaziHehunActivity.class);
                 break;
-            case R.id.ll_bottom_taohua:
-                StartActivity(YuelaoActivity.class);
-                break;
             case R.id.ll_bottom_yunshi:
+            case R.id.iv_home_bazi:
+            case R.id.ll_top_bazi:
                 StartActivity(BaziJingPiActivity.class);
                 break;
         }

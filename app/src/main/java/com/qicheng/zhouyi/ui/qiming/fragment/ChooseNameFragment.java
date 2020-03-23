@@ -39,6 +39,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ChooseNameFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
 
@@ -71,6 +73,8 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     private List<ChooseNameBean> normalData = new ArrayList<>();
     private List<ChooseNameBean> bigData = new ArrayList<>();
     private List<ChooseNameBean> smallData = new ArrayList<>();
+
+    private int type = -1;
 
     private String userData;
     private ChooseNameListAdapter adapter;
@@ -114,6 +118,13 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("onItemClick-->>", position + "---" + id);
         changeNameList(position);
@@ -151,28 +162,45 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_namebar_normal:
-                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
-                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                getNameList(-1);
+                type = -1;
+                changeNameBar(type);
+                getNameList(type);
                 break;
             case R.id.tv_namebar_small:
-                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
-                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                type = 1;
+                changeNameBar(type);
                 //是否解锁
-                getNameList(1);
+                getNameList(type);
                 break;
             case R.id.tv_namebar_big:
-                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                type = 2;
+                changeNameBar(type);
                 //是否解锁
-                getNameList(2);
+                getNameList(type);
                 break;
             case R.id.iv_collect:
                 //请求服务器 收藏
                 onClickCollect();
+                break;
+        }
+    }
+
+    private void changeNameBar(int type) {
+        switch (type) {
+            case -1:
+                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                break;
+            case 1:
+                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                break;
+            case 2:
+                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
                 break;
         }
     }
@@ -298,6 +326,29 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     }
 
 
+    //结果处理函数，当从secondActivity中返回时调用此函数
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            int status = bundle.getInt("status");
+            if (status == 1) {
+                Log.d("status-->>", "支付成功");
+                //支付成功,重新请求
+                changeNameBar(type);
+                getNameList(type);
+            } else {
+                //支付失败 ,返回
+                //保持状态
+                Log.d("status-->>", "未支付");
+                type = -1;
+                changeNameBar(type);
+                getNameList(type);
+            }
+        }
+    }
+
     private void gotoH5() {
         Map<String, String> map = new HashMap();
         map.put("type", "6");
@@ -313,12 +364,11 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                     String url = jsonObject.getJSONObject("data").getString("url");
 //                    url += urlData;
                     Log.d("url---->>", url);
-
                     Intent intent = new Intent(mContext, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    startActivityForResult(intent, 0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

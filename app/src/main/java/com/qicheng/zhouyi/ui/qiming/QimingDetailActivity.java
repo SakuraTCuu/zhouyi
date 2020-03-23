@@ -50,7 +50,10 @@ public class QimingDetailActivity extends BaseActivity {
 
     private JSONArray nameList;
     private JSONObject userInfo;
+    private JSONArray qr; //强弱总比值
     private String nongliStr;
+    private JSONObject jReturn;
+    private JSONObject pp;
 
     @Override
     protected int setLayoutId() {
@@ -68,6 +71,10 @@ public class QimingDetailActivity extends BaseActivity {
             JSONObject jsondata = new JSONObject(data);
             nameList = jsondata.getJSONArray("name_list");
             userInfo = jsondata.getJSONObject("info");
+            qr = jsondata.getJSONArray("qr");
+            jReturn = jsondata.getJSONObject("return");
+            pp = jsondata.getJSONObject("pp");
+
             nongliStr = jsondata.getString("nongli_day");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -78,8 +85,8 @@ public class QimingDetailActivity extends BaseActivity {
         viewPager.addOnPageChangeListener(new MyPagerChangeListener());
         list = new ArrayList<>();
         dashiQimingFragment = new DashiQimingFragment();
-        chooseNameFragment = new ChooseNameFragment(nameList,data);
-        qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr);
+        chooseNameFragment = new ChooseNameFragment(nameList, data);
+        qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr,qr,jReturn,pp);
 
         list.add(qimingBaziFragment);
         list.add(chooseNameFragment);
@@ -93,10 +100,6 @@ public class QimingDetailActivity extends BaseActivity {
         tv_qiming_bazi_title.setTextColor(Color.GREEN);
         tv_qiming_choose_title.setTextColor(Color.BLACK);
         tv_qiming_dashi_title.setTextColor(Color.BLACK);
-
-//        tv_qiming_bazi_title.setOnClickListener();
-//        tv_qiming_choose_title.setOnClickListener(Color.BLACK);
-//        tv_qiming_dashi_title.setOnClickListener(Color.BLACK);
 
     }
 
@@ -128,7 +131,7 @@ public class QimingDetailActivity extends BaseActivity {
         }
     }
 
-    public void onPageChange(int arg0){
+    public void onPageChange(int arg0) {
         switch (arg0) {//状态改变时底部对应的字体颜色改变
             case 0:
                 tv_qiming_bazi_title.setTextColor(Color.GREEN);

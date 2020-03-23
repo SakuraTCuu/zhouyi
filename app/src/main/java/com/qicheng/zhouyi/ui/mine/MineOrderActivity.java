@@ -98,6 +98,7 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                 onClickDetailBtn(orderBean);
             }
         };
+        lv_order.onRefreshComplete();
         lv_order.setAdapter(new MineOrderAdapter(data, mContext, listener));
         lv_order.setOnItemClickListener(this);
     }
@@ -132,7 +133,7 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     private void getNameDataFromServer(MineOrderBean orderBean) {
         JSONObject userData = orderBean.getUserInfo();
         try {
-            Log.d("userData---->",userData.getString("birthday"));
+            Log.d("userData---->", userData.getString("birthday"));
             String user_name = userData.getString("user_name");
             String birthday = userData.getString("birthday");
             String gender = userData.getString("gender");
@@ -239,9 +240,9 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                                 bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
                             } else if (key.equals(Constants.getClassifyKey.HYCS)) {
                                 bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            }else if (key.equals(Constants.getClassifyKey.BZJP)) {
+                            } else if (key.equals(Constants.getClassifyKey.BZJP)) {
                                 bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            }  else {
+                            } else {
                                 Log.d("key--->>", key);
                             }
                             data.add(bean);

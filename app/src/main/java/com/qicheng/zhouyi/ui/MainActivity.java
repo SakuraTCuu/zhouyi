@@ -57,10 +57,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         bottomNavigationBar.setBarBackgroundColor("#D7E6EF");
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.mipmap.home, "首页").setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.home1)))
-                .addItem(new BottomNavigationItem(R.mipmap.bazi, "八字排盘").setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.bazi1)))
-                .addItem(new BottomNavigationItem(R.mipmap.qiming, "大师起名").setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.qiming1)))
-                .addItem(new BottomNavigationItem(R.mipmap.mine, "个人中心").setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.mine1)))
+                .addItem(new BottomNavigationItem(R.mipmap.home, "首页").setActiveColorResource(R.color.white).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.home1)))
+                .addItem(new BottomNavigationItem(R.mipmap.bazi, "八字排盘").setActiveColorResource(R.color.white).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.bazi1)))
+                .addItem(new BottomNavigationItem(R.mipmap.qiming, "大师起名").setActiveColorResource(R.color.white).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.qiming1)))
+                .addItem(new BottomNavigationItem(R.mipmap.mine, "个人中心").setActiveColorResource(R.color.white).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.mine1)))
                 .setFirstSelectedPosition(0)
                 .initialise();
         bottomNavigationBar.setAutoHideEnabled(true);
@@ -71,12 +71,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             public void skipQiming() {
                 hideAllFragment();
                 manager.beginTransaction().show(qimingFragment).commit();
+                bottomNavigationBar.selectTab(2);
             }
 
             @Override
             public void skipBazi() {
                 hideAllFragment();
                 manager.beginTransaction().show(baziFragment).commit();
+                bottomNavigationBar.selectTab(1);
             }
 
             @Override

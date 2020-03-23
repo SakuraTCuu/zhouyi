@@ -48,10 +48,10 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:orientation="horizontal">
 
                         <TextView
@@ -110,7 +110,7 @@
                             android:background="@drawable/circlebg_shunian_select"
                             android:gravity="center"
                             android:text="男"
-                            android:textColor="@color/shunian_input_textcolor"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <TextView
@@ -118,10 +118,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
-                            android:background="@drawable/circlebg_shunian_unselect"
                             android:gravity="center"
                             android:text="女"
-                            android:textColor="@color/white"
+                            android:textColor="@color/black"
                             android:textSize="16sp" />
 
                     </LinearLayout>

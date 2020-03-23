@@ -139,14 +139,14 @@ public class MouseYearActivity extends BaseActivity {
                 Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-                    url +=urlData;
+                    url += urlData;
                     Log.d("url---->>", url);
 
                     Intent intent = new Intent(MouseYearActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {
@@ -168,11 +168,12 @@ public class MouseYearActivity extends BaseActivity {
             return;
         }
         gender = 0;
-        tv_shunian_women.setTextColor(getResources().getColor(R.color.red));
+        tv_shunian_women.setTextColor(getResources().getColor(R.color.white));
         tv_shunian_women.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_select));
 
-        tv_shunian_man.setTextColor(getResources().getColor(R.color.white));
-        tv_shunian_man.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_unselect));
+        tv_shunian_man.setTextColor(getResources().getColor(R.color.black));
+//        tv_shunian_man.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_unselect));
+        tv_shunian_man.setBackground(null);
     }
 
     private void onClickMan() {
@@ -180,11 +181,12 @@ public class MouseYearActivity extends BaseActivity {
             return;
         }
         gender = 1;
-        tv_shunian_man.setTextColor(getResources().getColor(R.color.red));
+        tv_shunian_man.setTextColor(getResources().getColor(R.color.white));
         tv_shunian_man.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_select));
 
-        tv_shunian_women.setTextColor(getResources().getColor(R.color.white));
-        tv_shunian_women.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_unselect));
+        tv_shunian_women.setTextColor(getResources().getColor(R.color.black));
+//        tv_shunian_women.setBackground(ResourcesManager.getDrawable(mContext, R.drawable.circlebg_shunian_unselect));
+        tv_shunian_women.setBackground(null);
     }
 
 

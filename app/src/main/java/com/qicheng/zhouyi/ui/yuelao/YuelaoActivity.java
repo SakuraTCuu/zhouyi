@@ -95,12 +95,13 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
 
     }
 
-    @OnClick({R.id.btn_yuelao_cesuan, R.id.iv_yuelao_date, R.id.iv_yuelao_women, R.id.iv_yuelao_man})
+    @OnClick({R.id.btn_yuelao_cesuan, R.id.iv_yuelao_date, R.id.iv_yuelao_women, R.id.iv_yuelao_man, R.id.tv_yuelao_date})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_yuelao_cesuan:
                 onClickBtn();
                 break;
+            case R.id.tv_yuelao_date:
             case R.id.iv_yuelao_date:
                 showDatePicker();
                 break;
@@ -168,7 +169,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
             ToastUtils.showShortToast("请输入正确的名字");
             return;
         }
-        if(cDate ==null){
+        if (cDate == null) {
             ToastUtils.showShortToast("请输入时间");
             return;
         }
@@ -186,7 +187,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
 
         Map<String, Object> map = new HashMap();
         map.put("user_name", userName);
-        map.put("gender", gender+"");
+        map.put("gender", gender + "");
         map.put("birthday", dateStr);
         map.put("user_id", Constants.userInfo.getUser_id());
 
@@ -207,14 +208,14 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
                 Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-                    url +=urlData;
+                    url += urlData;
                     Log.d("url---->>", url);
 
                     Intent intent = new Intent(YuelaoActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

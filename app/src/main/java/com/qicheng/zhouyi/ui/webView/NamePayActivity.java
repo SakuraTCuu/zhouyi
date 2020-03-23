@@ -36,7 +36,7 @@ public class NamePayActivity extends BaseActivity {
     //    @BindView(R.id.webview_order)
 //    WebView webview_order;
     private List<String> urlList = new ArrayList<>(); // 记录访问的URL
-   private Map<String, String> headers = new HashMap<>();
+    private Map<String, String> headers = new HashMap<>();
     @BindView(R.id.fl_view)
     FrameLayout fl_view;
 
@@ -50,7 +50,7 @@ public class NamePayActivity extends BaseActivity {
         hideTitleBar();
         Bundle bundle = this.getIntent().getExtras(); //读取intent的数据给bundle对象
         String url = bundle.getString("url"); //通过key得到value
-        headers.put("Referer", "http://app.zhouyi999.cn");
+//        headers.put("Referer", "http://app.zhouyi999.cn");
         addWeb(url);
     }
 
@@ -65,7 +65,8 @@ public class NamePayActivity extends BaseActivity {
 
         webview_order.setWebViewClient(new MyWebViewClient());
         webview_order.setWebChromeClient(new WebChromeClient());
-        webview_order.loadUrl(url,headers);
+        headers.put("Referer", "http://app.zhouyi999.cn");
+        webview_order.loadUrl(url, headers);
         WebSettings settings = webview_order.getSettings();
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         //开启本地DOM存储
@@ -94,6 +95,8 @@ public class NamePayActivity extends BaseActivity {
 
     }
 
+    private boolean flag = false;
+
     class MyWebViewClient extends WebViewClient {
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
@@ -103,14 +106,30 @@ public class NamePayActivity extends BaseActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             Log.d("onPageStarted-->>", url);
+            if (url.startsWith("https://wx.tenpay.com")) {
+                flag = true;
+            }
             super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url == null) return false;
-
-            Log.d("urll--->>",url);
+            //?pay_status=1
+            if (url.startsWith("js://webview")) {
+                //大小吉名支付成功;
+                //返回到选名界面,然后
+                Intent intent = new Intent();
+                intent.putExtra("status", 1);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            Log.d("urll--->>", url);
             try {
                 if (url.startsWith("weixin://") || url.startsWith("alipays://")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -118,33 +137,23 @@ public class NamePayActivity extends BaseActivity {
                     return true;
                 } else {
                     if (!urlList.contains(url)) {
-                        addWeb(url);
+                        if (!url.startsWith("http://app.zhouyi999.cn/index/order")) {
+                            addWeb(url);
+                        } else {
+                            //如果支付成功就不重定向了直接刷新;
+                            Log.d("ordder-->", "order");
+                            view.loadUrl(url);
+                            return true;
+                        }
                         urlList.add(url);
                         return true;
                     }
-//                    Log.d("1111","1111");
-//                    Map<String, String> headers = new HashMap<>();
-//                    headers.put("Referer", "http://app.zhouyi999.cn");
-//                    view.loadUrl(url, headers);
                 }
             } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
                 return false;
             }
             return true;
         }
-
-//        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//        @Override
-//        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {// 截获跳转
-//            String url = request.getUrl().toString();
-//            if (!urlList.contains(url)) {
-//                addWeb(url);
-//                urlList.add(url);
-//                return true;
-//            } else {
-//                return super.shouldOverrideUrlLoading(view, request);
-//            }
-//        }
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
@@ -162,10 +171,22 @@ public class NamePayActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        Log.d("onResume", "onResume");
+        super.onResume();
+        if (flag) {
+            flag = false;
+            Log.d("remove--->", "removeView");
+            //保留第一个webview
+            fl_view.removeViewAt(1);
+        }
+    }
+
+    @Override
     public void onBackPressed() {
-        Log.d("urllist-->>",urlList.toString());
+        Log.d("urllist-->>", urlList.toString());
         int childCount = fl_view.getChildCount();
-        Log.d("childCount-->>",childCount+"");
+        Log.d("childCount-->>", childCount + "");
         if (childCount > 1) {
             fl_view.removeViewAt(childCount - 1);
             urlList.remove(urlList.size() - 1);

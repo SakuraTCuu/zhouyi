@@ -31,6 +31,12 @@
             android:text="账号信息"
             android:textColor="@color/titlebarColor"
             android:textSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="#eee" />
     </RelativeLayout>
 
     <FrameLayout

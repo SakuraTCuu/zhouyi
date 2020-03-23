@@ -15,6 +15,7 @@ import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.ui.LoginActivity;
 import com.qicheng.zhouyi.ui.MainActivity;
+import com.qicheng.zhouyi.ui.MyApplication;
 import com.qicheng.zhouyi.utils.ToastUtils;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -45,7 +46,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //接收到分享以及登录的intent传递handleIntent方法，处理结果
-        api = WXAPIFactory.createWXAPI(this, "wx10f0e8af9e8031c3", false);
+        api = MyApplication.getInstance().getWxApi();
         api.handleIntent(getIntent(), this);
     }
 

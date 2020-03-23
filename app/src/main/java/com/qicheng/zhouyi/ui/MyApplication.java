@@ -113,7 +113,6 @@ public class MyApplication extends Application {
         });
     }
 
-
     public void getPhoneInfo() {
         OneKeyLoginManager.getInstance().getPhoneInfo(new GetPhoneInfoListener() {
             @Override
@@ -161,8 +160,16 @@ public class MyApplication extends Application {
     }
 
     public void initWX() {
-// 通过WXAPIFactory工厂，获取IWXAPI的实例
-//        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
-//        api.registerApp(APP_ID);
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+        api.registerApp(APP_ID);
+    }
+
+    public IWXAPI getWxApi() {
+        if (api == null) {
+            api = WXAPIFactory.createWXAPI(this, APP_ID, false);
+            api.registerApp(APP_ID);
+        }
+        return api;
     }
 }
