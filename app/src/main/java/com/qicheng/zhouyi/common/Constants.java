@@ -133,5 +133,15 @@ public class Constants {
         //解梦具体内容
         public static final String JIEMENGDETAIL = URL + "index/jmeng/mengInfo";
 
+        //用户分享次数
+        public static final String ADDUSERSHARE = URL + "index/user/addUserShare";
+
+        //用户分享次数
+        public static final String GETUSERSHAREURL = URL + "index/share/userShareUrl";
+
+        //获取农历日期
+        public static final String GETNONGLIDATE = URL + "/index/index/index";
+
+
     }
 }

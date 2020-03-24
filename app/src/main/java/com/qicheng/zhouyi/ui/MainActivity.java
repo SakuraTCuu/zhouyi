@@ -1,18 +1,28 @@
 package com.qicheng.zhouyi.ui;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.okhttplib.HttpInfo;
+import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
-import com.qicheng.zhouyi.base.BaseFragment;
 import com.qicheng.zhouyi.common.ActivityManager;
+import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
 import com.qicheng.zhouyi.ui.fragment.bazi.BaziFragment;
 import com.qicheng.zhouyi.ui.fragment.home.HomeFragment;
 import com.qicheng.zhouyi.ui.fragment.mine.MineFragment;
@@ -20,12 +30,24 @@ import com.qicheng.zhouyi.ui.fragment.qiming.QimingFragment;
 
 import butterknife.BindView;
 
+import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.LogUtils;
+import com.qicheng.zhouyi.utils.ToastUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar bottomNavigationBar;
+
+    @BindView(R.id.scroll_root)
+    ScrollView scroll_root;
 
     public static MainActivity instances;
     private FragmentManager manager;
@@ -49,6 +71,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
         hideTitleBar();
 
+        setDate();
         instances = this;
         //设置Mode
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
@@ -89,9 +112,29 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         });
         baziFragment = new BaziFragment();
         qimingFragment = new QimingFragment();
-        mineFragment = new MineFragment();
+        mineFragment = new MineFragment(new hideBottom() {
 
-        manager.beginTransaction().add(R.id.container, homeFragment, HomeFragment.class.getName())
+            @Override
+            public void hide() {
+                bottomNavigationBar.hide();
+            }
+
+            @Override
+            public void show() {
+                bottomNavigationBar.show();
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public Size getWH() {
+                ViewGroup.LayoutParams lp = scroll_root.getLayoutParams();
+                Size size = new Size(lp.width, lp.height);
+                return size;
+            }
+        });
+
+        manager.beginTransaction()
+                .add(R.id.container, homeFragment, HomeFragment.class.getName())
                 .add(R.id.container, baziFragment, BaziFragment.class.getName())
                 .add(R.id.container, qimingFragment, QimingFragment.class.getName())
                 .add(R.id.container, mineFragment, MineFragment.class.getName())
@@ -103,6 +146,36 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void initData() {
+
+    }
+
+    private void setDate() {
+        Map map = new HashMap();
+        OkHttpManager.request(Constants.getApi.GETNONGLIDATE, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>", jsonObject.toString());
+                    JSONArray jar = jsonObject.getJSONArray("data");
+                    String year = jar.getString(0);
+                    String month = jar.getString(1);
+                    String day = jar.getString(2);
+                    String n_year = jar.getString(3);
+                    String n_month = jar.getString(4);
+                    String n_day = jar.getString(4);
+                    homeFragment.setDate(year, month, day, n_year + n_month + n_day);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+            }
+        });
 
     }
 
@@ -179,6 +252,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         void skipBazi();
 
         void skipMine();
+    }
+
+    public interface hideBottom {
+        void hide();
+
+        void show();
+
+        Size getWH();
     }
 
     @Override

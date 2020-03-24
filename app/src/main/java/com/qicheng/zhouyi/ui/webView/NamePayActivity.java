@@ -124,12 +124,18 @@ public class NamePayActivity extends BaseActivity {
             if (url.startsWith("js://webview")) {
                 //大小吉名支付成功;
                 //返回到选名界面,然后
+                Log.d("url--->>", url);
+                String status = Uri.parse(url).getQueryParameter("back_status");
                 Intent intent = new Intent();
-                intent.putExtra("status", 1);
+                if (status.equals("1")) {
+                    intent.putExtra("status", 1);
+                } else {
+                    intent.putExtra("status", -1);
+                }
                 setResult(RESULT_OK, intent);
                 finish();
+                return false;
             }
-            Log.d("urll--->>", url);
             try {
                 if (url.startsWith("weixin://") || url.startsWith("alipays://")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

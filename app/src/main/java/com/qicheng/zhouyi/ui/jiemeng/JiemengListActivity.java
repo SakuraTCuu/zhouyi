@@ -122,28 +122,35 @@ public class JiemengListActivity extends BaseActivity {
 
     private void getDataFromServer(Map map) {
 
+
         OkHttpManager.request(Constants.getApi.JIEMENGDETAIL, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 Log.d("info---->>", info.getRetDetail());
-                try {
-                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>", jsonObject.toString());
-                    boolean code = jsonObject.getBoolean("code");
-                    if (code) {
-                        JSONObject jdata = jsonObject.getJSONObject("data");
-                        String text = jdata.getString("newstext");
-                        Intent intent = new Intent(JiemengListActivity.this, JiemengDetailActivity.class);
-                        intent.putExtra("text", text);
-                        intent.putExtra("bigText", targetText);
-                        startActivity(intent);
-                    } else {
-                        String msg = jsonObject.getString("msg");
-                        ToastUtils.showShortToast(msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                String str = info.getRetDetail();
+                Intent intent = new Intent(JiemengListActivity.this, JiemengDetailActivity.class);
+                intent.putExtra("text", str);
+                intent.putExtra("bigText", targetText);
+                startActivity(intent);
+
+//                    Log.d("jsonObject---->>", jsonObject.toString());
+//                    boolean code = jsonObject.getBoolean("code");
+//                    if (code) {
+////                        JSONObject jdata = jsonObject.getJSONObject("data");
+////                        String text = jdata.getString("newstext");
+////                        Intent intent = new Intent(JiemengListActivity.this, JiemengDetailActivity.class);
+////                        intent.putExtra("text", text);
+////                        intent.putExtra("bigText", targetText);
+////                        startActivity(intent);
+//                    } else {
+//                        String msg = jsonObject.getString("msg");
+//                        ToastUtils.showShortToast(msg);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override

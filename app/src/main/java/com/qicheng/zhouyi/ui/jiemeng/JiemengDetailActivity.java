@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,8 +37,12 @@ import butterknife.OnClick;
  */
 public class JiemengDetailActivity extends BaseActivity {
 
-    @BindView(R.id.tv_jieming_detail)
-    TextView tv_jieming_detail;
+//    @BindView(R.id.tv_jieming_detail)
+//    TextView tv_jieming_detail;
+
+    @BindView(R.id.webview_jiemeng)
+    WebView webview_jiemeng;
+
 
     @Override
     protected int setLayoutId() {
@@ -46,42 +51,21 @@ public class JiemengDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         Intent intent = getIntent();
         String text = intent.getStringExtra("text");
         String bigText = intent.getStringExtra("bigText");
+        if (bigText.length() > 10) {
+            bigText = bigText.substring(0, 10) + "...";
+        }
         setTitleText(bigText);
 
-        tv_jieming_detail.setText(Html.fromHtml(text));
-
+        Log.d("text-->>", text);
+//        tv_jieming_detail.setText(Html.fromHtml(text));
+        webview_jiemeng.loadDataWithBaseURL(null, text, "text/html", "utf-8", null);
     }
 
     private void setData() {
 
-    }
-
-    class MyFlowAdapter extends FlowAdapter<JieMengBean> {
-
-        public MyFlowAdapter(Context context, List<JieMengBean> list) {
-            super(context, list);
-        }
-
-        @Override
-        protected int generateLayout(int position) {
-            return R.layout.flow_item;
-        }
-
-        @Override
-        protected void getView(final JieMengBean o, View parent) {
-            TextView text = (TextView) parent.findViewById(R.id.flow_text);
-            text.setText(o.getTempName());
-            text.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
     }
 
     @Override
@@ -91,6 +75,6 @@ public class JiemengDetailActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
-    }
 
+    }
 }

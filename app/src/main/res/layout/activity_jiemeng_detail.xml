@@ -4,16 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tv_jieming_detail"
+    <WebView
+        android:id="@+id/webview_jiemeng"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/jiemeng_detail_border"
-        android:padding="20dp"
-        android:paddingLeft="20dp"
-        android:text="梦见自己好爽啊"
-        android:textSize="16dp" />
+        android:layout_marginBottom="20dp" />
+
 </ScrollView>

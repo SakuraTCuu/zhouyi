@@ -17,9 +17,11 @@ import com.qicheng.zhouyi.ui.LoginActivity;
 import com.qicheng.zhouyi.ui.MainActivity;
 import com.qicheng.zhouyi.ui.MyApplication;
 import com.qicheng.zhouyi.utils.ToastUtils;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.ShowMessageFromWX;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -29,7 +31,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
     public static final String APP_ID = "wx10f0e8af9e8031c3";
@@ -51,7 +52,18 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     }
 
     @Override
-    public void onReq(BaseReq baseReq) {
+    public void onReq(BaseReq req) {
+        switch (req.getType()) {
+            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+//                goToGetMsg();
+                break;
+            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+//                goToShowMsg((ShowMessageFromWX.Req) req);
+                break;
+            default:
+                break;
+        }
+        finish();
     }
 
     @Override

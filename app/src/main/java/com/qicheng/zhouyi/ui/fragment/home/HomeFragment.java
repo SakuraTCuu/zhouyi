@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
@@ -60,12 +61,20 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.iv_home_bazi)
     ImageView iv_home_bazi;
 
+    @BindView(R.id.tv_nongli_date)
+    TextView tv_nongli_date;
+
+    @BindView(R.id.tv_gongli_day)
+    TextView tv_gongli_day;
+
+    @BindView(R.id.tv_gongli_year)
+    TextView tv_gongli_year;
+
     public HomeFragment() {
         super();
     }
 
     private MainActivity.skipFragment listener;
-
 
     public HomeFragment(MainActivity.skipFragment skipFragment) {
         this.listener = skipFragment;
@@ -83,6 +92,14 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+    }
+
+    public void setDate(String year, String month, String day, String n_date) {
+
+        tv_nongli_date.setText(n_date);
+        tv_gongli_day.setText(day);
+        tv_gongli_year.setText(year + "/" + month);
 
     }
 

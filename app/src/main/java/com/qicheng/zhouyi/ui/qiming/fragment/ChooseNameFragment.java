@@ -25,6 +25,7 @@ import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
 import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
 import com.qicheng.zhouyi.utils.LoadingDialog;
+import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONArray;
@@ -114,7 +115,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
         lv_namelist.setOnItemClickListener(this);
 
         //确定第一个是否标记
-        initSignName(0);
+        changeNameList(0);
     }
 
     @Override
@@ -257,12 +258,21 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
             Log.e("err---->>", genderStr);
             String gender = genderStr.equals("男") ? "1" : "0";
 
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap();
             map.put("user_name", surName);
             map.put("gender", gender);
             map.put("name_type", type + "");
 
-            Log.e("map-->>", map.toString());
+            Map<String, Object> map2 = new HashMap();
+            map2.put("user_name", surName);
+            map2.put("gender", gender);
+            map2.put("name_type", type);
+            map2.put("user_id", Constants.userInfo.getUser_id());
+
+            Log.e("map-->>", map2.toString());
+
+            String url_data = MapUtils.Map2String(map2);
+            Log.e("url_data-->>", url_data);
 //            {"code":true,"msg":"未名支付","data":{"big_ji":{"classify_id":9,"classify_name":"大吉名","classify_key":"djm","price":"0.01"},
 ////            "small_ji":{"classify_id":10,"classify_name":"小吉","classify_key":"xjm","price":"0.01"},"types":-1}}
             //请求数据
@@ -276,7 +286,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                         int types = jsonData.getInt("types");
                         if (types == -1) { //未支付，跳转到支付
                             //请求h5界面 跳转到webview,
-                            gotoH5();
+                            gotoH5(url_data);
                             loading.dismiss();
                         } else {
                             JSONArray jar = jsonData.getJSONArray("name_list");
@@ -330,9 +340,11 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("onActivityResult--->>", "onActivityResult");
         if (requestCode == 0 && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             int status = bundle.getInt("status");
+            Log.d("status-->>", status + "");
             if (status == 1) {
                 Log.d("status-->>", "支付成功");
                 //支付成功,重新请求
@@ -346,10 +358,14 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                 changeNameBar(type);
                 getNameList(type);
             }
+        } else {
+            type = -1;
+            changeNameBar(type);
+            getNameList(type);
         }
     }
 
-    private void gotoH5() {
+    private void gotoH5(String url_data) {
         Map<String, String> map = new HashMap();
         map.put("type", "6");
 
@@ -362,7 +378,7 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-//                    url += urlData;
+                    url += url_data;
                     Log.d("url---->>", url);
                     Intent intent = new Intent(mContext, NamePayActivity.class);
                     Bundle bundle = new Bundle();
@@ -381,10 +397,5 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
                 ToastUtils.showShortToast(result);
             }
         });
-    }
-
-    public void requestOrderUrl() {
-//        NamePayActivity
-        mContext.startActivity(new Intent(mContext, NamePayActivity.class));
     }
 }
