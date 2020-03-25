@@ -2,72 +2,75 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <!--        <TextView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:gravity="center"-->
-    <!--            android:text="大师起名" />-->
-
-    <ImageView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/famous_dashi" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp">
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="大师起名" />-->
 
-        <LinearLayout
-            android:id="@+id/ll__dashi_jieshao"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/famous_dashi" />
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_jieshao_title"
-            android:layout_marginTop="-30dp"
-            android:background="@mipmap/bazi_baidi"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
 
-            android:orientation="vertical"
-            android:padding="30dp">
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll__dashi_jieshao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="姓名: xxx" />
+                android:layout_below="@id/tv_jieshao_title"
+                android:layout_marginTop="-30dp"
+                android:background="@mipmap/bazi_baidi"
+
+                android:orientation="vertical"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/tv_qiming_dashi_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="姓名: xxx" />
+
+                <TextView
+                    android:id="@+id/tv_qiming_dashi_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_jieshao_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:lineSpacingExtra="5dp"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
-        </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/bazi_anniu"
+                android:gravity="center"
+                android:text="大师介绍"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_jieshao_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/iv_dashi_wx"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@mipmap/bazi_anniu"
-            android:gravity="center"
-            android:text="大师介绍"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/famous_dashi" />
 
-    <ImageView
-        android:id="@+id/iv_dashi_wx"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/famous_dashi" />
-
-</LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+</ScrollView>

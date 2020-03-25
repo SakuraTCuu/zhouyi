@@ -110,7 +110,6 @@ public class MineFragment extends BaseFragment {
             //错误!!!
             ToastUtils.showShortToast("用户信息获取失败!");
         }
-
         getShareUrl();
     }
 
@@ -136,7 +135,6 @@ public class MineFragment extends BaseFragment {
                 ToastUtils.showShortToast(result);
             }
         });
-
     }
 
     @Override
@@ -150,9 +148,10 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.about_view, R.id.feedback_view, R.id.user_view, R.id.kefu_view, R.id.order_view, R.id.share_view,
-            R.id.logout_btn, R.id.user_beiyong})
+            R.id.logout_btn, R.id.user_beiyong, R.id.iv_touxiang})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_touxiang:
             case R.id.user_view:
                 gotoMineUserAcitivty();
                 break;

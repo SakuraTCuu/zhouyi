@@ -16,6 +16,7 @@ import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseFragment;
+import com.qicheng.zhouyi.bean.DaShiKeFuBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.common.ResourcesManager;
@@ -57,6 +58,11 @@ public class QimingFragment extends BaseFragment {
     @BindView(R.id.text_unknow)
     TextView text_unknow;
 
+    @BindView(R.id.tv_dashi_name)
+    TextView tv_dashi_name;
+    @BindView(R.id.tv_dashi_desc)
+    TextView tv_dashi_desc;
+
     Calendar cDate;  //选中的日期
 
     String input_name;
@@ -65,22 +71,6 @@ public class QimingFragment extends BaseFragment {
     int birthState = 1;  // 出生状态  1已出生  0未出生
 
     String date_type = "1"; // 日期类型  公历还是农历
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            switch (msg.what) {
-                case TASK_START:
-
-                    break;
-                case TASK_1:
-
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
 
     @Override
     protected int setLayoutId() {
@@ -94,6 +84,11 @@ public class QimingFragment extends BaseFragment {
         cDate = cl;
         String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         text_birthday.setText(dateStr);
+
+        DaShiKeFuBean kefuInfo = Constants.kefuInfo;
+
+        tv_dashi_name.setText(kefuInfo.getDashi_name());
+        tv_dashi_desc.setText(kefuInfo.getDashi_desc());
     }
 
     @Override
@@ -241,6 +236,7 @@ public class QimingFragment extends BaseFragment {
         text_birthday_state.setText("预产日期");
         //TODO 显示未知性别
         text_unknow.setVisibility(View.VISIBLE);
+        onClickUnknow();
     }
 
     /**

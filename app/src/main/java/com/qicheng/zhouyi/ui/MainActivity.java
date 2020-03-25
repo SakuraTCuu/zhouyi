@@ -19,6 +19,7 @@ import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
+import com.qicheng.zhouyi.bean.DaShiKeFuBean;
 import com.qicheng.zhouyi.common.ActivityManager;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
@@ -71,7 +72,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
         hideTitleBar();
 
-        setDate();
         instances = this;
         //设置Mode
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
@@ -147,6 +147,45 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     protected void initData() {
 
+        setDate();
+        //获取大师的信息
+
+        getDaShiInfo();
+    }
+
+    private void getDaShiInfo() {
+        Map<String, String> map = new HashMap<>();
+        OkHttpManager.request(Constants.getApi.GETKEFUINFO, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("GETKEFUINFO---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    JSONObject jData = jsonObject.getJSONObject("data");
+                    JSONObject kefuData = jData.getJSONObject("kf");
+                    JSONObject dashiData = jData.getJSONObject("ds");
+                    String kefu_wx = kefuData.getString("wx");
+                    String kefu_img = kefuData.getString("wx_qrcode");
+                    String ds_name = dashiData.getString("ds_name");
+                    String ds_img = dashiData.getString("ds_img");
+                    String ds_desc = dashiData.getString("ds_desc");
+                    DaShiKeFuBean kefuInfo = new DaShiKeFuBean(kefu_wx, kefu_img, ds_name, ds_img, ds_desc);
+                    Constants.kefuInfo = kefuInfo;
+// {"code":true,"msg":"操作成功","data":{"kf":{"wx":"aaaa","wx_qrcode":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png"},
+// "ds":{"ds_name":"苏才谦","ds_img":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png",
+// "ds_desc":"我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。"}}}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+            }
+        });
+
     }
 
     private void setDate() {
@@ -154,7 +193,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         OkHttpManager.request(Constants.getApi.GETNONGLIDATE, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
-                Log.d("info---->>", info.getRetDetail());
+                Log.d("GETNONGLIDATE---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     Log.d("jsonObject---->>", jsonObject.toString());
@@ -176,7 +215,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 Log.d("info---->>", info.toString());
             }
         });
-
     }
 
     @Override

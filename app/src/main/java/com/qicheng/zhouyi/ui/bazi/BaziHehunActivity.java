@@ -22,6 +22,7 @@ import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.adapter.HehunAdapter;
 import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.HehunListBean;
+import com.qicheng.zhouyi.bean.MineOrderBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.ui.bazijingpi.BaziJingPiActivity;
@@ -30,6 +31,7 @@ import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.MapUtils;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,7 +86,8 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
     protected void initView() {
         setTitleText("八字合婚");
         //设置switcher_text中的TextVie
-        setTextSwitche();
+        getTextData();
+//        setTextSwitche();
     }
 
     @Override
@@ -97,64 +100,110 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
 
     }
 
-    //设置tv翻滚数据
-    private void setTextSwitche() {
-        Calendar calender = Calendar.getInstance();
-        calender.setTime(new Date());
-        int year = calender.get(Calendar.YEAR);
-        int month = calender.get(Calendar.MONTH) + 1;
-        int day = calender.get(Calendar.DATE);
+    private void getTextData() {
+        Map map = new HashMap();
+        OkHttpManager.request(Constants.getApi.GETSCROLLTEXT, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    JSONArray jar = jsonObject.getJSONArray("data");
 
-        String monthStr = addZero2Date(month);
-        String dayStr = addZero2Date(day);
+                    data = new ArrayList<HehunListBean>();
+                    for (int i = 0; i < jar.length(); i++) {
+                        JSONObject jdata = jar.getJSONObject(i);
+                        String order_sn = jdata.getString("order_sn");
+                        String comment = jdata.getString("comment");
+                        data.add(new HehunListBean(order_sn, comment));
 
-        String textStr = year + "-" + monthStr + "-" + dayStr;
-        textStr += "订单号:" + year + monthStr + "****";
+                    }
+                    Log.d("textStr-->>", "");
+                    adapter = new HehunAdapter(mContext, data);
+                    lv_switcher.setAdapter(adapter);
+                    lv_switcher.setOnScrollListener(BaziHehunActivity.this);
+                    lv_switcher.setSelection(data.size());
+                    new Timer().schedule(new TimeTaskScroll(BaziHehunActivity.this, lv_switcher), 0, 10);
 
-        //随机订单号
-        String[] words = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-        //  开吹
-        String[] contentList = new String[]{"这个网站可以信赖 挺好的!",
-                "会推荐给其他人,我觉得挺准的",
-                "看着同龄人小孩都可以打酱油了,家里人也开始催了,我会听大师建议好好抓住机会的,谢谢指导",
-                "里面说的情况和我现在的真像!"
-        };
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-        String orderStr = "";
-        for (int i = 0; i < 4; i++) {
-            Random rand = new Random();
-            int number = rand.nextInt(26);
-            orderStr += words[number];
-        }
-        textStr += orderStr;
-
-        data = new ArrayList<HehunListBean>();
-        //生成20个无限循环
-        for (int i = 1; i < 20; i++) {
-            data.add(new HehunListBean(textStr, contentList[i % contentList.length]));
-        }
-
-        Log.d("textStr-->>", textStr);
-
-        adapter = new HehunAdapter(mContext, data);
-        lv_switcher.setAdapter(adapter);
-        lv_switcher.setOnScrollListener(this);
-        lv_switcher.setSelection(data.size());
-        new Timer().schedule(new TimeTaskScroll(this, lv_switcher), 0, 10);
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                try {
+                    String result = new JSONObject(info.getRetDetail()).getString("msg");
+                    ToastUtils.showShortToast(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    @OnClick({R.id.btn_hehun_cesuan1, R.id.btn_hehun_cesuan2, R.id.iv__man_date, R.id.iv__woman_date})
+    //设置tv翻滚数据
+//    private void setTextSwitche() {
+//        Calendar calender = Calendar.getInstance();
+//        calender.setTime(new Date());
+//        int year = calender.get(Calendar.YEAR);
+//        int month = calender.get(Calendar.MONTH) + 1;
+//        int day = calender.get(Calendar.DATE);
+//
+//        String monthStr = addZero2Date(month);
+//        String dayStr = addZero2Date(day);
+//
+//        String textStr = year + "-" + monthStr + "-" + dayStr;
+//        textStr += "订单号:" + year + monthStr + "****";
+//
+//        //随机订单号
+//        String[] words = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+//        //  开吹
+//        String[] contentList = new String[]{"这个网站可以信赖 挺好的!",
+//                "会推荐给其他人,我觉得挺准的",
+//                "看着同龄人小孩都可以打酱油了,家里人也开始催了,我会听大师建议好好抓住机会的,谢谢指导",
+//                "里面说的情况和我现在的真像!"
+//        };
+//
+//
+//        String orderStr = "";
+//        for (int i = 0; i < 4; i++) {
+//            Random rand = new Random();
+//            int number = rand.nextInt(26);
+//            orderStr += words[number];
+//        }
+//        textStr += orderStr;
+//
+//        data = new ArrayList<HehunListBean>();
+//        //生成20个无限循环
+//        for (int i = 1; i < 20; i++) {
+//            data.add(new HehunListBean(textStr, contentList[i % contentList.length]));
+//        }
+//
+//        Log.d("textStr-->>", textStr);
+//
+//        adapter = new HehunAdapter(mContext, data);
+//        lv_switcher.setAdapter(adapter);
+//        lv_switcher.setOnScrollListener(this);
+//        lv_switcher.setSelection(data.size());
+//        new Timer().schedule(new TimeTaskScroll(this, lv_switcher), 0, 10);
+//    }
+
+    @OnClick({R.id.btn_hehun_cesuan1, R.id.btn_hehun_cesuan2, R.id.iv_man_date, R.id.iv_women_date, R.id.tv_man_date, R.id.tv_women_date})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_hehun_cesuan1:
             case R.id.btn_hehun_cesuan2:
                 onClickCeSuan();
                 break;
-            case R.id.iv__man_date:
+            case R.id.iv_man_date:
+            case R.id.tv_man_date:
                 clickDateId = 0;
                 showDatePicker();
                 break;
-            case R.id.iv__woman_date:
+            case R.id.iv_women_date:
+            case R.id.tv_women_date:
                 clickDateId = 1;
                 showDatePicker();
                 break;
@@ -189,12 +238,14 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
             return;
         }
 
-        int manYear = manDate.get(Calendar.YEAR); ;
+        int manYear = manDate.get(Calendar.YEAR);
+        ;
         int manMonth = manDate.get(Calendar.MONTH);
         int manDay = manDate.get(Calendar.DAY_OF_MONTH);
         int manHour = manDate.get(Calendar.HOUR_OF_DAY);
 
-        int womanYear = womenDate.get(Calendar.YEAR); ;
+        int womanYear = womenDate.get(Calendar.YEAR);
+        ;
         int womanMonth = womenDate.get(Calendar.MONTH);
         int womanDay = womenDate.get(Calendar.DAY_OF_MONTH);
         int womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
@@ -230,14 +281,14 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
                 Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-                    url +=urlData;
+                    url += urlData;
                     Log.d("url---->>", url);
 
                     Intent intent = new Intent(BaziHehunActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

@@ -169,6 +169,7 @@ public class BaziFragment extends BaseFragment {
         map.put("user_name", input_name);
         map.put("birthday", birthday);
         map.put("gender", gender + "");
+        map.put("user_id", Constants.userInfo.getUser_id());
 
         String urlData = MapUtils.Map2String(map);
 
@@ -182,15 +183,15 @@ public class BaziFragment extends BaseFragment {
             public void Success(HttpInfo info) {
                 Log.d("info---->>", info.getRetDetail());
                 try {
-                    JSONObject  jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-                    url +=urlData;
+                    url += urlData;
                     Log.d("url---->>", url);
 
                     Intent intent = new Intent(mContext, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

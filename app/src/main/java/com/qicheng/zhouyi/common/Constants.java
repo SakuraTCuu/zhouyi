@@ -1,5 +1,6 @@
 package com.qicheng.zhouyi.common;
 
+import com.qicheng.zhouyi.bean.DaShiKeFuBean;
 import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.ui.MyApplication;
 
@@ -12,6 +13,7 @@ public class Constants {
     //    public static String userId = "48"; //用户id
     public static boolean isLogin = false;
     public static UserModel userInfo;
+    public static DaShiKeFuBean kefuInfo;
 
     public static String getUid() {
         return (String) SPUtils.get(MyApplication.getInstance(), "uid", "");
@@ -140,8 +142,13 @@ public class Constants {
         public static final String GETUSERSHAREURL = URL + "index/share/userShareUrl";
 
         //获取农历日期
-        public static final String GETNONGLIDATE = URL + "/index/index/index";
+        public static final String GETNONGLIDATE = URL + "index/index/index";
 
+        //获取大师信息 大师微信客服
+        public static final String GETKEFUINFO = URL + "index/user/getKefuinfo";
+
+        //获取大师信息 大师微信客服
+        public static final String GETSCROLLTEXT = URL + "index/order_comment/getyyCommentList";
 
     }
 }

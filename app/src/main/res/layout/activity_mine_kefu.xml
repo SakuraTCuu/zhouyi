@@ -13,6 +13,7 @@
         android:src="@mipmap/index_banner" />
 
     <Button
+        android:id="@+id/btn_kefu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -61,7 +61,7 @@ public class MineFeedbackActivity extends BaseActivity {
         //提交
         String content = et_input_content.getText().toString().trim();
         String phone = et_input_phone.getText().toString().trim();
-        if (content == "") {
+        if (content.equals("")) {
             ToastUtils.showShortToast("请输入反馈信息");
             return;
         } else if (DataCheck.isCellphone(phone)) {
