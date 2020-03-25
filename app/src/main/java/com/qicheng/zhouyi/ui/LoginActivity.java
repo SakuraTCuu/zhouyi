@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity {
         Map map = new HashMap<String, String>();
         map.put("phone", input_phone);
 
-        OkHttpManager.request(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.request2(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 Log.d("Success-->>", info.toString());
@@ -245,7 +245,7 @@ public class LoginActivity extends BaseActivity {
         map.put("phone", input_phone);
         map.put("code", code);
 
-        OkHttpManager.request(Constants.getApi.CODELOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.request2(Constants.getApi.CODELOGIN, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 try {

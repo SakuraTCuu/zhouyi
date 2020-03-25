@@ -197,13 +197,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     Log.d("jsonObject---->>", jsonObject.toString());
-                    JSONArray jar = jsonObject.getJSONArray("data");
-                    String year = jar.getString(0);
-                    String month = jar.getString(1);
-                    String day = jar.getString(2);
-                    String n_year = jar.getString(3);
-                    String n_month = jar.getString(4);
-                    String n_day = jar.getString(4);
+                    JSONObject jar = jsonObject.getJSONObject("data");
+                    String year = jar.getString("year");
+                    String month = jar.getString("month");
+                    String day = jar.getString("day");
+                    String n_year = jar.getString("n_year");
+                    String n_month = jar.getString("n_month");
+                    String n_day = jar.getString("n_day");
                     homeFragment.setDate(year, month, day, n_year + n_month + n_day);
                 } catch (JSONException e) {
                     e.printStackTrace();

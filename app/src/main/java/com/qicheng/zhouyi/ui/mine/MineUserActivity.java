@@ -140,27 +140,16 @@ public class MineUserActivity extends BaseActivity {
         Bitmap bmp = null;
 
         try {
-
             URL myurl = new URL(url);
-
             // 获得连接
-
             HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
-
             conn.setConnectTimeout(6000);//设置超时
-
             conn.setDoInput(true);
-
             conn.setUseCaches(false);//不缓存
-
             conn.connect();
-
             InputStream is = conn.getInputStream();//获得图片的数据流
-
             bmp = BitmapFactory.decodeStream(is);//读取图像数据
-
             is.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,7 +220,7 @@ public class MineUserActivity extends BaseActivity {
         work = DataCheck.filterEmoji(work);
 
         Map<String, String> map = new HashMap();
-        map.put("nike_name", nickName);
+        map.put("nick_name", nickName);
         map.put("job", work);
         map.put("birthday", birthday);
         map.put("gender", gender + "");

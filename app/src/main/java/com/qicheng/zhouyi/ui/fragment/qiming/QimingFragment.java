@@ -85,15 +85,45 @@ public class QimingFragment extends BaseFragment {
         String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         text_birthday.setText(dateStr);
 
-        DaShiKeFuBean kefuInfo = Constants.kefuInfo;
-
-        tv_dashi_name.setText(kefuInfo.getDashi_name());
-        tv_dashi_desc.setText(kefuInfo.getDashi_desc());
     }
 
     @Override
     protected void initData() {
 
+        Map<String, String> map = new HashMap<>();
+        OkHttpManager.request(Constants.getApi.GETKEFUINFO, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("GETKEFUINFO---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    JSONObject jData = jsonObject.getJSONObject("data");
+                    JSONObject kefuData = jData.getJSONObject("kf");
+                    JSONObject dashiData = jData.getJSONObject("ds");
+                    String kefu_wx = kefuData.getString("wx");
+                    String kefu_img = kefuData.getString("wx_qrcode");
+                    String ds_name = dashiData.getString("ds_name");
+                    String ds_img = dashiData.getString("ds_img");
+                    String ds_desc = dashiData.getString("ds_desc");
+                    DaShiKeFuBean kefuInfo = new DaShiKeFuBean(kefu_wx, kefu_img, ds_name, ds_img, ds_desc);
+                    Constants.kefuInfo = kefuInfo;
+
+                    tv_dashi_name.setText(kefuInfo.getDashi_name());
+                    tv_dashi_desc.setText(kefuInfo.getDashi_desc());
+// {"code":true,"msg":"操作成功","data":{"kf":{"wx":"aaaa","wx_qrcode":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png"},
+// "ds":{"ds_name":"苏才谦","ds_img":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png",
+// "ds_desc":"我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。"}}}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+            }
+        });
     }
 
     @OnClick({R.id.click_btn, R.id.text_live, R.id.text_noLive, R.id.text_men, R.id.text_women, R.id.text_birthday, R.id.text_unknow})

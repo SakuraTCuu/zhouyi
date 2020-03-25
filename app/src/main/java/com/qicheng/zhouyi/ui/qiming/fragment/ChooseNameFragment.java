@@ -212,9 +212,9 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     public void onClickCollect() {
         ChooseNameBean NameInfo = data.get(currentPos);
         boolean isCollect = NameInfo.isCollect();
-
+        int isCollect2 = isCollect ? 1 : 0;
         Map<String, String> map = new HashMap();
-        map.put("is_collent", String.valueOf(isCollect));
+        map.put("is_collent", String.valueOf(isCollect2));
         map.put("xing", NameInfo.getName().substring(0, 1));
         map.put("ming", NameInfo.getName().substring(1));
 

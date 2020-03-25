@@ -64,7 +64,7 @@ public class MineFeedbackActivity extends BaseActivity {
         if (content.equals("")) {
             ToastUtils.showShortToast("请输入反馈信息");
             return;
-        } else if (DataCheck.isCellphone(phone)) {
+        } else if (!DataCheck.isCellphone(phone)) {
             ToastUtils.showShortToast("请输入联系方式");
             return;
         }
