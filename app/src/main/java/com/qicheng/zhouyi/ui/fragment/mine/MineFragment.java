@@ -48,6 +48,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,7 +88,6 @@ public class MineFragment extends BaseFragment {
 
     private IWXAPI api;
     private int type = 1;
-    private MainActivity.hideBottom listener;
     private String url = "";
 
     private String[] contentList = {"人生总有不如意，快来“星逸堂”免费算一卦吧！\n",
@@ -93,8 +95,8 @@ public class MineFragment extends BaseFragment {
             "一个人太累，想马上脱单。月老姻缘揭秘你的桃花正缘。",
             "什么是你财富自由上的最大阻碍？你的“八字”已经告诉你了。"};
 
-    public MineFragment(MainActivity.hideBottom hideBottom) {
-        this.listener = hideBottom;
+    public MineFragment() {
+
     }
 
     @Override
@@ -104,13 +106,61 @@ public class MineFragment extends BaseFragment {
             UserModel userInfo = Constants.userInfo;
 
             String nickName = userInfo.getNick_name();
+            String head_img = userInfo.getHead_img();
             tv_nickname.setText(nickName);
             //显示图片
+            loadUserIcon(head_img);
         } else {
             //错误!!!
             ToastUtils.showShortToast("用户信息获取失败!");
         }
         getShareUrl();
+    }
+
+    private void loadUserIcon(String url) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bmp = null;
+                try {
+                    URL myurl = new URL(url);
+                    // 获得连接
+                    HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
+                    conn.setConnectTimeout(6000);//设置超时
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);//不缓存
+                    conn.connect();
+                    InputStream is = conn.getInputStream();//获得图片的数据流
+                    bmp = BitmapFactory.decodeStream(is);//读取图像数据
+                    Bitmap finalBmp = bmp;
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            iv_touxiang.setImageBitmap(finalBmp);
+                        }
+                    });
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+//        Log.d()
+        if (requestCode == 1) {
+            if (Constants.localUrl != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(Constants.localUrl);
+                iv_touxiang.setImageBitmap(bitmap);
+                tv_nickname.setText(Constants.nickName);
+            }
+        } else {
+
+        }
     }
 
     private void getShareUrl() {
@@ -144,7 +194,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
     }
 
     @OnClick({R.id.about_view, R.id.feedback_view, R.id.user_view, R.id.kefu_view, R.id.order_view, R.id.share_view,
@@ -291,6 +340,7 @@ public class MineFragment extends BaseFragment {
         //跳转到登录界面
         Constants.removeUserInfo();
         Constants.isLogin = false;
+        Constants.userInfo = null;
         startActivity(new Intent(mContext, LoginActivity.class));
         getActivity().finish();
     }
@@ -312,7 +362,8 @@ public class MineFragment extends BaseFragment {
     }
 
     public void gotoMineUserAcitivty() {
-        startActivity(new Intent(mContext, MineUserActivity.class));
+//        startActivity(new Intent(mContext, MineUserActivity.class));
+        startActivityForResult(new Intent(mContext, MineUserActivity.class), 1);
     }
 
     public void gotoMineBeiyongAcitivty() {

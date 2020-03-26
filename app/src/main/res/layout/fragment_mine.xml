@@ -26,12 +26,14 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/iv_touxiang"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/touxiang" />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/touxiang"
+                    app:riv_oval="true" />
 
                 <TextView
                     android:id="@+id/tv_nickname"

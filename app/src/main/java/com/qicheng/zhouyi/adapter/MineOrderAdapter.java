@@ -28,6 +28,10 @@ public class MineOrderAdapter<M> extends BaseAdapter {
         this.listener = listener;
     }
 
+    public void setData(ArrayList<MineOrderBean> data) {
+        this.data = data;
+    }
+
     @Override
     public int getCount() {
         return data.size();
@@ -50,7 +54,7 @@ public class MineOrderAdapter<M> extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_mine_order_item, parent, false);
             holder = new ViewHolder();
             holder.titleText = (TextView) convertView.findViewById(R.id.tv_order_item_title);
-            holder.payStatus = (TextView) convertView.findViewById(R.id.tv_pay_status);
+//            holder.payStatus = (TextView) convertView.findViewById(R.id.tv_pay_status);
             holder.orderText = (TextView) convertView.findViewById(R.id.tv_order_item_order);
             holder.orderTimeText = (TextView) convertView.findViewById(R.id.tv_order_item_ordertime);
             holder.btn_detail = (Button) convertView.findViewById(R.id.btn_detail);
@@ -61,8 +65,8 @@ public class MineOrderAdapter<M> extends BaseAdapter {
         holder.titleText.setText(data.get(position).getOrderTitle());
         holder.orderText.setText("订单号：" + data.get(position).getOrderCode());
         holder.orderTimeText.setText("下单时间：" + data.get(position).getOrderTime());
-        String payStatus = data.get(position).getPayStatus() == 1 ? "已支付" : "未支付";
-        holder.payStatus.setText(payStatus);
+//        String payStatus = data.get(position).getPayStatus() == 1 ? "已支付" : "未支付";
+//        holder.payStatus.setText(payStatus);
         holder.btn_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +78,7 @@ public class MineOrderAdapter<M> extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView payStatus;
+        //        TextView payStatus;
         TextView titleText;
         TextView orderText;
         TextView orderTimeText;

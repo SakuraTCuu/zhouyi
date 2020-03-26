@@ -18,70 +18,81 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/ll_bottom_yunshi"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/text_xiongji_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/text_xiongji_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="2020年运势"
-                    android:textColor="#4D6F71"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:id="@+id/text_xiongji_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_xiongji_1"
-                    android:layout_marginTop="20dp"
-                    android:text="一对一咨询" />
-
-                <TextView
-                    android:id="@+id/text_xiongji_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_xiongji_2"
-                    android:layout_marginTop="5dp"
-                    android:text="改变" />
-
-                <TextView
-                    android:id="@+id/text_xiongji_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_xiongji_3"
-                    android:layout_marginTop="5dp"
-                    android:text="命运走向" />
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@mipmap/index_jixiong" />
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:text="2020年运势"
+                android:textColor="#4D6F71"
+                android:textSize="18sp" />
 
-            <View
-                android:layout_width="2dp"
+            <LinearLayout
+                android:id="@+id/ll_bottom_yunshi"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="#ccc" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:id="@+id/text_xiongji_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="一对一咨询" />
+
+                    <TextView
+                        android:id="@+id/text_xiongji_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_xiongji_2"
+                        android:layout_marginTop="5dp"
+                        android:text="改变" />
+
+                    <TextView
+                        android:id="@+id/text_xiongji_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_xiongji_3"
+                        android:layout_marginTop="5dp"
+                        android:text="命运走向" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/index_jixiong" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="#ccc" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout

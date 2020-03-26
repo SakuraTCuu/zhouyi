@@ -33,6 +33,9 @@ public class DataCheck {
 
     //循环判断
     public static boolean isHanzi(String str) {
+        if (str.equals("")) {
+            return false;
+        }
         for (int i = 0; i < str.length(); i++) {
             if (!isHanzi2(String.valueOf(str.charAt(i)))) {
                 return false;

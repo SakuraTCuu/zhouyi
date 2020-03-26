@@ -23,6 +23,7 @@ import com.qicheng.zhouyi.common.OkHttpManager;
 import com.qicheng.zhouyi.ui.bazi.BaziHehunActivity;
 import com.qicheng.zhouyi.ui.qiming.QimingDetailActivity;
 import com.qicheng.zhouyi.ui.webView.NamePayActivity;
+import com.qicheng.zhouyi.utils.LoadingDialog;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.qicheng.zhouyi.base.BaseFragment.BASE_END;
 
@@ -45,17 +47,77 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     @BindView(R.id.tv_noOrder)
     TextView tv_noOrder;
 
+    @BindView(R.id.tv_order_no)
+    TextView tv_order_no;
+    @BindView(R.id.tv_order_all)
+    TextView tv_order_all;
+    @BindView(R.id.tv_order_over)
+    TextView tv_order_over;
+
     public interface onClickOrderListener {
         public void clickBtn(int position);
     }
 
     private String TAG = MineOrderActivity.class.getSimpleName();
     private ArrayList<MineOrderBean> data = new ArrayList<>();
-    private int page = 1;
+    private ArrayList<MineOrderBean> over_data = new ArrayList<>(); //已支付
+    private ArrayList<MineOrderBean> noover_data = new ArrayList<>(); //未支付
+    private MineOrderAdapter adapter;
+    private LoadingDialog dialog;
+
+    private int page = 1;  //更换查询状态从1重新开始
+    private int type = -1;
 
     @Override
     protected int setLayoutId() {
         return R.layout.activity_mine_order;
+    }
+
+    @OnClick({R.id.tv_order_no, R.id.tv_order_all, R.id.tv_order_over})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_order_no:
+                if (type != 0) {
+                    type = 0;
+                    page = 1;
+                    getDataFromServer(type, -1);
+                    setChangeStatus(type);
+                }
+                break;
+            case R.id.tv_order_all:
+                if (type != -1) {
+                    type = -1;
+                    page = 1;
+                    getDataFromServer(type, -1);
+                    setChangeStatus(type);
+                }
+                break;
+            case R.id.tv_order_over:
+                if (type != 1) {
+                    type = 1;
+                    page = 1;
+                    getDataFromServer(type, -1);
+                    setChangeStatus(type);
+                }
+                break;
+        }
+        dialog.showDialog();
+    }
+
+    private void setChangeStatus(int type) {
+        if (type == -1) {
+            tv_order_all.setBackgroundResource(R.drawable.mine_order_bottom_border);
+            tv_order_over.setBackground(null);
+            tv_order_no.setBackground(null);
+        } else if (type == 1) {
+            tv_order_all.setBackground(null);
+            tv_order_over.setBackgroundResource(R.drawable.mine_order_bottom_border);
+            tv_order_no.setBackground(null);
+        } else if (type == 0) {
+            tv_order_all.setBackground(null);
+            tv_order_over.setBackground(null);
+            tv_order_no.setBackgroundResource(R.drawable.mine_order_bottom_border);
+        }
     }
 
     @Override
@@ -75,10 +137,25 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                 Log.d("PullUp", "PullUp");
                 //加载数据
                 page += 1;
-                getDataFromServer();
+                getDataFromServer(type, 1);
             }
         });
-        this.getDataFromServer();
+
+        dialog = new LoadingDialog(this);
+        this.getDataFromServer(type, -1);
+
+        onClickOrderListener listener = new onClickOrderListener() {
+            @Override
+            public void clickBtn(int position) {
+                //点击详情页
+                MineOrderBean orderBean = data.get(position);
+                onClickDetailBtn(orderBean);
+            }
+        };
+        lv_order.onRefreshComplete();
+        adapter = new MineOrderAdapter(data, mContext, listener);
+        lv_order.setAdapter(adapter);
+        lv_order.setOnItemClickListener(this);
     }
 
     public void initRefreshListView() {
@@ -89,18 +166,17 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     }
 
     public void setData() {
-        Log.d("setData", data.toString());
-        onClickOrderListener listener = new onClickOrderListener() {
-            @Override
-            public void clickBtn(int position) {
-                //点击详情页
-                MineOrderBean orderBean = data.get(position);
-                onClickDetailBtn(orderBean);
-            }
-        };
+        dialog.dismiss();
+        if (type == -1) {
+            adapter.setData(data);
+        } else if (type == 0) {
+            adapter.setData(noover_data);
+        } else if (type == 1) {
+            adapter.setData(over_data);
+        }
+        adapter.notifyDataSetChanged();
+
         lv_order.onRefreshComplete();
-        lv_order.setAdapter(new MineOrderAdapter(data, mContext, listener));
-        lv_order.setOnItemClickListener(this);
     }
 
     private void onClickDetailBtn(MineOrderBean orderBean) {
@@ -188,9 +264,18 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
 //        Toast.makeText(mContext, "你点击了第" + position + "项", Toast.LENGTH_SHORT).show();
     }
 
-    public void getDataFromServer() {
+    public void getDataFromServer(int Status, int from) {
+        if (from == -1) {
+            //清空数据
+            //浪费带宽
+            over_data.clear();
+            data.clear();
+            noover_data.clear();
+        }
+        dialog.showDialog();
         Map<String, String> map = new HashMap<>();
         map.put("page", page + "");
+        map.put("pay_status", Status + "");
 
         OkHttpManager.request(Constants.getApi.GETORDERLIST, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
@@ -198,7 +283,6 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                 Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    JSONArray orderList = jsonObject.getJSONObject("data").getJSONArray("order_list");
                     int type = jsonObject.getJSONObject("data").getInt("type");
                     String msg = jsonObject.getString("msg");
                     if (type == -1) {
@@ -206,12 +290,15 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
 //                        tv_noOrder.setVisibility(View.VISIBLE);
                         ToastUtils.showShortToast(msg);
                         lv_order.onRefreshComplete();
+                        dialog.dismiss();
                     } else if (type == -2) {
                         //暂无数据
                         ToastUtils.showShortToast(msg);
                         tv_noOrder.setVisibility(View.VISIBLE);
                         lv_order.onRefreshComplete();
+                        dialog.dismiss();
                     } else {
+                        JSONArray orderList = jsonObject.getJSONObject("data").getJSONArray("order_list");
                         tv_noOrder.setVisibility(View.GONE);
                         for (int i = 0; i < orderList.length(); i++) {
                             JSONObject jdata = orderList.getJSONObject(i);
@@ -224,32 +311,16 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
                             String add_time = jdata.getString("add_time");
                             int pay_status = jdata.getInt("pay_status");
                             String bigTitle = "[" + classify_name + "]" + title;
-                            MineOrderBean bean = null;
-//                            跳转到不同的页面
-                            if (key.equals(Constants.getClassifyKey.DJM)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.XJM)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.CYFX)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.BZHH)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.YLYY)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.WLYS)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.HYCS)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else if (key.equals(Constants.getClassifyKey.BZJP)) {
-                                bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
-                            } else {
-                                Log.d("key--->>", key);
-                            }
-                            data.add(bean);
-                            if (i == orderList.length() - 1) {
-                                setData();
+                            MineOrderBean bean = new MineOrderBean(key, pay_status, classify_name + bigTitle, order_sn, add_time, userInfo);
+                            if (Status == -1) {
+                                data.add(bean);
+                            } else if (Status == 0) {
+                                noover_data.add(bean);
+                            } else if (Status == 1) {
+                                over_data.add(bean);
                             }
                         }
+                        setData();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -14,6 +14,8 @@ public class Constants {
     public static boolean isLogin = false;
     public static UserModel userInfo;
     public static DaShiKeFuBean kefuInfo;
+    public static String localUrl;
+    public static String nickName;
 
     public static String getUid() {
         return (String) SPUtils.get(MyApplication.getInstance(), "uid", "");

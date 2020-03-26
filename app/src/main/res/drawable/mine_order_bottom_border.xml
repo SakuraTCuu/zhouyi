@@ -2,13 +2,13 @@
     <item>
         <shape>
             <!-- 边框颜色 -->
-            <solid android:color="#eee" />
+            <solid android:color="@color/red" />
         </shape>
     </item>
     <item android:bottom="2dp">
         <shape>
             <!--内容颜色-->
-            <solid android:color="@color/white" />
+            <solid android:color="@color/gray" />
         </shape>
     </item>
 </layer-list>

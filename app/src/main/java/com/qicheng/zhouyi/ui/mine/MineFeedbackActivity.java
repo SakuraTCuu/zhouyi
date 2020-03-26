@@ -79,6 +79,7 @@ public class MineFeedbackActivity extends BaseActivity {
             public void Success(HttpInfo info) {
                 Log.d("Success-->>", info.getRetDetail());
                 ToastUtils.showShortToast("提交成功");
+                finish();
             }
 
             @Override

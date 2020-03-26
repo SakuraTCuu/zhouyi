@@ -112,26 +112,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         });
         baziFragment = new BaziFragment();
         qimingFragment = new QimingFragment();
-        mineFragment = new MineFragment(new hideBottom() {
-
-            @Override
-            public void hide() {
-                bottomNavigationBar.hide();
-            }
-
-            @Override
-            public void show() {
-                bottomNavigationBar.show();
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public Size getWH() {
-                ViewGroup.LayoutParams lp = scroll_root.getLayoutParams();
-                Size size = new Size(lp.width, lp.height);
-                return size;
-            }
-        });
+        mineFragment = new MineFragment();
 
         manager.beginTransaction()
                 .add(R.id.container, homeFragment, HomeFragment.class.getName())

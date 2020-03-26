@@ -18,5 +18,6 @@
     <color name="shunian_content_bg">#B52E2A</color>
     <color name="shunian_input_textcolor">#DEB283</color>
     <color name="caiyun_content_bg">#F4D59C</color>
+    <color name="gray">#eee</color>
 
 </resources>

@@ -45,7 +45,7 @@
                     android:textSize="16dp" />
             </LinearLayout>
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/img_usericon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -53,7 +53,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="30dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/touxiang" />
+                android:src="@mipmap/touxiang"
+                app:riv_oval="true" />
 
             <!--            <ImageView-->
             <!--                android:layout_width="wrap_content"-->

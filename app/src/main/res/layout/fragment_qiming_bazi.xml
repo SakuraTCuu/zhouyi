@@ -173,6 +173,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:background="@color/qiming_color"
             android:divider="@drawable/bazi_line_h"
             android:gravity="center_horizontal"
             android:orientation="vertical"

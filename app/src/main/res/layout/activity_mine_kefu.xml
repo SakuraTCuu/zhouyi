@@ -22,4 +22,13 @@
         android:text="复制客服小姐姐微信号"
         android:textColor="@color/white" />
 
+
+    <ImageView
+        android:id="@+id/iv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@null" />
+
 </LinearLayout>

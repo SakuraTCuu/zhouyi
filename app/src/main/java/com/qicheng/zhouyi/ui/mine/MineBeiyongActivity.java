@@ -44,7 +44,6 @@ import butterknife.BindView;
 
 public class MineBeiyongActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
-
     // 内部接口
     public interface getDataListener {
         public void getListIndex(int position);

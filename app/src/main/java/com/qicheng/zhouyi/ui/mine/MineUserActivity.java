@@ -30,6 +30,7 @@ import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
+import com.qicheng.zhouyi.ui.MainActivity;
 import com.qicheng.zhouyi.utils.DataCheck;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
@@ -109,18 +110,6 @@ public class MineUserActivity extends BaseActivity {
         showTitleBar();
         setTitleText("账号信息");
 
-//        OkHttpManager.sendOkHttpGetRequest(getUrl, new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.e("onFailure-->>", e.toString());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Log.d("onResponse-->>", response.body().toString());
-//            }
-//        });
-
         //设置用户头像
 
         UserModel umodel = Constants.userInfo;
@@ -131,29 +120,38 @@ public class MineUserActivity extends BaseActivity {
         text_gender.setText(gender);
         edit_nickname.setText(nickName);
 
-        Bitmap bmp = loadUserIcon(head_img);
-        img_usericon.setImageBitmap(bmp);
-
+        loadUserIcon(head_img);
     }
 
-    private Bitmap loadUserIcon(String url) {
-        Bitmap bmp = null;
+    private void loadUserIcon(String url) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bmp = null;
+                try {
+                    URL myurl = new URL(url);
+                    // 获得连接
+                    HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
+                    conn.setConnectTimeout(6000);//设置超时
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);//不缓存
+                    conn.connect();
+                    InputStream is = conn.getInputStream();//获得图片的数据流
+                    bmp = BitmapFactory.decodeStream(is);//读取图像数据
+                    Bitmap finalBmp = bmp;
+                    MineUserActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            img_usericon.setImageBitmap(finalBmp);
+                        }
+                    });
 
-        try {
-            URL myurl = new URL(url);
-            // 获得连接
-            HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
-            conn.setConnectTimeout(6000);//设置超时
-            conn.setDoInput(true);
-            conn.setUseCaches(false);//不缓存
-            conn.connect();
-            InputStream is = conn.getInputStream();//获得图片的数据流
-            bmp = BitmapFactory.decodeStream(is);//读取图像数据
-            is.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bmp;
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -218,6 +216,9 @@ public class MineUserActivity extends BaseActivity {
         //  过滤颜文字
         nickName = DataCheck.filterEmoji(nickName);
         work = DataCheck.filterEmoji(work);
+
+        Constants.userInfo.setNick_name(nickName);
+        Constants.saveData();
 
         Map<String, String> map = new HashMap();
         map.put("nick_name", nickName);
@@ -357,6 +358,9 @@ public class MineUserActivity extends BaseActivity {
             int columnIndex = c.getColumnIndex(filePathColumns[0]);
             String imagePath = c.getString(columnIndex);
             Log.d("showImage--->>", imagePath);
+
+            Constants.localUrl = imagePath;
+
             File file = new File(imagePath);
             showImage(imagePath, file);
 //            sendStudentInfoToServer(file);
@@ -388,8 +392,24 @@ public class MineUserActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("response-->>", response.body().toString());
-                Log.d("response-->>", response.body().string());
-                ToastUtils.showShortToast("头像修改成功");
+                //修改成功 更新头像地址
+                String js = response.body().string();
+                try {
+                    JSONObject json = new JSONObject(js);
+                    JSONObject jdata = json.getJSONObject("data");
+                    String url = jdata.getString("img_url");
+                    Constants.userInfo.setHead_img(url);
+                    Constants.saveData();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                MineUserActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShortToast("头像修改成功");
+                    }
+                });
             }
         });
     }
