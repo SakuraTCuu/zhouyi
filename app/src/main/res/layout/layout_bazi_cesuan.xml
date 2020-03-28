@@ -17,7 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年运势"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_yunshi_2"
@@ -63,7 +63,8 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@mipmap/index_yunshi" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_yunshi" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年财运"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_caiyun_2"
@@ -108,7 +109,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@mipmap/index_caiyun" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_caiyun" />
         </LinearLayout>
     </LinearLayout>
 
@@ -136,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年危机"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_weiji_2"
@@ -159,7 +161,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@mipmap/index_weiji" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_weiji" />
         </LinearLayout>
 
         <LinearLayout
@@ -181,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年姻缘"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_yinyuan_2"
@@ -204,7 +207,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@mipmap/index_yinyuan" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_yinyuan" />
         </LinearLayout>
     </LinearLayout>
 
@@ -233,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年合婚"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_hehun_2"
@@ -256,7 +260,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@mipmap/index_hehun" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_hehun" />
         </LinearLayout>
 
         <LinearLayout
@@ -278,7 +283,7 @@
                     android:layout_height="wrap_content"
                     android:text="2020年好名"
                     android:textColor="#4D6F71"
-                    android:textSize="18dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/text_haoming_2"
@@ -301,7 +306,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@mipmap/index_haoming" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/index_haoming" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

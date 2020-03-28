@@ -5,7 +5,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.qicheng.zhouyi"
+        applicationId "com.example.qicheng.suanming"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
@@ -14,9 +14,9 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("E:\\APK\\zhouyi_sign.jks")
+            storeFile file("E:\\APK\\zhouyi_minglidashi.jks")
             storePassword "123456"
-            keyAlias "qicheng"
+            keyAlias "sm"
             keyPassword "123456"
 //            v1SigningEnabled true
 //            v2SigningEnabled true
@@ -28,7 +28,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             //加上以下两句
-            debuggable true
+//            debuggable true
             signingConfig signingConfigs.release
         }
         //添加以下

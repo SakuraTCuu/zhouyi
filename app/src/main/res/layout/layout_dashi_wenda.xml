@@ -35,7 +35,7 @@
                 android:maxLines="1"
                 android:text="2020年运势"
                 android:textColor="#4D6F71"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:id="@+id/ll_bottom_yunshi"
@@ -83,7 +83,8 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/index_jixiong" />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/index_jixiong" />
 
                 <View
                     android:layout_width="2dp"
@@ -116,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:text="感情指导"
                         android:textColor="#4D6F71"
-                        android:textSize="18dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/text_ganqing_2"
@@ -139,7 +140,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="@mipmap/index_ganqing" />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/index_ganqing" />
             </LinearLayout>
 
             <!--                 <View-->
@@ -180,7 +182,7 @@
                             android:layout_height="wrap_content"
                             android:text="财富挖掘"
                             android:textColor="#4D6F71"
-                            android:textSize="18dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/text_caifu_2"
@@ -205,7 +207,8 @@
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="10dp"
-                        android:background="@mipmap/index_caifu" />
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/index_caifu" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

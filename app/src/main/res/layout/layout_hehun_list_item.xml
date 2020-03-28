@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_title_time"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="left"-->
+    <!--        android:text="2020-01-14" />-->
+
     <TextView
         android:id="@+id/tv_item_title"
         android:layout_width="match_parent"

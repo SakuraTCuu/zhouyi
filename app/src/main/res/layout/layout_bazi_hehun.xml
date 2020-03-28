@@ -37,7 +37,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/index_peidui" />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/index_peidui" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -59,6 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_xiongji_1"
+                        android:layout_marginTop="5dp"
                         android:text="一对一咨询" />
 
                     <TextView
@@ -131,7 +133,8 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:background="@mipmap/index_ceshi" />
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/index_ceshi" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,8 +153,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
-
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -183,11 +186,10 @@
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:background="@mipmap/index_taohua" />
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/index_taohua" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
-
     </LinearLayout>
-
 </LinearLayout>

@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/ll_top_bazi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
@@ -15,7 +19,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/index_01" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/index_01" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,6 +34,8 @@
         android:id="@+id/ll_top_yuelao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
@@ -36,7 +43,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/index_02" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/index_02" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,6 +58,8 @@
         android:id="@+id/ll_top_zhougong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
@@ -57,7 +67,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/index_03" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/index_03" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,6 +82,8 @@
         android:id="@+id/ll_top_qiming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
@@ -78,7 +91,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/index_04" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/index_04" />
 
         <TextView
             android:layout_width="wrap_content"

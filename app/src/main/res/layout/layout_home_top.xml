@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@mipmap/index_banner"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -52,57 +52,59 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="农历"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_nongli_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="己亥年十一月初"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+    <!--    <LinearLayout-->
+    <!--        android:visibility="gone"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/index_yi" />
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@mipmap/index_yi" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="祭祀 祈福 斋x 塑绘 开光"
-            android:textSize="16sp" />
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:text="祭祀 祈福 斋x 塑绘 开光"-->
+    <!--            android:textSize="16sp" />-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+    <!--    <LinearLayout-->
+    <!--        android:visibility="gone"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/index_ji" />
+    <!--        <ImageView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@mipmap/index_ji" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="祭祀 祈福 斋x 塑绘 开光"
-            android:textSize="16sp" />
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:text="祭祀 祈福 斋x 塑绘 开光"-->
+    <!--            android:textSize="16sp" />-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
 
 </LinearLayout>
