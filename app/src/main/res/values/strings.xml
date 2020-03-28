@@ -1,9 +1,3 @@
 <resources>
-    <string name="app_name">周易</string>
-
-
-    <string name="title_home">首页</string>
-    <string name="title_bazi">八字排盘</string>
-    <string name="title_qiming">大师起名</string>
-    <string name="title_mine">个人中心</string>
+    <string name="app_name" translatable="false">周易</string>
 </resources>

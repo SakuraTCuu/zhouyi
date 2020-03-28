@@ -1,5 +1,6 @@
 package com.qicheng.zhouyi.ui.mine;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -18,9 +19,10 @@ import com.qicheng.zhouyi.base.BaseActivity;
 import com.qicheng.zhouyi.bean.DaShiKeFuBean;
 import com.qicheng.zhouyi.bean.UserModel;
 import com.qicheng.zhouyi.common.Constants;
+import com.qicheng.zhouyi.utils.DonwloadSaveImg;
 import com.qicheng.zhouyi.utils.ToastUtils;
 
-
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -35,6 +37,7 @@ public class MineKeFuActivity extends BaseActivity {
 
     private Bitmap bitmap;
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
 
         @Override
@@ -42,6 +45,13 @@ public class MineKeFuActivity extends BaseActivity {
             super.handleMessage(msg);
             if (bitmap != null) {
                 iv_code.setImageBitmap(bitmap);
+                try {
+                    //保存客服微信二维码
+                    DonwloadSaveImg.saveFile(MineKeFuActivity.this, bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtils.showShortToast("图片保存失败");
+                }
             } else {
                 ToastUtils.showShortToast("图片加载失败");
             }
@@ -57,11 +67,6 @@ public class MineKeFuActivity extends BaseActivity {
     protected void initView() {
         showTitleBar();
         setTitleText("客服");
-
-        //下载
-//        mHandler
-
-//        iv_code.setImageDrawable();
         DaShiKeFuBean kefuInfo = Constants.kefuInfo;
         String head_img = kefuInfo.getKefu_img_url();
         loadUserIcon(head_img);

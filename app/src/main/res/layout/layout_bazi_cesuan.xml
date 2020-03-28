@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/bazi_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -50,7 +49,6 @@
                     android:text="预知未来" />
 
                 <TextView
-                    android:id="@+id/text_yunshi_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_yunshi_2"
@@ -98,7 +96,6 @@
                     android:text="发财机遇" />
 
                 <TextView
-                    android:id="@+id/text_caiyun_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_caiyun_2"
@@ -150,7 +147,6 @@
                     android:text="预知未来" />
 
                 <TextView
-                    android:id="@+id/text_weiji_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_weiji_2"
@@ -196,7 +192,6 @@
                     android:text="能否与TA" />
 
                 <TextView
-                    android:id="@+id/text_yinyuan_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_yinyuan_2"
@@ -249,7 +244,6 @@
                     android:text="婚前必测" />
 
                 <TextView
-                    android:id="@+id/text_hehun_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_hehun_2"
@@ -295,7 +289,6 @@
                     android:text="送宝宝" />
 
                 <TextView
-                    android:id="@+id/text_haomingn_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_haoming_2"

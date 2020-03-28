@@ -1,16 +1,25 @@
 package com.qicheng.zhouyi.ui.jiemeng;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.library.flowlayout.FlowAdapter;
-import com.library.flowlayout.FlowLayout;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
@@ -35,6 +44,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static androidx.recyclerview.widget.OrientationHelper.VERTICAL;
+
 /**
  * Created by Sakura on 2020-03-21 10:57
  */
@@ -44,7 +55,7 @@ public class JiemengActivity extends BaseActivity {
     EditText et_input_jiemeng;
 
     @BindView(R.id.flow)
-    FlowLayout flow;
+    RecyclerView flow;
 
     private String input;
     private int[] tempidList;
@@ -61,34 +72,86 @@ public class JiemengActivity extends BaseActivity {
     protected void initView() {
         //进入就请求
         this.getJieDataFromServer();
+
+        initRecycleView();
+    }
+
+    private void initRecycleView() {
+        //谷歌提供了一个默认的item删除添加的动画
+        flow.setItemAnimator(new DefaultItemAnimator());
+        //谷歌提供了一个DividerItemDecoration的实现类来实现分割线
+        //往往我们需要自定义分割线的效果，需要自己实现ItemDecoration接口
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        flow.addItemDecoration(dividerItemDecoration);
+
+        //当item改变不会重新计算item的宽高
+        //调用adapter的增删改差方法的时候就不会重新计算，但是调用nofityDataSetChange的时候还是会
+        //所以往往是直接先设置这个为true，当需要布局重新计算宽高的时候才调用nofityDataSetChange
+        flow.setHasFixedSize(true);
+        //一行显示4个
+        GridLayoutManager mamager = new GridLayoutManager(this, 4) {
+            @Override
+            public boolean canScrollVertically() {
+                //禁止滑动
+                return false;
+            }
+        };
+        flow.setLayoutManager(mamager);
     }
 
     private void setData() {
-        final MyFlowAdapter myFlowAdapter = new MyFlowAdapter(this, itemList);
-        flow.setAdapter(myFlowAdapter);
+        JieMengAdapter newsAdapter = new JieMengAdapter(itemList);
+        flow.setAdapter(newsAdapter);
     }
 
-    class MyFlowAdapter extends FlowAdapter<JieMengBean> {
+    class JieMengAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private List<JieMengBean> list;
 
-        public MyFlowAdapter(Context context, List<JieMengBean> list) {
-            super(context, list);
+        public JieMengAdapter(List<JieMengBean> list) {
+            this.list = list;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = null;
+//            v = getLayoutInflater().inflate(R.layout.flow_item, null, false);
+            v = getLayoutInflater().from(JiemengActivity.this).inflate(R.layout.flow_item, flow, false);
+            RecyclerView.ViewHolder holder = null;
+            holder = new MyViewHolder(v);
+            return holder;
         }
 
         @Override
-        protected int generateLayout(int position) {
-            return R.layout.flow_item;
-        }
-
-        @Override
-        protected void getView(final JieMengBean o, View parent) {
-            TextView text = (TextView) parent.findViewById(R.id.flow_text);
-            text.setText(o.getTempName());
-            text.setOnClickListener(new View.OnClickListener() {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            ((MyViewHolder) holder).flow_text.setText(list.get(position).getTempName());
+            ((MyViewHolder) holder).bg_item_jiemeng.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getDataFromServer(o.getTempid(), o.getTempName());
+                    getDataFromServer(list.get(position).getTempid(), list.get(position).getTempName());
                 }
             });
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
+        }
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView flow_text;
+        public LinearLayout bg_item_jiemeng;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            flow_text = itemView.findViewById(R.id.flow_text);
+            bg_item_jiemeng = itemView.findViewById(R.id.bg_item_jiemeng);
         }
     }
 
@@ -105,7 +168,7 @@ public class JiemengActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_jiemeng:
-                this.getDataFromServer(-1,"");
+                this.getDataFromServer(-1, "");
                 break;
         }
     }

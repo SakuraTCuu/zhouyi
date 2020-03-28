@@ -26,7 +26,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_input_jiemeng"
+                android:id="@+id/et_input_jiemenglist"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:background="@mipmap/zgjm_kuang"
@@ -34,7 +34,7 @@
                 android:hint="输入你的梦境关键字" />
 
             <Button
-                android:id="@+id/btn_jiemeng"
+                android:id="@+id/btn_jiemenglist"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -65,14 +65,14 @@
 
         </LinearLayout>
 
-        <com.library.flowlayout.FlowLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fl_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:paddingTop="10dp" />
     </LinearLayout>
 </ScrollView>

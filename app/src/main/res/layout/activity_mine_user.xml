@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/parent_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F4F9FF"
@@ -70,7 +69,6 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/user_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/mine_border"
@@ -189,7 +187,6 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/user_work"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/mine_border"

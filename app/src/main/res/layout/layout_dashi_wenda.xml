@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/bazi_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -70,7 +69,6 @@
                         android:text="改变" />
 
                     <TextView
-                        android:id="@+id/text_xiongji_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_xiongji_3"
@@ -129,7 +127,6 @@
                         android:text="占卜脱单" />
 
                     <TextView
-                        android:id="@+id/text_ganqing_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_ganqing_2"
@@ -194,7 +191,6 @@
                             android:text="预测机遇" />
 
                         <TextView
-                            android:id="@+id/text_yunshi_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/text_caifu_2"

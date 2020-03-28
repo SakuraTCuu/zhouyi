@@ -88,8 +88,9 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
     //流式布局
-    implementation 'com.github.1002326270xc:FlowView-master:v1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // 圆形头像
     implementation 'com.makeramen:roundedimageview:2.2.1'
+
 
 }

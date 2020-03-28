@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/bazi_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -44,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp">
 
                     <TextView
@@ -117,7 +117,6 @@
                         android:text="是否是" />
 
                     <TextView
-                        android:id="@+id/text_ganqing_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/text_ganqing_2"

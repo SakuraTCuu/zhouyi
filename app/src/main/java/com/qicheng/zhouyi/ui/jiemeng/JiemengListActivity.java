@@ -1,20 +1,23 @@
 package com.qicheng.zhouyi.ui.jiemeng;
 
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
-import com.library.flowlayout.FlowAdapter;
-import com.library.flowlayout.FlowLayout;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.qicheng.zhouyi.R;
 import com.qicheng.zhouyi.base.BaseActivity;
-import com.qicheng.zhouyi.bean.JieMengBean;
 import com.qicheng.zhouyi.bean.JieMengListBean;
 import com.qicheng.zhouyi.common.Constants;
 import com.qicheng.zhouyi.common.OkHttpManager;
@@ -38,14 +41,22 @@ import butterknife.OnClick;
 public class JiemengListActivity extends BaseActivity {
 
     @BindView(R.id.fl_list)
-    FlowLayout fl_list;
+    RecyclerView fl_list;
 
     @BindView(R.id.tv_small_text)
     TextView tv_small_text;
 
+    @BindView(R.id.et_input_jiemenglist)
+    EditText et_input_jiemenglist;
+
     private final List<JieMengListBean> smallTitleList = new ArrayList<>();
     private String bigText;
     private String targetText;
+    private String input;
+
+    private JieMengListAdapter newsAdapter;
+
+    private int searchPage = 1;
 
     @Override
     protected int setLayoutId() {
@@ -59,6 +70,16 @@ public class JiemengListActivity extends BaseActivity {
         bigText = intent.getStringExtra("bigText");
         tv_small_text.setText(bigText);
         Log.d("data-->>", data);
+        boolean flag = initJsonData(data);
+        if (flag) {
+            setData();
+            initRecycleView();
+        } else {
+            ToastUtils.showShortToast("数据解析失败!");
+        }
+    }
+
+    private boolean initJsonData(String data) {
         try {
             JSONObject jsondata = new JSONObject(data);
             JSONArray jar = jsondata.getJSONArray("data");
@@ -67,47 +88,153 @@ public class JiemengListActivity extends BaseActivity {
                 JieMengListBean bean = new JieMengListBean(jdata.getString("title"), jdata.getInt("id"));
                 smallTitleList.add(bean);
             }
-            setData();
+            return true;
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    @OnClick({R.id.btn_jiemenglist})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_jiemenglist:
+                //获取信息
+                this.getDataListFromServer();
+                break;
+        }
+    }
+
+    private void getDataListFromServer() {
+
+        Map<String, String> map = new HashMap<>();
+        //点击事件和输入框
+        input = et_input_jiemenglist.getText().toString().trim();
+        map.put("search_key", input);
+        map.put("page", searchPage + "");
+
+        OkHttpManager.request(Constants.getApi.JIEMENGLISTSMALL, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                Log.d("info---->>", info.getRetDetail());
+                try {
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>", jsonObject.toString());
+                    boolean code = jsonObject.getBoolean("code");
+                    if (code) {
+//                        Intent intent = new Intent(mContext, JiemengListActivity.class);
+//                        intent.putExtra("data", jsonObject.toString());
+//                        intent.putExtra("bigText", bigText);
+//                        startActivity(intent);
+                        smallTitleList.clear();
+                        initJsonData(jsonObject.toString());
+                        newsAdapter.setData(smallTitleList);
+                        newsAdapter.notifyDataSetChanged();
+                    } else {
+                        String msg = jsonObject.getString("msg");
+                        ToastUtils.showShortToast(msg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.d("info---->>", info.toString());
+                String result = info.getRetDetail();
+                ToastUtils.showShortToast(result);
+            }
+        });
+    }
+
+    private void initRecycleView() {
+        //谷歌提供了一个默认的item删除添加的动画
+        fl_list.setItemAnimator(new DefaultItemAnimator());
+        //谷歌提供了一个DividerItemDecoration的实现类来实现分割线
+        //往往我们需要自定义分割线的效果，需要自己实现ItemDecoration接口
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        flow.addItemDecoration(dividerItemDecoration);
+
+        //当item改变不会重新计算item的宽高
+        //调用adapter的增删改差方法的时候就不会重新计算，但是调用nofityDataSetChange的时候还是会
+        //所以往往是直接先设置这个为true，当需要布局重新计算宽高的时候才调用nofityDataSetChange
+        fl_list.setHasFixedSize(true);
+        //一行显示4个
+        GridLayoutManager mamager = new GridLayoutManager(this, 2) {
+            @Override
+            public boolean canScrollVertically() {
+                //禁止滑动
+                return false;
+            }
+        };
+        fl_list.setLayoutManager(mamager);
     }
 
     private void setData() {
-        final MyFlowAdapter myFlowAdapter = new MyFlowAdapter(this, smallTitleList);
-        fl_list.setAdapter(myFlowAdapter);
+        newsAdapter = new JieMengListAdapter(smallTitleList);
+        fl_list.setAdapter(newsAdapter);
     }
 
-    class MyFlowAdapter extends FlowAdapter<JieMengListBean> {
+    class JieMengListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private List<JieMengListBean> list;
 
-        public MyFlowAdapter(Context context, List<JieMengListBean> list) {
-            super(context, list);
+        public JieMengListAdapter(List<JieMengListBean> list) {
+            this.list = list;
+        }
+
+        public void setData(List<JieMengListBean> list) {
+            this.list = list;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = null;
+            v = getLayoutInflater().from(JiemengListActivity.this).inflate(R.layout.flow_small_item, fl_list, false);
+            RecyclerView.ViewHolder holder = null;
+            holder = new JiemengListActivity.MyViewHolder(v);
+            return holder;
         }
 
         @Override
-        protected int generateLayout(int position) {
-            return R.layout.flow_small_item;
-        }
-
-        @Override
-        protected void getView(final JieMengListBean o, View parent) {
-            TextView text = (TextView) parent.findViewById(R.id.flow_small_text);
-            text.setText(o.getTitle());
-            text.setOnClickListener(new View.OnClickListener() {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            String title = list.get(position).getTitle();
+            ((MyViewHolder) holder).flow_small_text.setText(title);
+            ((MyViewHolder) holder).ll_bg_jiemenglist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //获取详情信息
-                    int id = o.getId();
-                    String title = o.getTitle();
+                    int id = list.get(position).getId();
+                    String title = list.get(position).getTitle();
                     Map<String, String> map = new HashMap();
                     map.put("id", id + "");
                     map.put("title", title);
-
                     targetText = bigText + "-" + title;
-
                     getDataFromServer(map);
                 }
             });
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
+        }
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView flow_small_text;
+        public LinearLayout ll_bg_jiemenglist;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            flow_small_text = itemView.findViewById(R.id.flow_small_text);
+            ll_bg_jiemenglist = itemView.findViewById(R.id.ll_bg_jiemenglist);
         }
     }
 
@@ -121,7 +248,6 @@ public class JiemengListActivity extends BaseActivity {
     }
 
     private void getDataFromServer(Map map) {
-
 
         OkHttpManager.request(Constants.getApi.JIEMENGDETAIL, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
