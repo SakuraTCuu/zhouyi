@@ -66,10 +66,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_01" />
+                        android:background="@mipmap/zhanghao" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,10 +94,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_07" />
+                        android:background="@mipmap/beiyong" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -120,10 +120,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_02" />
+                        android:background="@mipmap/dingdan" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,10 +147,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_03" />
+                        android:background="@mipmap/fankui" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -173,10 +173,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_04" />
+                        android:background="@mipmap/kefu" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -199,10 +199,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_05" />
+                        android:background="@mipmap/about" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -225,16 +225,42 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@mipmap/mine_06" />
+                        android:background="@mipmap/fenxiang" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:text="分享"
+                        android:text="分享好友"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEBEB" />
+
+                <LinearLayout
+                    android:id="@+id/privacy_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@mipmap/privacy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="隐私协议"
                         android:textSize="16dp" />
                 </LinearLayout>
 

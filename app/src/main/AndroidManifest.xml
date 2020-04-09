@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.qicheng.suanming">
+    package="com.example.qicheng.suanming"
+    android:versionCode="2"
+    android:versionName="2.0.0">
+
     <!-- 访问互联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -45,6 +48,7 @@
         <activity android:name=".ui.jiemeng.JiemengActivity" />
         <activity android:name=".ui.jiemeng.JiemengListActivity" />
         <activity android:name=".ui.jiemeng.JiemengDetailActivity" />
+        <activity android:name=".ui.webView.PrivacyActivty" />
         <!-- **********************移动授权⻚activity************************** -->
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"

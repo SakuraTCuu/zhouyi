@@ -150,5 +150,7 @@ public class Constants {
         //获取大师信息 大师微信客服
         public static final String GETSCROLLTEXT = URL + "index/order_comment/getyyCommentList";
 
+        public static final String GETPRIVACYTEXT = URL + "index/privacy/privacyInfo";
+
     }
 }

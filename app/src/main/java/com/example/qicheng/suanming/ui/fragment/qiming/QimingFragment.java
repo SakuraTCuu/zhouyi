@@ -93,6 +93,7 @@ public class QimingFragment extends BaseFragment {
             public void Success(HttpInfo info) {
                 Log.d("GETKEFUINFO---->>", info.getRetDetail());
                 try {
+                    //看文档
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     JSONObject jData = jsonObject.getJSONObject("data");
                     JSONObject kefuData = jData.getJSONObject("kf");
@@ -110,7 +111,6 @@ public class QimingFragment extends BaseFragment {
 // {"code":true,"msg":"操作成功","data":{"kf":{"wx":"aaaa","wx_qrcode":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png"},
 // "ds":{"ds_name":"苏才谦","ds_img":"http:\/\/app.zhouyi999.cn\/static\/common\/image\/kefu.png",
 // "ds_desc":"我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。我是一个大师，大的很。"}}}
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

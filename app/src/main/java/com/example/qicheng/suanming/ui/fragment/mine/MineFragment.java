@@ -22,6 +22,7 @@ import com.example.qicheng.suanming.ui.mine.MineFeedbackActivity;
 import com.example.qicheng.suanming.ui.mine.MineKeFuActivity;
 import com.example.qicheng.suanming.ui.mine.MineOrderActivity;
 import com.example.qicheng.suanming.ui.mine.MineUserActivity;
+import com.example.qicheng.suanming.ui.webView.PrivacyActivty;
 import com.example.qicheng.suanming.utils.CustomDialog;
 import com.example.qicheng.suanming.utils.ToastUtils;
 import com.okhttplib.HttpInfo;
@@ -185,7 +186,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.about_view, R.id.feedback_view, R.id.user_view, R.id.kefu_view, R.id.order_view, R.id.share_view,
-            R.id.logout_btn, R.id.user_beiyong, R.id.iv_touxiang})
+            R.id.logout_btn, R.id.user_beiyong, R.id.iv_touxiang, R.id.privacy_view})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_touxiang:
@@ -214,7 +215,37 @@ public class MineFragment extends BaseFragment {
                 //退出
                 logoutBtn();
                 break;
+            case R.id.privacy_view:
+                startPrivacyActivity();
+                break;
+
         }
+    }
+
+    private void startPrivacyActivity() {
+        Map map = new HashMap();
+        OkHttpManager.request2(Constants.getApi.GETPRIVACYTEXT, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                //跳转到privacyActivity
+                try {
+                    JSONObject jsonobject = new JSONObject(info.getRetDetail());
+                    JSONObject jData = jsonobject.getJSONObject("data");
+                    String privacy = jData.getString("privacy_content");
+                    Intent intent = new Intent(mContext, PrivacyActivty.class);
+                    intent.putExtra("text", privacy);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    ToastUtils.showShortToast("解析失败!");
+                }
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                ToastUtils.showShortToast("网络错误!");
+            }
+        });
     }
 
     private void gotoWxShare() {
@@ -303,11 +334,11 @@ public class MineFragment extends BaseFragment {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     boolean code = jsonObject.getBoolean("code");
                     String msg = jsonObject.getString("msg");
-                    if (code) {
-                        ToastUtils.showShortToast(msg);
-                    } else {
-                        ToastUtils.showShortToast(msg);
-                    }
+//                    if (code) {
+//                        ToastUtils.showShortToast(msg);
+//                    } else {
+//                        ToastUtils.showShortToast(msg);
+//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

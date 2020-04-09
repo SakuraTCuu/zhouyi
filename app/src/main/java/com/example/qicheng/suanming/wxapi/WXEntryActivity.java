@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,12 +54,15 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     @Override
     public void onReq(BaseReq req) {
+        finish();
         switch (req.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
 //                goToGetMsg();
+                finish();
                 break;
             case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
 //                goToShowMsg((ShowMessageFromWX.Req) req);
+                finish();
                 break;
             default:
                 break;
@@ -66,25 +70,46 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         finish();
     }
 
+    public int WX_LOGIN = 1;
+
     @Override
     public void onResp(BaseResp baseResp) {
         //登录回调
-        switch (baseResp.errCode) {
-            case BaseResp.ErrCode.ERR_OK:
-                String code = ((SendAuth.Resp) baseResp).code;
-                getDataFromServer(code);
-                Log.d("code--->>", code.toString() + "");
-                break;
-            case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
-                finish();
-                break;
-            case BaseResp.ErrCode.ERR_USER_CANCEL://用户取消
-                finish();
-                break;
-            default:
-                finish();
-                break;
+
+        if (baseResp.getType() == WX_LOGIN) {
+            switch (baseResp.errCode) {
+                case BaseResp.ErrCode.ERR_OK:
+                    String code = ((SendAuth.Resp) baseResp).code;
+                    getDataFromServer(code);
+                    Log.d("code--->>", code.toString() + "");
+                    break;
+                case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
+                    Toast.makeText(WXEntryActivity.this, "拒绝授权!", Toast.LENGTH_LONG).show();
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL://用户取消
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            //分享成功回调
+            System.out.println("------------分享回调------------");
+            switch (baseResp.errCode) {
+                case BaseResp.ErrCode.ERR_OK:
+                    //分享成功
+//                    Toast.makeText(WXEntryActivity.this, "分享成功", Toast.LENGTH_LONG).show();
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL:
+                    //分享取消
+//                    Toast.makeText(WXEntryActivity.this, "分享取消", Toast.LENGTH_LONG).show();
+                    break;
+                case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                    //分享拒绝
+//                    Toast.makeText(WXEntryActivity.this, "分享拒绝", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
+        finish();
     }
 
     private void getDataFromServer(String code) {

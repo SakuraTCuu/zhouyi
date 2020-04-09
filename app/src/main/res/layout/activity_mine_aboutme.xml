@@ -14,13 +14,13 @@
         android:src="@mipmap/login_logo" />
 
     <ScrollView
-        android:scrollbars="none"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="40dp"
-                android:text="V1.0" />
+                android:text="V2.0" />
         </LinearLayout>
 
     </ScrollView>

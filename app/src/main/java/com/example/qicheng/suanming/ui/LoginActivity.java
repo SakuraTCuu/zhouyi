@@ -3,8 +3,14 @@ package com.example.qicheng.suanming.ui;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +60,9 @@ public class LoginActivity extends BaseActivity {
     // APP_ID 替换为你的应用从官方网站申请到的合法appId
     public static final String APP_ID = "wx10f0e8af9e8031c3";
 
+    private View popRootView;
+    private PopupWindow popupWindow;
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_login;
@@ -64,7 +73,43 @@ public class LoginActivity extends BaseActivity {
         ActivityManager.getInstance().push(this);
         hideTitleBar();
         time = new TimeCount(60000, 1000);
+
         initWX();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //弹出用户隐私协议
+//        popupUserPrivacy();
+    }
+
+    /**
+     * Monitoring activity has finished.If it has finished, it's focus will change and call this method.
+     *
+     * @param hasFocus
+     */
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (hasFocus) {
+//            popupUserPrivacy();
+        }
+    }
+
+    /**
+     * 用户隐私协议
+     */
+    private void popupUserPrivacy() {
+        // 初始化popUpWindow
+        popRootView = LayoutInflater.from(this).inflate(R.layout.layout_privacy, null);
+        // PopUpWindow 传入 ContentView
+        popupWindow = new PopupWindow(popRootView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        View rootview = LayoutInflater.from(LoginActivity.this).inflate(R.layout.activity_login, null);
+        popupWindow.showAtLocation(rootview, Gravity.CENTER, 0, 0);
+
+        WindowManager.LayoutParams lp = this.getWindow().getAttributes();
+        lp.alpha = 0.5f;//设置阴影透明度
+        this.getWindow().setAttributes(lp);
     }
 
     public void initWX() {
@@ -339,5 +384,4 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
 }
