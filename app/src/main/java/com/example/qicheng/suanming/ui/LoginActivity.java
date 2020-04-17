@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity {
 
     private String input_phone;
     private String code; //验证码
-    private TimeCount time;                     // 定时器
+    private TimeCount time;  // 定时器
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
     // APP_ID 替换为你的应用从官方网站申请到的合法appId
@@ -175,7 +175,7 @@ public class LoginActivity extends BaseActivity {
         Map map = new HashMap<String, String>();
         map.put("phone", input_phone);
 
-        OkHttpManager.request2(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.request(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 Log.d("Success-->>", info.toString());
@@ -302,7 +302,7 @@ public class LoginActivity extends BaseActivity {
                         String gender = userData.getString("gender");
                         // String job =  userData.getString("job");
                         String phone = userData.getString("phone");
-                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone);
                         Constants.userInfo = uModel;
                         Constants.saveData();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -354,7 +354,7 @@ public class LoginActivity extends BaseActivity {
                         String gender = userData.getString("gender");
                         // String job =  userData.getString("job");
                         String phone = userData.getString("phone");
-                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone);
                         Constants.userInfo = uModel;
                         Constants.saveData();
                         startActivity();

@@ -12,6 +12,7 @@ public class Constants {
 
     //    public static String userId = "48"; //用户id
     public static boolean isLogin = false;
+    public static String os_type = "";
     public static UserModel userInfo;
     public static DaShiKeFuBean kefuInfo;
     public static String localUrl;
@@ -86,6 +87,12 @@ public class Constants {
 
         // 获取验证码
         public static final String GETCODE = URL + "index/login/sendPhoneCode";
+
+        // 获取绑定手机号验证码
+        public static final String GETBINDCODE = URL + "index/user/WxBangGetCode";
+
+        // 绑定手机号
+        public static final String BINDPHONE = URL + "index/user/WxBangPhone";
 
         //验证码登录
         public static final String CODELOGIN = URL + "index/login/codeLogin";

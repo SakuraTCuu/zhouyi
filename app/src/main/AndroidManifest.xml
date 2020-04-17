@@ -49,7 +49,7 @@
         <activity android:name=".ui.jiemeng.JiemengListActivity" />
         <activity android:name=".ui.jiemeng.JiemengDetailActivity" />
         <activity android:name=".ui.webView.PrivacyActivty" />
-        <!-- **********************移动授权⻚activity************************** -->
+        <activity android:name=".ui.BindPhoneActivity" />
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -61,19 +61,21 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:targetActivity="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
-            android:theme="@style/dialogStyle" /> <!-- **********************电信授权⻚activity************************* -->
+            android:theme="@style/dialogStyle" />
+
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.ShanYanOneKeyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
-            android:theme="@style/dialogStyle" /> <!-- **********************协议⻚activity************************** -->
+            android:theme="@style/dialogStyle" />
+
         <activity
+
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="behind"
             android:theme="@style/dialogStyle" />
-        <activity android:name=".ui.mine.MineBeiyongActivity" />
 
         <!--        微信登录页-->
         <activity

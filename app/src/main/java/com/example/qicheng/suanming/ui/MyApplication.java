@@ -3,6 +3,7 @@ package com.example.qicheng.suanming.ui;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import com.example.qicheng.suanming.bean.UserModel;
 import com.example.qicheng.suanming.common.ActivityManager;
 import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.utils.HttpInterceptor;
+import com.example.qicheng.suanming.utils.Rom;
 import com.okhttplib.OkHttpUtil;
 import com.okhttplib.annotation.CacheType;
 import com.okhttplib.annotation.Encoding;
@@ -42,6 +44,12 @@ public class MyApplication extends Application {
     }
 
     public void init() {
+        String name = Rom.getName();
+        Constants.os_type = name;
+//        ToastUtils.showShortToast(name);
+        Log.d("平台-->>", name);
+        //这个字符串可以自己定义,例如判断华为就填写huawei,魅族就填写meizu
+
         try {
             initUser();
         } catch (JSONException e) {
@@ -81,8 +89,9 @@ public class MyApplication extends Application {
             String head_img = data.getString("head_img");
             String nick_name = data.getString("nick_name");
             String gender = data.getString("gender");
+            String phone = data.getString("phone");
 
-            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender);
+            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender, phone);
             Log.e("userId--->>", userId);
             Log.e("userInfo--->>", userInfo);
         }

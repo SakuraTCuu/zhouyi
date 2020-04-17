@@ -14,6 +14,7 @@ import com.example.qicheng.suanming.bean.UserModel;
 import com.example.qicheng.suanming.common.ActivityManager;
 import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.common.OkHttpManager;
+import com.example.qicheng.suanming.ui.BindPhoneActivity;
 import com.example.qicheng.suanming.ui.LoginActivity;
 import com.example.qicheng.suanming.ui.MainActivity;
 import com.example.qicheng.suanming.ui.MyApplication;
@@ -134,10 +135,16 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                         String gender = userData.getString("gender");
                         // String job =  userData.getString("job");
                         String phone = userData.getString("phone");
-                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender);
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone);
                         Constants.userInfo = uModel;
                         Constants.saveData();
-                        startActivity(new Intent(WXEntryActivity.this, MainActivity.class));
+                        if (phone != "null" && phone != "" && !phone.equals("")) {
+                            Log.e("phone------->>", "phone" + phone);
+                            startActivity(new Intent(WXEntryActivity.this, MainActivity.class));
+                        } else {
+                            startActivity(new Intent(WXEntryActivity.this, BindPhoneActivity.class));
+                        }
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                         ActivityManager.getInstance().finishActivity(LoginActivity.class);
                         finish();
                     } else {

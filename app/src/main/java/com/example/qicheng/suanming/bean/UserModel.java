@@ -16,12 +16,14 @@ public class UserModel {
     private String head_img;
     private String nick_name;
     private String gender;
+    private String phone;
 
-    public UserModel(String user_id, String head_img, String nick_name, String gender) {
+    public UserModel(String user_id, String head_img, String nick_name, String gender, String phone) {
         this.user_id = user_id;
         this.head_img = head_img;
         this.nick_name = nick_name;
         this.gender = gender;
+        this.phone = phone;
     }
 
     public String getUser_id() {
@@ -56,17 +58,28 @@ public class UserModel {
         this.gender = gender;
     }
 
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String toString() {
         JSONObject data = new JSONObject();
         try {
-            data.put("user_id",user_id);
-            data.put("head_img",head_img);
-            data.put("nick_name",nick_name);
-            data.put("gender",gender);
-           return  data.toString();
+            data.put("user_id", user_id);
+            data.put("head_img", head_img);
+            data.put("nick_name", nick_name);
+            data.put("gender", gender);
+            data.put("phone", phone);
+            return data.toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return user_id + "_" + head_img + "_" + nick_name + "_" + gender;
+        return user_id + "_" + head_img + "_" + nick_name + "_" + gender + "_" + phone;
     }
+
 }

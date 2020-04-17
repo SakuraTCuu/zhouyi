@@ -39,6 +39,7 @@ public class OkHttpManager {
                         .setRequestType(type)//设置请求方式
 //                        .addParam("user_id",Constants.userInfo.getUser_id())
                         .addParam("user_id", Constants.userInfo.getUser_id())
+                        .addParam("os_type", Constants.os_type)
                         .addParams(params)
                         .build(),
                 new com.okhttplib.callback.Callback() {

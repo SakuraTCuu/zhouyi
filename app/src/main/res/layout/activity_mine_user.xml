@@ -214,6 +214,38 @@
                 android:gravity="right"
                 android:hint="请输入您的职业" />
         </RelativeLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="80dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:background="@drawable/mine_border"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="25dp"-->
+<!--                    android:text="绑定手机号"-->
+<!--                    android:textSize="16dp" />-->
+<!--            </LinearLayout>-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/edit_bind_phone"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:background="@null"-->
+<!--                android:gravity="right"-->
+<!--                android:hint="请输入您的手机号" />-->
+<!--        </RelativeLayout>-->
     </LinearLayout>
 
     <Button
