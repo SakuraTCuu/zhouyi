@@ -40,13 +40,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class ChooseNameFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
-
     @BindView(R.id.ll_root)
     LinearLayout ll_root;
-
     @BindView(R.id.lv_namelist)
     ListView lv_namelist;
-
     @BindView(R.id.tv_namebar_normal)
     TextView tv_namebar_normal;
     @BindView(R.id.tv_namebar_small)
