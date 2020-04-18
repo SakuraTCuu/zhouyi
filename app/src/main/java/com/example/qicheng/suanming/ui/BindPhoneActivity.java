@@ -167,8 +167,6 @@ public class BindPhoneActivity extends BaseActivity {
                 Log.d("Success-->>", info.toString());
                 try {
                     JSONObject jdata = new JSONObject(info.getRetDetail());
-//                    {"code":false,"msg":"验证码已过期，请重新获取","data":[]}
-//                    {"code":true,"msg":"合并成功","data":{"user_info":{"user_id":49,"head_img":"","nick_name":"王","gender":2,"phone":"13073701204","birthday":"2010-3-28","status":0}}}
                     JSONObject jsonData = new JSONObject(info.getRetDetail());
                     boolean code = jsonData.getBoolean("code");
                     if (code) {

@@ -81,7 +81,6 @@ public class QimingFragment extends BaseFragment {
         cDate = cl;
         String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         text_birthday.setText(dateStr);
-
     }
 
     @Override

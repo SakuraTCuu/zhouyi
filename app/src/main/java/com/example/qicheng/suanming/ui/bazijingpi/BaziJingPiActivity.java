@@ -24,6 +24,7 @@ import com.example.qicheng.suanming.utils.ToastUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,7 +101,7 @@ public class BaziJingPiActivity extends BaseActivity {
             ToastUtils.showShortToast("请输入正确的名字");
             return;
         }
-        if(cDate == null){
+        if (cDate == null) {
             ToastUtils.showShortToast("请输入时间");
             return;
         }
@@ -110,7 +111,7 @@ public class BaziJingPiActivity extends BaseActivity {
         }
 
         int year = cDate.get(Calendar.YEAR);
-        int month = cDate.get(Calendar.MONTH);
+        int month = cDate.get(Calendar.MONTH) + 1;
         int date = cDate.get(Calendar.DATE);
 
         String dateStr = year + "-" + month + "-" + date;
@@ -125,10 +126,10 @@ public class BaziJingPiActivity extends BaseActivity {
 //        String url_data = "?user_name="+userName+"&gender="+gender+"&birthday="+dateStr+"&user_id=48";
         String url_data = MapUtils.Map2String(map);
         Log.d("url_data-------->", url_data);
-        this.getDataFromServer(map,url_data);
+        this.getDataFromServer(map, url_data);
     }
 
-    private void getDataFromServer(Map params,String urlData) {
+    private void getDataFromServer(Map params, String urlData) {
 
         //类型1  八字精批
         Map<String, String> map = new HashMap();
@@ -140,15 +141,15 @@ public class BaziJingPiActivity extends BaseActivity {
             public void Success(HttpInfo info) {
                 Log.d("info---->>", info.getRetDetail());
                 try {
-                     JSONObject  jsonObject = new JSONObject(info.getRetDetail());
-                     Log.d("jsonObject---->>",  jsonObject.toString());
-                     String url = jsonObject.getJSONObject("data").getString("url");
-                     url +=urlData;
-                     Log.d("url---->>", url);
+                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
+                    Log.d("jsonObject---->>", jsonObject.toString());
+                    String url = jsonObject.getJSONObject("data").getString("url");
+                    url += urlData;
+                    Log.d("url---->>", url);
 
                     Intent intent = new Intent(BaziJingPiActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

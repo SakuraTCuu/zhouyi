@@ -10,9 +10,11 @@
     <!--        android:layout_height="wrap_content"-->
     <!--        android:text="自选姓名" />-->
     <LinearLayout
+        android:background="@mipmap/name_beijing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -116,7 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/red"
+                android:background="@color/qiming_select_color"
+                android:textColor="@color/white"
                 android:gravity="center"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"

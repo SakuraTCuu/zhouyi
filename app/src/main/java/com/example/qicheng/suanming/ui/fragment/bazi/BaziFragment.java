@@ -18,6 +18,8 @@ import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.common.OkHttpManager;
 import com.example.qicheng.suanming.common.ResourcesManager;
 import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
+import com.example.qicheng.suanming.utils.CustomDatePicker;
 import com.example.qicheng.suanming.utils.DataCheck;
 import com.example.qicheng.suanming.utils.MapUtils;
 import com.example.qicheng.suanming.utils.ToastUtils;
@@ -228,13 +230,15 @@ public class BaziFragment extends BaseFragment {
     }
 
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(getContext());
+        CustomDateDialog dialog = new CustomDateDialog(getContext());
+
+//        DatePickDialog dialog = new DatePickDialog(getContext());
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
-        dialog.setTitle("选择时间");
+//        dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMDHM);
+//        dialog.setType(DateType.TYPE_YMDHM);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd HH:mm");
         //设置选择回调
@@ -244,6 +248,10 @@ public class BaziFragment extends BaseFragment {
                 //日期监听
             }
         });
+
+//        dialog.setOnClickNLListener(new OnClickNLListener(){
+//
+//        });
 
         //设置点击确定按钮回调
         dialog.setOnSureLisener(new OnSureLisener() {

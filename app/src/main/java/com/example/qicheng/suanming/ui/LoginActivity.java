@@ -175,7 +175,7 @@ public class LoginActivity extends BaseActivity {
         Map map = new HashMap<String, String>();
         map.put("phone", input_phone);
 
-        OkHttpManager.request(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.request2(Constants.getApi.GETCODE, RequestType.POST, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 Log.d("Success-->>", info.toString());

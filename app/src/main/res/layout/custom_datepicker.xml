@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_click_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="#D7E6EF"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="公历"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_click_nl"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="#D7E6EF"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="农历"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_top_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="20dp"
+            android:text="2020-4-18" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#dddddd" />
+
+    <FrameLayout
+        android:id="@+id/wheelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"></FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#dddddd" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/abc_list_selector_holo_light"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#444444"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="#dddddd" />
+
+        <TextView
+            android:id="@+id/sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/abc_list_selector_holo_light"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#444444"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -187,19 +187,28 @@ public class ChooseNameFragment extends BaseFragment implements AdapterView.OnIt
     private void changeNameBar(int type) {
         switch (type) {
             case -1:
-                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.qiming_select_color));
+                tv_namebar_normal.setTextColor(getResources().getColor(R.color.white));
                 tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_small.setTextColor(getResources().getColor(R.color.black));
                 tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_big.setTextColor(getResources().getColor(R.color.black));
                 break;
             case 1:
                 tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                tv_namebar_normal.setTextColor(getResources().getColor(R.color.black));
+                tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.qiming_select_color));
+                tv_namebar_small.setTextColor(getResources().getColor(R.color.white));
                 tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_big.setTextColor(getResources().getColor(R.color.black));
                 break;
             case 2:
                 tv_namebar_normal.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
+                tv_namebar_normal.setTextColor(getResources().getColor(R.color.black));
                 tv_namebar_small.setBackground(ResourcesManager.getDrawable(mContext, R.color.white));
-                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.red));
+                tv_namebar_small.setTextColor(getResources().getColor(R.color.black));
+                tv_namebar_big.setBackground(ResourcesManager.getDrawable(mContext, R.color.qiming_select_color));
+                tv_namebar_big.setTextColor(getResources().getColor(R.color.white));
                 break;
         }
     }

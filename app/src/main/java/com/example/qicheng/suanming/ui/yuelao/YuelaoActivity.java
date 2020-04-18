@@ -177,7 +177,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         }
 
         int year = cDate.get(Calendar.YEAR);
-        int month = cDate.get(Calendar.MONTH);
+        int month = cDate.get(Calendar.MONTH) + 1;
         int date = cDate.get(Calendar.DATE);
 
         String dateStr = year + "-" + month + "-" + date;
@@ -229,12 +229,11 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         });
     }
 
-
     /**
      * 点击女图标
      */
     public void onClickWomenImg() {
-        gender = 2;
+        gender = 0;
         this.iv_yuelao_man.setImageResource(R.mipmap.yuelao_weixuan);
         this.iv_yuelao_women.setImageResource(R.mipmap.yuelao_xuanzhong);
     }

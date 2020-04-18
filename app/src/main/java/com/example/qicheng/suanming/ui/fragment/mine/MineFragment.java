@@ -148,7 +148,6 @@ public class MineFragment extends BaseFragment {
                 tv_nickname.setText(Constants.nickName);
             }
         } else {
-
         }
     }
 

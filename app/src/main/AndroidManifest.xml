@@ -37,6 +37,7 @@
         </activity>
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.mine.MineBeiyongActivity" />
         <activity android:name=".ui.mine.MineUserActivity" />
         <activity android:name=".ui.mine.MineOrderActivity" />
         <activity android:name=".ui.mine.MineKeFuActivity" />
