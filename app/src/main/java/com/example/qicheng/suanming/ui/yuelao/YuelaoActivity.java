@@ -18,6 +18,8 @@ import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
@@ -70,6 +72,9 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
     private Calendar cDate;
     private HehunAdapter adapter;
     private List data;
+
+    private GlnlUtils.glnlType nlType;
+    private Boolean isGL = true;
 
     @Override
     protected int setLayoutId() {
@@ -180,7 +185,14 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         int month = cDate.get(Calendar.MONTH) + 1;
         int date = cDate.get(Calendar.DATE);
 
-        String dateStr = year + "-" + month + "-" + date;
+//        = year + "-" + month + "-" + date
+        String dateStr;
+
+        if (isGL) {
+            dateStr = year + "-" + month + "-" + date;
+        } else {
+            dateStr = nlType.getString();
+        }
 
         Map<String, Object> map = new HashMap();
         map.put("user_name", userName);
@@ -248,13 +260,13 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
     }
 
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(mContext);
+        CustomDateDialog dialog = new CustomDateDialog(mContext);
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMDHM);
+//        dialog.setType(DateType.TYPE_YMDHM);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd HH:mm");
         //设置选择回调
@@ -266,9 +278,30 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         });
 
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
-            @Override
-            public void onSure(Date date) {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
+//            @Override
+//            public void onSure(Date date) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(date);
+//                cDate = calendar;
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
+//                int day = calendar.get(Calendar.DATE);
+//                int hour = calendar.get(Calendar.HOUR);
+//                int minute = calendar.get(Calendar.MINUTE);
+//
+//                //小于10 前边加0   如 9月 会变成09月
+//                String monthStr = addZero2Date(month);
+//                String dayStr = addZero2Date(day);
+//                String hourStr = addZero2Date(hour);
+//                String minuteStr = addZero2Date(minute);
+//
+//                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+//                tv_yuelao_date.setText(dateStr);
+//            }
+
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 cDate = calendar;
@@ -284,8 +317,23 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
                 String hourStr = addZero2Date(hour);
                 String minuteStr = addZero2Date(minute);
 
-                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
-                tv_yuelao_date.setText(dateStr);
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+                    try {
+                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+                        nlDate = nlType.getTypeString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                        nlDate = dateStr;
+                    }
+                    tv_yuelao_date.setText(nlDate);
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    tv_yuelao_date.setText(dateStr);
+                }
             }
         });
         dialog.show();

@@ -84,10 +84,6 @@ public class MineFragment extends BaseFragment {
             "一个人太累，想马上脱单。月老姻缘揭秘你的桃花正缘。",
             "什么是你财富自由上的最大阻碍？你的“八字”已经告诉你了。"};
 
-    public MineFragment() {
-
-    }
-
     @Override
     protected void initView() {
         //获取用户信息
@@ -147,6 +143,8 @@ public class MineFragment extends BaseFragment {
                 iv_touxiang.setImageBitmap(bitmap);
                 tv_nickname.setText(Constants.nickName);
             }
+            String nickName = Constants.userInfo.getNick_name();
+            tv_nickname.setText(nickName);
         } else {
         }
     }

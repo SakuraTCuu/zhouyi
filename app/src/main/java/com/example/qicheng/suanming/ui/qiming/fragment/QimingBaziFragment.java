@@ -93,17 +93,19 @@ public class QimingBaziFragment extends BaseFragment {
     private JSONArray qr;
     private JSONObject jreturn;
     private JSONObject pp;
+    private String zodic;
 
     public QimingBaziFragment() {
         super();
     }
 
-    public QimingBaziFragment(JSONObject userInfo, String nongliStr, JSONArray qr, JSONObject jreturn, JSONObject pp) {
+    public QimingBaziFragment(JSONObject userInfo, String nongliStr, JSONArray qr, JSONObject jreturn, JSONObject pp, String zodic) {
         this.userInfo = userInfo;
         this.nongliStr = nongliStr;
         this.qr = qr;
         this.jreturn = jreturn;
         this.pp = pp;
+        this.zodic = zodic;
     }
 
     @Override
@@ -121,7 +123,7 @@ public class QimingBaziFragment extends BaseFragment {
             String name = userInfo.getString("name");
             tv_gender.setText(gender);
             tv_surname.setText(name);
-            tv_zodic.setText(name);
+            tv_zodic.setText(zodic);
             tv_glday.setText(glDay);
             tv_nlday.setText(nongliStr);
 

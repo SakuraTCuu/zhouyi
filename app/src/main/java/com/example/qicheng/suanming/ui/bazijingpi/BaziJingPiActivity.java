@@ -17,7 +17,9 @@ import com.example.qicheng.suanming.base.BaseActivity;
 import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.common.OkHttpManager;
 import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
 import com.example.qicheng.suanming.utils.DataCheck;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.example.qicheng.suanming.utils.LogUtils;
 import com.example.qicheng.suanming.utils.MapUtils;
 import com.example.qicheng.suanming.utils.ToastUtils;
@@ -53,6 +55,9 @@ public class BaziJingPiActivity extends BaseActivity {
     private String input_name;
     private Calendar cDate;
     private String gender = "1";
+
+    private GlnlUtils.glnlType nlType;
+    private Boolean isGL = true;
 
     @Override
     protected int setLayoutId() {
@@ -114,7 +119,13 @@ public class BaziJingPiActivity extends BaseActivity {
         int month = cDate.get(Calendar.MONTH) + 1;
         int date = cDate.get(Calendar.DATE);
 
-        String dateStr = year + "-" + month + "-" + date;
+        String dateStr;
+
+        if (!isGL) {
+            dateStr = nlType.getString();
+        } else {
+            dateStr = year + "-" + month + "-" + date;
+        }
 
         Map<String, Object> map = new HashMap();
         map.put("user_name", userName);
@@ -185,13 +196,13 @@ public class BaziJingPiActivity extends BaseActivity {
     }
 
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(mContext);
+        CustomDateDialog dialog = new CustomDateDialog(mContext);
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMDHM);
+//        dialog.setType(DateType.TYPE_YMDHM);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd HH:mm");
         //设置选择回调
@@ -203,9 +214,10 @@ public class BaziJingPiActivity extends BaseActivity {
         });
 
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
             @Override
-            public void onSure(Date date) {
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 cDate = calendar;
@@ -221,8 +233,23 @@ public class BaziJingPiActivity extends BaseActivity {
                 String hourStr = addZero2Date(hour);
                 String minuteStr = addZero2Date(minute);
 
-                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
-                tv_bazijingpi_date.setText(dateStr);
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+                    try {
+                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+                        nlDate = nlType.getTypeString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                        nlDate = dateStr;
+                    }
+                    tv_bazijingpi_date.setText(nlDate);
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    tv_bazijingpi_date.setText(dateStr);
+                }
             }
         });
         dialog.show();

@@ -179,6 +179,7 @@
             android:stretchColumns="*">
 
             <TableRow
+                android:background="@color/qiming_table_top_color"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@drawable/bazi_line_h"
@@ -194,26 +195,22 @@
                 <TextView
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="年柱" />
 
                 <TextView
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="月柱" />
 
                 <TextView
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="日柱" />
 
                 <TextView
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="时柱" />
             </TableRow>
 
@@ -225,6 +222,8 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:singleLine="true"
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -234,21 +233,18 @@
                     android:id="@+id/tv_bazi_shen_0"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
-                    android:text="年柱" />
+                    android:text="年柱年柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_shen_1"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="月柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_shen_2"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="日柱" />
 
                 <TextView
@@ -256,7 +252,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="时柱" />
             </TableRow>
 
@@ -268,6 +263,7 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -277,21 +273,18 @@
                     android:id="@+id/tv_bazi_qian_0"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="年柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_qian_1"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="月柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_qian_2"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="日柱" />
 
                 <TextView
@@ -299,7 +292,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="时柱" />
             </TableRow>
 
@@ -311,38 +303,39 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
                     android:text="藏干" />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/tv_bazi_cang_0"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="年柱" />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/tv_bazi_cang_1"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="月柱" />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/tv_bazi_cang_2"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="日柱" />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/tv_bazi_cang_3"
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="时柱" />
             </TableRow>
 
@@ -354,6 +347,7 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -364,7 +358,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="胎元" />
             </TableRow>
 
@@ -376,6 +369,7 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -386,7 +380,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="胎元" />
             </TableRow>
 
@@ -398,6 +391,7 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -408,7 +402,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="命宫" />
             </TableRow>
 
@@ -420,6 +413,7 @@
                 android:showDividers="beginning|middle|end">
 
                 <TextView
+                    android:background="@color/qiming_table_content_color"
                     android:layout_width="1dp"
                     android:gravity="center"
                     android:padding="15dp"
@@ -429,21 +423,18 @@
                     android:id="@+id/tv_bazi_na_0"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="年柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_na_1"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="月柱" />
 
                 <TextView
                     android:id="@+id/tv_bazi_na_2"
                     android:layout_width="1dp"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="日柱" />
 
                 <TextView
@@ -451,7 +442,6 @@
                     android:layout_width="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="15dp"
                     android:text="时柱" />
             </TableRow>
         </TableLayout>

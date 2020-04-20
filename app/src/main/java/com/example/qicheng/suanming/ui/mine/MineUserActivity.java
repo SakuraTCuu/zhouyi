@@ -235,6 +235,7 @@ public class MineUserActivity extends BaseActivity {
                     boolean code = jsonObject.getBoolean("code");
                     if (code) {
                         ToastUtils.showShortToast("修改成功");
+                        finish();
                     } else {
                         String msg = jsonObject.getString("msg");
                         ToastUtils.showShortToast(msg);

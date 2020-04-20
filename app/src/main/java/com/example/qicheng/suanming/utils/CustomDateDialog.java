@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+
+import androidx.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,9 +47,11 @@ public class CustomDateDialog extends Dialog implements OnChangeLisener {
     //年分限制，默认上下5年
     private int yearLimt = 5;
 
+    private boolean flag = true;
+
     private OnChangeLisener onChangeLisener;
 
-    private OnSureLisener onSureLisener;
+    private OnCustomSureLisener onSureLisener;
 
     private CustomDatePicker mDatePicker;
 
@@ -70,8 +75,12 @@ public class CustomDateDialog extends Dialog implements OnChangeLisener {
         this.onChangeLisener = onChangeLisener;
     }
 
+    public interface OnCustomSureLisener {
+        void onSure(Date date, boolean flag);
+    }
+
     //设置点击确定按钮，回调
-    public void setOnSureLisener(OnSureLisener onSureLisener) {
+    public void setOnSureLisener(OnCustomSureLisener onSureLisener) {
         this.onSureLisener = onSureLisener;
     }
 
@@ -120,31 +129,37 @@ public class CustomDateDialog extends Dialog implements OnChangeLisener {
             public void onClick(View v) {
                 dismiss();
                 if (onSureLisener != null) {
-                    onSureLisener.onSure(mDatePicker.getSelectDate());
+                    onSureLisener.onSure(mDatePicker.getSelectDate(), flag);
                 }
             }
         });
 
         this.btn_gl.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                flag = true;
                 mDatePicker.onClickGL();
                 btn_gl.setBackgroundColor(Color.parseColor("#395C74"));
                 btn_nl.setBackgroundColor(Color.parseColor("#D7E6EF"));
-                btn_gl.setTextColor(R.color.white);
-                btn_nl.setTextColor(R.color.black);
+//                btn_gl.setTextColor(R.color.white);
+//                btn_nl.setTextColor(R.color.black);
+                btn_nl.setTextColor(getContext().getColor(R.color.black));
+                btn_gl.setTextColor(getContext().getColor(R.color.white));
             }
         });
 
         this.btn_nl.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+                flag = false;
                 mDatePicker.onClickNL();
                 btn_gl.setBackgroundColor(Color.parseColor("#D7E6EF"));
                 btn_nl.setBackgroundColor(Color.parseColor("#395C74"));
-                btn_gl.setTextColor(R.color.black);
-                btn_nl.setTextColor(R.color.white);
+                btn_gl.setTextColor(getContext().getColor(R.color.black));
+                btn_nl.setTextColor(getContext().getColor(R.color.white));
 //                ToastUtils.showShortToast("农历");
             }
         });
@@ -174,6 +189,4 @@ public class CustomDateDialog extends Dialog implements OnChangeLisener {
             messgeTv.setText(messge);
         }
     }
-
-
 }

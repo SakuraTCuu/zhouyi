@@ -12,6 +12,8 @@ import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
@@ -52,6 +54,9 @@ public class CaiyunActivity extends BaseActivity {
     private Calendar cDate;
     private int gender = 1;
 
+    private GlnlUtils.glnlType nlType;
+    private Boolean isGL = true;
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_caiyun;
@@ -59,7 +64,7 @@ public class CaiyunActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-       setTitleText("财运分析");
+        setTitleText("财运分析");
     }
 
     @Override
@@ -113,7 +118,15 @@ public class CaiyunActivity extends BaseActivity {
 
         String month = String.valueOf(cDate.get(Calendar.MONTH) + 1);
 //         年月日   服务器参数定义
-        String birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
+//        String birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
+
+        String birthday;
+
+        if (isGL) {
+            birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
+        } else {
+            birthday = nlType.getString();
+        }
 
         //请求服务器
         Map<String, Object> map = new HashMap();
@@ -139,14 +152,14 @@ public class CaiyunActivity extends BaseActivity {
                 Log.d("info---->>", info.getRetDetail());
                 try {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
-                    Log.d("jsonObject---->>",  jsonObject.toString());
+                    Log.d("jsonObject---->>", jsonObject.toString());
                     String url = jsonObject.getJSONObject("data").getString("url");
-                    url +=urlData;
+                    url += urlData;
                     Log.d("url---->>", url);
 
                     Intent intent = new Intent(CaiyunActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("url",url);
+                    bundle.putString("url", url);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {
@@ -162,6 +175,7 @@ public class CaiyunActivity extends BaseActivity {
             }
         });
     }
+
     private void onClickWomen() {
         if (gender == 0) {
             return;
@@ -188,13 +202,13 @@ public class CaiyunActivity extends BaseActivity {
     }
 
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(mContext);
+        CustomDateDialog dialog = new CustomDateDialog(mContext);
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMDHM);
+//        dialog.setType(DateType.TYPE_YMDHM);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd HH:mm");
         //设置选择回调
@@ -206,9 +220,30 @@ public class CaiyunActivity extends BaseActivity {
         });
 
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
+
+            //            public void onSure(Date date) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(date);
+//                cDate = calendar;
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
+//                int day = calendar.get(Calendar.DATE);
+//                int hour = calendar.get(Calendar.HOUR);
+//                int minute = calendar.get(Calendar.MINUTE);
+//
+//                //小于10 前边加0   如 9月 会变成09月
+//                String monthStr = addZero2Date(month);
+//                String dayStr = addZero2Date(day);
+//                String hourStr = addZero2Date(hour);
+//                String minuteStr = addZero2Date(minute);
+//
+//                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+//                tv_caiyun_birthday.setText(dateStr);
+//            }
             @Override
-            public void onSure(Date date) {
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 cDate = calendar;
@@ -224,8 +259,23 @@ public class CaiyunActivity extends BaseActivity {
                 String hourStr = addZero2Date(hour);
                 String minuteStr = addZero2Date(minute);
 
-                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
-                tv_caiyun_birthday.setText(dateStr);
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+                    try {
+                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+                        nlDate = nlType.getTypeString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                        nlDate = dateStr;
+                    }
+                    tv_caiyun_birthday.setText(nlDate);
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    tv_caiyun_birthday.setText(dateStr);
+                }
             }
         });
         dialog.show();

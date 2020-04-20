@@ -15,11 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
-            android:background="#D7E6EF"
+            android:background="#395C74"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="公历"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btn_click_nl"

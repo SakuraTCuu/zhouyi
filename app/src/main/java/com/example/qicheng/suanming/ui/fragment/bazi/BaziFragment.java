@@ -21,7 +21,9 @@ import com.example.qicheng.suanming.ui.webView.NamePayActivity;
 import com.example.qicheng.suanming.utils.CustomDateDialog;
 import com.example.qicheng.suanming.utils.CustomDatePicker;
 import com.example.qicheng.suanming.utils.DataCheck;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.example.qicheng.suanming.utils.MapUtils;
+import com.example.qicheng.suanming.utils.Nl2gl;
 import com.example.qicheng.suanming.utils.ToastUtils;
 import com.example.qicheng.suanming.R;
 import com.okhttplib.HttpInfo;
@@ -54,6 +56,9 @@ public class BaziFragment extends BaseFragment {
     String input_name;
     String birthday = new Date().toString();
     int gender = 1;  // 性别 1男    0女
+
+    private GlnlUtils.glnlType nlType;
+    private Boolean isGL = true;
 
     @Override
     protected int setLayoutId() {
@@ -110,60 +115,23 @@ public class BaziFragment extends BaseFragment {
         long curTime = cl.getTimeInMillis();
         if (cDate.getTimeInMillis() > curTime) {
             ToastUtils.showShortToast("请选择正确的时间");
+            return;
         }
         String month = String.valueOf(cDate.get(Calendar.MONTH) + 1);
-//         年月日   服务器参数定义
-        birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
+
+        String year = cDate.get(Calendar.YEAR) + "";
+        String day = cDate.get(Calendar.DATE) + "";
+
+        if (isGL) {
+            birthday = cDate.get(Calendar.YEAR) + "-" + month + "-" + cDate.get(Calendar.DATE);
+        } else {
+            birthday = nlType.getString();
+        }
+
+// 年月日   服务器参数定义
 //        QIMING
         this.getDataFromServer();
     }
-
-//    public void getDataFromServer() {
-//        Log.d("user_name--->>", input_name);
-//        Log.d("birthday--->>", birthday);
-//        Log.d("gender--->>", gender + "");
-//
-//        Map<String, Object> map = new HashMap();
-//        map.put("user_name", input_name);
-//        map.put("birthday", birthday);
-//        map.put("gender", gender + "");
-//        map.put("user_id", Constants.userId);
-//
-//        String url_data = MapUtils.Map2String(map);
-//        Log.d("url_data-------->", url_data);
-//        this.getDataFromServer(map,url_data);
-
-//        OkHttpManager.request(Constants.getApi.BAZI, RequestType.POST, map, new OkHttpManager.RequestListener() {
-//            @Override
-//            public void Success(HttpInfo info) {
-//                getMainHandler().sendEmptyMessage(BASE_END);
-//                try {
-//                    JSONObject jsonObject = new JSONObject(info.getRetDetail());
-//                    Log.d("jsonObject---->>", jsonObject.toString());
-//
-//                    String url = jsonObject.getJSONObject("data").getString("url");
-//                    url +=urlData;
-//                    Log.d("url---->>", url);
-//
-//                    Intent intent = new Intent(BaziJingPiActivity.this, NamePayActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("url",url);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void Fail(HttpInfo info) {
-//                String result = info.getRetDetail();
-//                getMainHandler().sendEmptyMessage(BASE_END);
-//                ToastUtils.showShortToast(result);
-//            }
-//        });
-//    }
 
     private void getDataFromServer() {
         Map<String, Object> map = new HashMap();
@@ -249,14 +217,11 @@ public class BaziFragment extends BaseFragment {
             }
         });
 
-//        dialog.setOnClickNLListener(new OnClickNLListener(){
-//
-//        });
-
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
-            @Override
-            public void onSure(Date date) {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
+
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 cDate = calendar;
@@ -272,8 +237,23 @@ public class BaziFragment extends BaseFragment {
                 String hourStr = addZero2Date(hour);
                 String minuteStr = addZero2Date(minute);
 
-                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
-                bazi_text_birthday.setText(dateStr);
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+                    try {
+                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+                        nlDate = nlType.getTypeString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                        nlDate = dateStr;
+                    }
+                    bazi_text_birthday.setText(nlDate);
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    bazi_text_birthday.setText(dateStr);
+                }
             }
         });
         dialog.show();

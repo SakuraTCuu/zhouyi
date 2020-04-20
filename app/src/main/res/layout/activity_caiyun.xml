@@ -67,7 +67,7 @@
                     <EditText
                         android:id="@+id/et_caiyun_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="21dp"
                         android:layout_marginLeft="20dp"
                         android:background="@null"
                         android:hint="请输入姓名"

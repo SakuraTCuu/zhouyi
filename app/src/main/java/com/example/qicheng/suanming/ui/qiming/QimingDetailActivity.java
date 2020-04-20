@@ -54,6 +54,7 @@ public class QimingDetailActivity extends BaseActivity {
     private String nongliStr;
     private JSONObject jReturn;
     private JSONObject pp;
+    private String zodic;
 
     @Override
     protected int setLayoutId() {
@@ -76,6 +77,7 @@ public class QimingDetailActivity extends BaseActivity {
             pp = jsondata.getJSONObject("pp");
 
             nongliStr = jsondata.getString("nongli_day");
+            zodic = jsondata.getJSONArray("nongli").getString(6);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -86,7 +88,7 @@ public class QimingDetailActivity extends BaseActivity {
         list = new ArrayList<>();
         dashiQimingFragment = new DashiQimingFragment();
         chooseNameFragment = new ChooseNameFragment(nameList, data);
-        qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr,qr,jReturn,pp);
+        qimingBaziFragment = new QimingBaziFragment(userInfo, nongliStr, qr, jReturn, pp,zodic);
 
         list.add(qimingBaziFragment);
         list.add(chooseNameFragment);
@@ -100,7 +102,6 @@ public class QimingDetailActivity extends BaseActivity {
         tv_qiming_bazi_title.setTextColor(Color.GREEN);
         tv_qiming_choose_title.setTextColor(Color.BLACK);
         tv_qiming_dashi_title.setTextColor(Color.BLACK);
-
     }
 
     @Override
@@ -134,19 +135,19 @@ public class QimingDetailActivity extends BaseActivity {
     public void onPageChange(int arg0) {
         switch (arg0) {//状态改变时底部对应的字体颜色改变
             case 0:
-                tv_qiming_bazi_title.setTextColor(Color.GREEN);
+                tv_qiming_bazi_title.setTextColor(getResources().getColor(R.color.qiming_select_color));
                 tv_qiming_choose_title.setTextColor(Color.BLACK);
                 tv_qiming_dashi_title.setTextColor(Color.BLACK);
                 break;
             case 1:
                 tv_qiming_bazi_title.setTextColor(Color.BLACK);
-                tv_qiming_choose_title.setTextColor(Color.GREEN);
+                tv_qiming_choose_title.setTextColor(getResources().getColor(R.color.qiming_select_color));
                 tv_qiming_dashi_title.setTextColor(Color.BLACK);
                 break;
             case 2:
                 tv_qiming_bazi_title.setTextColor(Color.BLACK);
                 tv_qiming_choose_title.setTextColor(Color.BLACK);
-                tv_qiming_dashi_title.setTextColor(Color.GREEN);
+                tv_qiming_dashi_title.setTextColor(getResources().getColor(R.color.qiming_select_color));
                 break;
         }
     }

@@ -73,7 +73,7 @@ public class ChooseNameListAdapter extends BaseAdapter {
         holder.tv_name.setText(data.get(position).getName());
 
         if (selectedPosition == position) {
-            holder.tv_name.setBackgroundResource(R.color.red);
+            holder.tv_name.setBackgroundResource(R.color.qiming_select_color);
         } else {
             holder.tv_name.setBackgroundResource(R.color.white);
         }

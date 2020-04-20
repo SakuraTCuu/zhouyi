@@ -37,6 +37,9 @@ public class CustomDatePicker extends CustomWheelPick {
     private int yearLimt = 5;
     private OnChangeLisener onChangeLisener;
 
+    // 公历
+    private boolean flag = true;
+
     private Context context;
 
     //选择时间回调
@@ -147,18 +150,28 @@ public class CustomDatePicker extends CustomWheelPick {
 
     @Override
     public void onChanged(WheelView wheel, int oldValue, int newValue) {
-
-        int year = yearArr[yearView.getCurrentItem()];
-        int moth = mothArr[monthView.getCurrentItem()];
-        int day = dayArr[dayView.getCurrentItem()];
-        int hour = hourArr[hourView.getCurrentItem()];
-        int minut = minutArr[minuteView.getCurrentItem()];
-
-        if (wheel == yearView || wheel == monthView) {
-            setChangeDaySelect(year, moth);
-        } else {
-            selectDay = day;
+        int year, moth, day, hour, minut;
+        if (true) {
+            year = yearArr[yearView.getCurrentItem()];
+            moth = mothArr[monthView.getCurrentItem()];
+            day = dayArr[dayView.getCurrentItem()];
+            hour = hourArr[hourView.getCurrentItem()];
+            minut = minutArr[minuteView.getCurrentItem()];
         }
+//        else {
+//            year = yearArr[yearView.getCurrentItem()];
+//            moth = nlMotnArr[monthView.getCurrentItem()];
+//            day = nlDayArr[dayView.getCurrentItem()];
+//            hour = nlHourArr[hourView.getCurrentItem()];
+//            minut = minutArr[minuteView.getCurrentItem()];
+//        }
+
+
+//        if (wheel == yearView || wheel == monthView) {
+//            setChangeDaySelect(year, moth);
+//        } else {
+//            selectDay = day;
+//        }
 
         if (onChangeLisener != null) {
             onChangeLisener.onChanged(DateUtils.getDate(year, moth, day, hour, minut));
@@ -166,31 +179,33 @@ public class CustomDatePicker extends CustomWheelPick {
     }
 
     public void onClickNL() {
+        flag = false;
         setWheelListener(yearView, yearArr, false);
         setWheelListener(monthView, nlMotnArr, false);
         setWheelListener(dayView, nlDayArr, false);
         setWheelListener(hourView, nlHourArr, false);
         setWheelListener(minuteView, minutArr, false);
 
-        yearView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.YEAR), yearArr));
+//        yearView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.YEAR), yearArr));
 //        monthView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MOTH), nlMotnArr));
 //        dayView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.DAY), nlDayArr));
 //        hourView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.HOUR), nlHourArr));
-        minuteView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MINUTE), minutArr));
+//        minuteView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MINUTE), minutArr));
     }
 
     public void onClickGL() {
+        flag = true;
         setWheelListener(yearView, yearArr, false);
         setWheelListener(monthView, mothArr, true);
         setWheelListener(dayView, dayArr, true);
         setWheelListener(hourView, hourArr, true);
         setWheelListener(minuteView, minutArr, true);
 
-        yearView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.YEAR), yearArr));
-        monthView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MOTH), mothArr));
-        dayView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.DAY), dayArr));
-        hourView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.HOUR), hourArr));
-        minuteView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MINUTE), minutArr));
+//        yearView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.YEAR), yearArr));
+//        monthView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MOTH), mothArr));
+//        dayView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.DAY), dayArr));
+//        hourView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.HOUR), hourArr));
+//        minuteView.setCurrentItem(datePicker.findIndextByValue(datePicker.getToady(PickerDateHelper.Type.MINUTE), minutArr));
     }
 
     @Override

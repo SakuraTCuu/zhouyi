@@ -17,6 +17,8 @@ import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
@@ -72,6 +74,10 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
     private ArrayList<HehunListBean> data;
     private HehunAdapter adapter;
 
+    private GlnlUtils.glnlType manNlType;
+    private GlnlUtils.glnlType womenNlType;
+    private Boolean isGL = true;
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_bazi_hehun;
@@ -111,7 +117,6 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
                         String order_sn = jdata.getString("order_sn");
                         String comment = jdata.getString("comment");
                         data.add(new HehunListBean(order_sn, comment));
-
                     }
                     Log.d("textStr-->>", "");
                     adapter = new HehunAdapter(mContext, data);
@@ -233,17 +238,36 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
             return;
         }
 
-        int manYear = manDate.get(Calendar.YEAR);
-        ;
-        int manMonth = manDate.get(Calendar.MONTH);
-        int manDay = manDate.get(Calendar.DAY_OF_MONTH);
-        int manHour = manDate.get(Calendar.HOUR_OF_DAY);
+        String manYear;
+        String manMonth;
+        String manDay;
+        int manHour;
+        String womanYear;
+        String womanMonth;
+        String womanDay;
+        int womanHour;
 
-        int womanYear = womenDate.get(Calendar.YEAR);
-        ;
-        int womanMonth = womenDate.get(Calendar.MONTH);
-        int womanDay = womenDate.get(Calendar.DAY_OF_MONTH);
-        int womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
+        if (!isGL) {
+            manYear = manNlType.year;
+            manMonth = manNlType.month;
+            manDay = manNlType.day;
+            manHour = manDate.get(Calendar.HOUR_OF_DAY);
+
+            womanYear = womenNlType.year;
+            womanMonth = womenNlType.month;
+            womanDay = womenNlType.day;
+            womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
+        } else {
+            manYear = manDate.get(Calendar.YEAR) + "";
+            manMonth = manDate.get(Calendar.MONTH) + 1 + "";
+            manDay = manDate.get(Calendar.DAY_OF_MONTH) + "";
+            manHour = manDate.get(Calendar.HOUR_OF_DAY);
+
+            womanYear = womenDate.get(Calendar.YEAR) + "";
+            womanMonth = womenDate.get(Calendar.MONTH) + 1 + "";
+            womanDay = womenDate.get(Calendar.DAY_OF_MONTH) + "";
+            womanHour = womenDate.get(Calendar.HOUR_OF_DAY);
+        }
 
         Map<String, Object> map = new HashMap();
         map.put("user_id", Constants.userInfo.getUser_id());
@@ -304,13 +328,13 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
      * 展示日期
      */
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(mContext);
+        CustomDateDialog dialog = new CustomDateDialog(mContext);
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMDHM);
+//        dialog.setType(DateType.TYPE_YMDHM);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd HH:mm");
         //设置选择回调
@@ -322,11 +346,38 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
         });
 
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
-            @Override
-            public void onSure(Date date) {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
+//            @Override
+//            public void onSure(Date date) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(date);
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
+//                int day = calendar.get(Calendar.DATE);
+//                int hour = calendar.get(Calendar.HOUR);
+//                int minute = calendar.get(Calendar.MINUTE);
+//
+//                //小于10 前边加0   如 9月 会变成09月
+//                String monthStr = addZero2Date(month);
+//                String dayStr = addZero2Date(day);
+//                String hourStr = addZero2Date(hour);
+//                String minuteStr = addZero2Date(minute);
+//
+//                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+//                if (clickDateId == 0) {
+//                    manDate = calendar;
+//                    tv_man_date.setText(dateStr);
+//                } else if (clickDateId == 1) {
+//                    womenDate = calendar;
+//                    tv_women_date.setText(dateStr);
+//                }
+//            }
+
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
+//                cDate = calendar;
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
                 int day = calendar.get(Calendar.DATE);
@@ -339,13 +390,52 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
                 String hourStr = addZero2Date(hour);
                 String minuteStr = addZero2Date(minute);
 
-                String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
-                if (clickDateId == 0) {
-                    manDate = calendar;
-                    tv_man_date.setText(dateStr);
-                } else if (clickDateId == 1) {
-                    womenDate = calendar;
-                    tv_women_date.setText(dateStr);
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+//                    try {
+//                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+//                        nlDate = nlType.getTypeString();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+//                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+//                        nlDate = dateStr;
+//                    }
+                    if (clickDateId == 0) {
+                        try {
+                            manNlType = GlnlUtils.lunarToSolar(glDate, false);
+                            nlDate = manNlType.getTypeString();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            String dateStr = year + "年" + monthStr + "月" + dayStr;
+                            manNlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                            nlDate = dateStr;
+                        }
+                        manDate = calendar;
+                        tv_man_date.setText(nlDate);
+                    } else if (clickDateId == 1) {
+                        try {
+                            womenNlType = GlnlUtils.lunarToSolar(glDate, false);
+                            nlDate = womenNlType.getTypeString();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            String dateStr = year + "年" + monthStr + "月" + dayStr;
+                            womenNlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                            nlDate = dateStr;
+                        }
+                        womenDate = calendar;
+                        tv_women_date.setText(nlDate);
+                    }
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    if (clickDateId == 0) {
+                        manDate = calendar;
+                        tv_man_date.setText(dateStr);
+                    } else if (clickDateId == 1) {
+                        womenDate = calendar;
+                        tv_women_date.setText(dateStr);
+                    }
                 }
             }
         });

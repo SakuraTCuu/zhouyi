@@ -8,6 +8,8 @@
     <color name="red">#F00</color>
     <color name="qiming_color">#F4F9FF</color>
     <color name="qiming_select_color">#395C74</color>
+    <color name="qiming_table_top_color">#F5F0EC</color>
+    <color name="qiming_table_content_color">#FEF5E6</color>
     <color name="mBlack_50">#80000000</color>
     <color name="titlebarColor">#435F72</color>
     <color name="qiming_bazi_text_title">#CAA27B</color>
@@ -15,7 +17,8 @@
 
 
     <color name="shunian_content_bg">#B52E2A</color>
-    <color name="shunian_input_textcolor">#DEB283</color>
+<!--    <color name="shunian_input_textcolor">#DEB283</color>-->
+    <color name="shunian_input_textcolor">#000000</color>
     <color name="caiyun_content_bg">#F4D59C</color>
     <color name="gray">#eee</color>
 
