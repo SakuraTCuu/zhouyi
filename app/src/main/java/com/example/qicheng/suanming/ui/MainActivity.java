@@ -40,8 +40,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar bottomNavigationBar;
 
-    @BindView(R.id.scroll_root)
-    ScrollView scroll_root;
+//    @BindView(R.id.scroll_root)
+//    ScrollView scroll_root;
 
     public static MainActivity instances;
     private FragmentManager manager;

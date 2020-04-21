@@ -242,9 +242,12 @@ public class QimingFragment extends BaseFragment {
     public void onClickLive() {
         Drawable select_live_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_shape);
         text_live.setBackground(select_live_bg);
+        text_live.setTextColor(getResources().getColor(R.color.white));
 
         Drawable unselect_live_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_noLive.setBackground(unselect_live_bg);
+        text_noLive.setTextColor(getResources().getColor(R.color.black));
+
 
         birthState = 1;
         text_birthday_state.setText("出生日期");
@@ -267,9 +270,11 @@ public class QimingFragment extends BaseFragment {
     public void onClickNoLive() {
         Drawable select_nolive_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_shape);
         text_noLive.setBackground(select_nolive_bg);
+        text_noLive.setTextColor(getResources().getColor(R.color.white));
 
         Drawable unselect_nolive_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_live.setBackground(unselect_nolive_bg);
+        text_live.setTextColor(getResources().getColor(R.color.black));
 
         birthState = 0;
         text_birthday_state.setText("预产日期");
@@ -286,9 +291,11 @@ public class QimingFragment extends BaseFragment {
     public void onClickMen() {
         Drawable select_men_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_shape);
         text_men.setBackground(select_men_bg);
+        text_men.setTextColor(getResources().getColor(R.color.white));
 
         Drawable unselect_men_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_women.setBackground(unselect_men_bg);
+        text_women.setTextColor(getResources().getColor(R.color.black));
 
         if (birthState != 1) {
             text_unknow.setBackground(unselect_men_bg);
@@ -305,9 +312,11 @@ public class QimingFragment extends BaseFragment {
     public void onClickWomen() {
         Drawable select_women_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_shape);
         text_women.setBackground(select_women_bg);
+        text_women.setTextColor(getResources().getColor(R.color.white));
 
         Drawable unselect_women_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_men.setBackground(unselect_women_bg);
+        text_men.setTextColor(getResources().getColor(R.color.black));
 
         if (birthState != 1) {
             text_unknow.setBackground(unselect_women_bg);
@@ -323,12 +332,15 @@ public class QimingFragment extends BaseFragment {
     public void onClickUnknow() {
         Drawable select_unknow_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_shape);
         text_unknow.setBackground(select_unknow_bg);
+        text_unknow.setTextColor(getResources().getColor(R.color.white));
 
         Drawable unselect_women_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_women.setBackground(unselect_women_bg);
+        text_women.setTextColor(getResources().getColor(R.color.black));
 
         Drawable unselect_men_bg = ResourcesManager.getDrawable(getContext(), R.drawable.qiming_bg_unshape);
         text_men.setBackground(unselect_men_bg);
+        text_men.setTextColor(getResources().getColor(R.color.black));
 
         gender = -1;
     }

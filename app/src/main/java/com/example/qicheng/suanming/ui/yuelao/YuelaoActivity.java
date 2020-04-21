@@ -127,7 +127,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         String monthStr = addZero2Date(month);
         String dayStr = addZero2Date(day);
 
-        String textStr = year + "-" + monthStr + "-" + dayStr;
+        String textStr = "时间: " + year + "-" + monthStr + "-" + dayStr + "\n";
         textStr += "订单号:" + year + monthStr + "****";
 
         //随机订单号
@@ -136,24 +136,34 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
         String[] contentList = new String[]{"这个网站可以信赖 挺好的!",
                 "会推荐给其他人,我觉得挺准的",
                 "看着同龄人小孩都可以打酱油了,家里人也开始催了,我会听大师建议好好抓住机会的,谢谢指导",
-                "里面说的情况和我现在的真像!"
+                "里面说的情况和我现在的真像!",
+                "还行!",
+                "这网站真棒! 婚姻算的太准了! 这钱花的值!"
         };
 
-        String orderStr = "";
-        for (int i = 0; i < 4; i++) {
-            Random rand = new Random();
-            int number = rand.nextInt(26);
-            orderStr += words[number];
-        }
-        textStr += orderStr;
+//        //一个订单号
+//        String orderStr = "";
+//        for (int i = 0; i < 4; i++) {
+//            Random rand = new Random();
+//            int number = rand.nextInt(26);
+//            orderStr += words[number];
+//        }
+//        textStr += orderStr;
 
         data = new ArrayList<HehunListBean>();
         //生成20个无限循环
         for (int i = 1; i < 20; i++) {
-            data.add(new HehunListBean(textStr, contentList[i % contentList.length]));
+            //一个订单号
+            String tempOrderStr = textStr;
+            String orderStr = "";
+            for (int j = 0; j < 4; j++) {
+                Random rand = new Random();
+                int number = rand.nextInt(26);
+                orderStr += words[number];
+            }
+            tempOrderStr += orderStr;
+            data.add(new HehunListBean(tempOrderStr, contentList[i % contentList.length]));
         }
-
-        Log.d("textStr-->>", textStr);
 
         adapter = new HehunAdapter(mContext, data);
         lv_yuelao_switcher.setAdapter(adapter);

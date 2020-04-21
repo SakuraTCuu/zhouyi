@@ -51,7 +51,7 @@ public class HehunAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tv_title.setText("订单号: " + data.get(position % data.size()).getTitle());
+        holder.tv_title.setText(data.get(position % data.size()).getTitle());
         holder.tv_content.setText("评价:" + data.get(position % data.size()).getContent());
         return convertView;
     }

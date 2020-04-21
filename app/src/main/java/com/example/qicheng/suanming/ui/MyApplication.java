@@ -90,8 +90,8 @@ public class MyApplication extends Application {
             String nick_name = data.getString("nick_name");
             String gender = data.getString("gender");
             String phone = data.getString("phone");
-
-            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender, phone);
+            String birthday = data.getString("birthday");
+            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender, phone,birthday);
             Log.e("userId--->>", userId);
             Log.e("userInfo--->>", userInfo);
         }

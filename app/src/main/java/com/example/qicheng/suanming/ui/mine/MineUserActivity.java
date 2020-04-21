@@ -24,6 +24,9 @@ import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.example.qicheng.suanming.bean.UserModel;
+import com.example.qicheng.suanming.utils.CustomDateDialog;
+import com.example.qicheng.suanming.utils.CustomDatePicker;
+import com.example.qicheng.suanming.utils.GlnlUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
@@ -88,6 +91,9 @@ public class MineUserActivity extends BaseActivity {
     //调用系统相册-选择图片
     private static final int IMAGE = 1;
 
+    private GlnlUtils.glnlType nlType;
+    private Boolean isGL = true;
+
     private int gender = 0; //性别
     private String birthday;
     private String nickName = "";
@@ -110,14 +116,21 @@ public class MineUserActivity extends BaseActivity {
         setTitleText("账号信息");
 
         //设置用户头像
-
         UserModel umodel = Constants.userInfo;
         String nickName = umodel.getNick_name();
         String gender = umodel.getGender();
         String head_img = umodel.getHead_img();
+        String u_birthday = umodel.getBirthday();
 
         text_gender.setText(gender);
         edit_nickname.setText(nickName);
+
+        if (u_birthday != null) {
+            birthday = u_birthday;
+            text_birth.setText(birthday);
+            text_birth.setVisibility(View.VISIBLE);
+            img_birth.setVisibility(View.INVISIBLE);
+        }
 
         loadUserIcon(head_img);
     }
@@ -216,8 +229,6 @@ public class MineUserActivity extends BaseActivity {
         nickName = DataCheck.filterEmoji(nickName);
         work = DataCheck.filterEmoji(work);
 
-        Constants.userInfo.setNick_name(nickName);
-        Constants.saveData();
 
         Map<String, String> map = new HashMap();
         map.put("nick_name", nickName);
@@ -235,6 +246,10 @@ public class MineUserActivity extends BaseActivity {
                     boolean code = jsonObject.getBoolean("code");
                     if (code) {
                         ToastUtils.showShortToast("修改成功");
+                        Constants.userInfo.setBirthday(birthday);
+                        Constants.userInfo.setGender(gender == 1 ? "男" : "女");
+                        Constants.userInfo.setNick_name(nickName);
+                        Constants.saveData();
                         finish();
                     } else {
                         String msg = jsonObject.getString("msg");
@@ -298,13 +313,13 @@ public class MineUserActivity extends BaseActivity {
      * 展示日历
      */
     public void showDatePicker() {
-        DatePickDialog dialog = new DatePickDialog(mContext);
+        CustomDateDialog dialog = new CustomDateDialog(mContext);
         //设置上下年分限制
         dialog.setYearLimt(50);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型
-        dialog.setType(DateType.TYPE_YMD);
+//        dialog.setType(DateType.TYPE_YMD);
         //设置消息体的显示格式，日期格式
         dialog.setMessageFormat("yyyy-MM-dd");
         //设置选择回调
@@ -316,23 +331,74 @@ public class MineUserActivity extends BaseActivity {
         });
 
         //设置点击确定按钮回调
-        dialog.setOnSureLisener(new OnSureLisener() {
+        dialog.setOnSureLisener(new CustomDateDialog.OnCustomSureLisener() {
+            //            @Override
+//            public void onSure(Date date) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(date);
+//                int year = calendar.get(Calendar.YEAR);
+//                int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
+//                int day = calendar.get(Calendar.DATE);
+//
+//                String dateStr = year + "-" + month + "-" + day;
+//                birthday = dateStr;
+//                text_birth.setText(dateStr);
+//                text_birth.setVisibility(View.VISIBLE);
+//                img_birth.setVisibility(View.INVISIBLE);
+//            }
             @Override
-            public void onSure(Date date) {
+            public void onSure(Date date, boolean flag) {
+                isGL = flag;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH) + 1;  //月份从0开始算起
                 int day = calendar.get(Calendar.DATE);
+                int hour = calendar.get(Calendar.HOUR);
+                int minute = calendar.get(Calendar.MINUTE);
 
-                String dateStr = year + "-" + month + "-" + day;
-                birthday = dateStr;
-                text_birth.setText(dateStr);
-                text_birth.setVisibility(View.VISIBLE);
-                img_birth.setVisibility(View.INVISIBLE);
+                //小于10 前边加0   如 9月 会变成09月
+                String monthStr = addZero2Date(month);
+                String dayStr = addZero2Date(day);
+                String hourStr = addZero2Date(hour);
+                String minuteStr = addZero2Date(minute);
+
+                if (!flag) { //农历
+                    String glDate = year + monthStr + dayStr;
+                    String nlDate;
+                    try {
+                        nlType = GlnlUtils.lunarToSolar(glDate, false);
+                        nlDate = nlType.getTypeString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String dateStr = year + "年" + monthStr + "月" + dayStr;
+                        nlType = new GlnlUtils.glnlType(year + "", monthStr, dayStr, dateStr);
+                        nlDate = dateStr;
+                    }
+                    birthday = nlDate;
+                    text_birth.setText(nlDate);
+                    text_birth.setVisibility(View.VISIBLE);
+                    img_birth.setVisibility(View.INVISIBLE);
+                } else {
+                    String dateStr = year + "年" + monthStr + "月" + dayStr + "    " + hourStr + ":" + minuteStr;
+                    birthday = dateStr;
+                    text_birth.setText(dateStr);
+                    text_birth.setVisibility(View.VISIBLE);
+                    img_birth.setVisibility(View.INVISIBLE);
+                }
             }
         });
         dialog.show();
+    }
+
+    public String addZero2Date(int i) {
+        String str;
+        if (i < 10) {
+            str = "0" + i;
+        } else {
+            str = "" + i;
+        }
+        return str;
     }
 
     /**

@@ -178,7 +178,9 @@ public class BindPhoneActivity extends BaseActivity {
                         String gender = userData.getString("gender");
                         // String job =  userData.getString("job");
                         String phone = userData.getString("phone");
-                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone);
+                        String birthday = userData.getString("birthday");
+
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone,birthday);
                         Constants.userInfo = uModel;
                         Constants.saveData();
                         startActivity(new Intent(BindPhoneActivity.this, MainActivity.class));

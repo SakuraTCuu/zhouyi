@@ -44,7 +44,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wxentry);
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
-//        getSupportActionBar().hide();
+        // getSupportActionBar().hide();
         // 隐藏状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -135,7 +135,8 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                         String gender = userData.getString("gender");
                         // String job =  userData.getString("job");
                         String phone = userData.getString("phone");
-                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone);
+                        String birthday = userData.getString("birthday");
+                        UserModel uModel = new UserModel(user_id, head_img, nick_name, gender, phone, birthday);
                         Constants.userInfo = uModel;
                         Constants.saveData();
                         if (phone != "null" && phone != "" && !phone.equals("")) {

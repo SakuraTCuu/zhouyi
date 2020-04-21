@@ -17,13 +17,15 @@ public class UserModel {
     private String nick_name;
     private String gender;
     private String phone;
+    private String birthday;
 
-    public UserModel(String user_id, String head_img, String nick_name, String gender, String phone) {
+    public UserModel(String user_id, String head_img, String nick_name, String gender, String phone, String birthday) {
         this.user_id = user_id;
         this.head_img = head_img;
         this.nick_name = nick_name;
         this.gender = gender;
         this.phone = phone;
+        this.birthday = birthday;
     }
 
     public String getUser_id() {
@@ -75,11 +77,19 @@ public class UserModel {
             data.put("nick_name", nick_name);
             data.put("gender", gender);
             data.put("phone", phone);
+            data.put("birthday", birthday);
             return data.toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return user_id + "_" + head_img + "_" + nick_name + "_" + gender + "_" + phone;
+        return user_id + "_" + head_img + "_" + nick_name + "_" + gender + "_" + phone + "_" + birthday;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 }
