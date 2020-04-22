@@ -136,7 +136,6 @@ public class MineFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        Log.d()
         if (requestCode == 1) {
             if (Constants.localUrl != null) {
                 Bitmap bitmap = BitmapFactory.decodeFile(Constants.localUrl);

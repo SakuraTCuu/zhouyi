@@ -98,15 +98,15 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
             switch (baseResp.errCode) {
                 case BaseResp.ErrCode.ERR_OK:
                     //分享成功
-//                    Toast.makeText(WXEntryActivity.this, "分享成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(WXEntryActivity.this, "分享成功", Toast.LENGTH_LONG).show();
                     break;
                 case BaseResp.ErrCode.ERR_USER_CANCEL:
                     //分享取消
-//                    Toast.makeText(WXEntryActivity.this, "分享取消", Toast.LENGTH_LONG).show();
+                    Toast.makeText(WXEntryActivity.this, "分享取消", Toast.LENGTH_LONG).show();
                     break;
                 case BaseResp.ErrCode.ERR_AUTH_DENIED:
                     //分享拒绝
-//                    Toast.makeText(WXEntryActivity.this, "分享拒绝", Toast.LENGTH_LONG).show();
+                    Toast.makeText(WXEntryActivity.this, "分享拒绝", Toast.LENGTH_LONG).show();
                     break;
             }
         }

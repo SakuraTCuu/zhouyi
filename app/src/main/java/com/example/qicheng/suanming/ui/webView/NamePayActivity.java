@@ -1,5 +1,6 @@
 package com.example.qicheng.suanming.ui.webView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -17,6 +19,7 @@ import android.widget.FrameLayout;
 
 import com.example.qicheng.suanming.R;
 import com.example.qicheng.suanming.base.BaseActivity;
+import com.example.qicheng.suanming.utils.WxShareUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +63,7 @@ public class NamePayActivity extends BaseActivity {
         webview_order.setWebViewClient(new MyWebViewClient());
         webview_order.setWebChromeClient(new WebChromeClient());
         headers.put("Referer", "http://app.zhouyi999.cn");
+        webview_order.addJavascriptInterface(new MyJavascriptInterface(this), "share");  //调用本地方法
         webview_order.loadUrl(url, headers);
         WebSettings settings = webview_order.getSettings();
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
@@ -130,6 +134,14 @@ public class NamePayActivity extends BaseActivity {
                 finish();
                 return false;
             }
+//            else if (url.startsWith("js://wxShare")) {
+//                Log.d("wxShareurl--->>", url);
+//                String shareUrl = Uri.parse(url).getQueryParameter("share_url");
+//                int type = Integer.parseInt(Uri.parse(url).getQueryParameter("type"));
+//
+//                WxShareUtils.showWxShare(shareUrl, type);
+//                return false;
+//            }
             try {
                 if (url.startsWith("weixin://") || url.startsWith("alipays://")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -192,6 +204,26 @@ public class NamePayActivity extends BaseActivity {
             urlList.remove(urlList.size() - 1);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    class MyJavascriptInterface {
+        private Context context;
+
+        public MyJavascriptInterface(Context context) {
+            this.context = context;
+        }
+
+        /**
+         * 前端代码嵌入js：
+         * showWxShare 名应和js函数方法名一致
+         */
+        @JavascriptInterface
+        public void showWxShare(String url, String type) {
+            Log.e("src", url);
+            Log.e("type", type + "");
+            int newType = Integer.parseInt(type);
+            WxShareUtils.showWxShare(url, newType);
         }
     }
 }

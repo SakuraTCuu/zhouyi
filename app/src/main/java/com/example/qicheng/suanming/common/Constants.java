@@ -76,8 +76,8 @@ public class Constants {
     }
 
     public static class getApi {
-        public static final String URL = "http://app.zhouyi999.cn/";
-//        public static final String URL = "http://app.nyqicheng.cn/"; //临时域名
+                public static final String URL = "http://app.zhouyi999.cn/";
+//        public static final String URL = "http://192.168.2.248/"; //临时域名
 
         // 起名接口
         public static final String QIMING = URL + "index/names/addQiMing";
@@ -145,7 +145,7 @@ public class Constants {
         //用户分享次数
         public static final String ADDUSERSHARE = URL + "index/user/addUserShare";
 
-        //用户分享次数
+        //用户分享url
         public static final String GETUSERSHAREURL = URL + "index/share/userShareUrl";
 
         //获取农历日期
