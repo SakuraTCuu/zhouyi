@@ -1,0 +1,48 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\values-fi\\values-fi.xml",
+            "map": [
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values-fi\\pull_refresh_strings.xml",
+                    "from": {
+                        "startLines": "8,10,9,3,5,4",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "412,613,504,59,221,139",
+                        "endColumns": "90,113,107,78,73,80",
+                        "endOffsets": "498,722,607,133,290,215"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,146,260,368,447,521",
+                        "endColumns": "90,113,107,78,73,80",
+                        "endOffsets": "141,255,363,442,516,597"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-fi\\values-fi.xml",
+            "map": [
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values-fi\\pull_refresh_strings.xml",
+                    "from": {
+                        "startLines": "8,10,9,3,5,4",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "412,613,504,59,221,139",
+                        "endColumns": "90,113,107,78,73,80",
+                        "endOffsets": "498,722,607,133,290,215"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,146,260,368,447,521",
+                        "endColumns": "90,113,107,78,73,80",
+                        "endOffsets": "141,255,363,442,516,597"
+                    }
+                }
+            ]
+        }
+    ]
+}

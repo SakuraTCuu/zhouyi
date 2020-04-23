@@ -28,6 +28,7 @@ import com.example.qicheng.suanming.ui.fragment.qiming.QimingFragment;
 import butterknife.BindView;
 
 import com.example.qicheng.suanming.utils.LogUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -288,6 +289,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             Toast.makeText(this, "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
             clickTime = System.currentTimeMillis();
         } else {
+            MobclickAgent.onKillProcess(this);
             this.finish();
         }
     }

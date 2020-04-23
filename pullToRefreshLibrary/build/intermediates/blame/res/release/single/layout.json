@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    }
+]

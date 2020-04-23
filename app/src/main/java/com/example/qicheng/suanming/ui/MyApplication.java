@@ -3,7 +3,6 @@ package com.example.qicheng.suanming.ui;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -24,6 +23,7 @@ import com.okhttplib.cookie.persistence.SharedPrefsCookiePersistor;
 import com.example.qicheng.suanming.utils.ToastUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.umeng.commonsdk.UMConfigure;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +41,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         init();
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
     public void init() {
@@ -91,7 +92,7 @@ public class MyApplication extends Application {
             String gender = data.getString("gender");
             String phone = data.getString("phone");
             String birthday = data.getString("birthday");
-            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender, phone,birthday);
+            Constants.userInfo = new UserModel(userId, head_img, nick_name, gender, phone, birthday);
             Log.e("userId--->>", userId);
             Log.e("userInfo--->>", userInfo);
         }

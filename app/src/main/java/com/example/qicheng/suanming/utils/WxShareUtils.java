@@ -1,6 +1,5 @@
 package com.example.qicheng.suanming.utils;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -120,11 +119,6 @@ public class WxShareUtils {
                     JSONObject jsonObject = new JSONObject(info.getRetDetail());
                     boolean code = jsonObject.getBoolean("code");
                     String msg = jsonObject.getString("msg");
-//                    if (code) {
-//                        ToastUtils.showShortToast("分享成功");
-//                    } else {
-//                        ToastUtils.showShortToast(msg);
-//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -137,7 +131,6 @@ public class WxShareUtils {
                 ToastUtils.showShortToast(result);
             }
         });
-
     }
 
 }

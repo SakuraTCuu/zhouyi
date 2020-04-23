@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\drawable-hdpi\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\drawable-hdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\drawable-hdpi\\indicator_arrow.png"
+    }
+]

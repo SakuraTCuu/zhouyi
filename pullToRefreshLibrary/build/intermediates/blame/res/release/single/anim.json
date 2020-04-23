@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\anim\\slide_out_to_bottom.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\anim\\slide_in_from_bottom.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\anim\\slide_in_from_top.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\anim\\slide_out_to_top.xml",
+        "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\anim\\slide_out_to_top.xml"
+    }
+]

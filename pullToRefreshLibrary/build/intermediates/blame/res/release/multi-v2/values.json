@@ -1,0 +1,154 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\pull_refresh_strings.xml",
+                    "from": {
+                        "startLines": "8,10,9,3,5,4",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "398,610,501,59,211,132",
+                        "endColumns": "101,113,107,71,69,77",
+                        "endOffsets": "495,719,604,126,276,205"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "465,567,681,789,861,931",
+                        "endColumns": "101,113,107,71,69,77",
+                        "endOffsets": "562,676,784,856,926,1004"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\attrs.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "59",
+                        "endLines": "77",
+                        "endColumns": "24",
+                        "endOffsets": "3672"
+                    },
+                    "to": {
+                        "startLines": "16",
+                        "startColumns": "4",
+                        "startOffsets": "1009",
+                        "endLines": "90",
+                        "endColumns": "24",
+                        "endOffsets": "4522"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\ids.xml",
+                    "from": {
+                        "startLines": "3,5,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "59,138,99",
+                        "endColumns": "38,40,37",
+                        "endOffsets": "93,174,132"
+                    },
+                    "to": {
+                        "startLines": "7,8,9",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "350,388,428",
+                        "endColumns": "37,39,36",
+                        "endOffsets": "383,423,460"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "6,7,4,5,3",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "229,294,115,171,59",
+                        "endColumns": "63,63,54,56,54",
+                        "endOffsets": "288,353,165,223,109"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,119,183,238,295",
+                        "endColumns": "63,63,54,56,54",
+                        "endOffsets": "114,178,233,290,345"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\build\\intermediates\\res\\merged\\release\\values\\values.xml",
+            "map": [
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\pull_refresh_strings.xml",
+                    "from": {
+                        "startLines": "8,10,9,3,5,4",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "398,610,501,59,211,132",
+                        "endColumns": "101,113,107,71,69,77",
+                        "endOffsets": "495,719,604,126,276,205"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "465,567,681,789,861,931",
+                        "endColumns": "101,113,107,71,69,77",
+                        "endOffsets": "562,676,784,856,926,1004"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\attrs.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "59",
+                        "endLines": "77",
+                        "endColumns": "24",
+                        "endOffsets": "3672"
+                    },
+                    "to": {
+                        "startLines": "16",
+                        "startColumns": "4",
+                        "startOffsets": "1009",
+                        "endLines": "90",
+                        "endColumns": "24",
+                        "endOffsets": "4522"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\ids.xml",
+                    "from": {
+                        "startLines": "3,5,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "59,138,99",
+                        "endColumns": "38,40,37",
+                        "endOffsets": "93,174,132"
+                    },
+                    "to": {
+                        "startLines": "7,8,9",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "350,388,428",
+                        "endColumns": "37,39,36",
+                        "endOffsets": "383,423,460"
+                    }
+                },
+                {
+                    "source": "E:\\code\\Android\\zhouyi\\pullToRefreshLibrary\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "6,7,4,5,3",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "229,294,115,171,59",
+                        "endColumns": "63,63,54,56,54",
+                        "endOffsets": "288,353,165,223,109"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,119,183,238,295",
+                        "endColumns": "63,63,54,56,54",
+                        "endOffsets": "114,178,233,290,345"
+                    }
+                }
+            ]
+        }
+    ]
+}
