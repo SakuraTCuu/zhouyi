@@ -160,6 +160,7 @@ public class CaiyunActivity extends BaseActivity {
                     Intent intent = new Intent(CaiyunActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
+                    bundle.putString("title", "财运分析");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

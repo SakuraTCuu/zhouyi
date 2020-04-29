@@ -158,6 +158,7 @@ public class MouseYearActivity extends BaseActivity {
                     Intent intent = new Intent(MouseYearActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
+                    bundle.putString("title", "鼠年运程");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

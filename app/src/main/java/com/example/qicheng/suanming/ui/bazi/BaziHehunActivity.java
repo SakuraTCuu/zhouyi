@@ -308,6 +308,7 @@ public class BaziHehunActivity extends BaseActivity implements AbsListView.OnScr
                     Intent intent = new Intent(BaziHehunActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
+                    bundle.putString("title", "八字合婚");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

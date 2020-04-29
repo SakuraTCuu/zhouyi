@@ -161,6 +161,7 @@ public class BaziJingPiActivity extends BaseActivity {
                     Intent intent = new Intent(BaziJingPiActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
+                    bundle.putString("title", "八字精批");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

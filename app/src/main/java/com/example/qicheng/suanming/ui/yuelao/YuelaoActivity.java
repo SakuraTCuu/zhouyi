@@ -141,15 +141,6 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
                 "这网站真棒! 婚姻算的太准了! 这钱花的值!"
         };
 
-//        //一个订单号
-//        String orderStr = "";
-//        for (int i = 0; i < 4; i++) {
-//            Random rand = new Random();
-//            int number = rand.nextInt(26);
-//            orderStr += words[number];
-//        }
-//        textStr += orderStr;
-
         data = new ArrayList<HehunListBean>();
         //生成20个无限循环
         for (int i = 1; i < 20; i++) {
@@ -235,6 +226,7 @@ public class YuelaoActivity extends BaseActivity implements AbsListView.OnScroll
                     Intent intent = new Intent(YuelaoActivity.this, NamePayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", url);
+                    bundle.putString("title", "月老姻缘");
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (JSONException e) {

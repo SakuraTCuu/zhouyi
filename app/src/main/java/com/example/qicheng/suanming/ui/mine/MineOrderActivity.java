@@ -185,28 +185,53 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
     }
 
     private void onClickDetailBtn(MineOrderBean orderBean) {
+        String title = "";
         switch (orderBean.getType()) {
             case Constants.getClassifyKey.DJM:
             case Constants.getClassifyKey.XJM:
-//                    跳转到自选姓名界面  需要先请求
+                //跳转到自选姓名界面  需要先请求
                 getNameDataFromServer(orderBean);
                 break;
             case Constants.getClassifyKey.BZJP:
+                title = "八字精批";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.BZHH:
+                title = "八字合婚";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.YLYY:
+                title = "月老姻缘";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.CYFX:
+                title = "财运分析";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.CSFX:
+                title = "测试分类";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.HYCS:
+                title = "婚姻测算";
+                startOrderInfo(orderBean, title);
+                break;
             case Constants.getClassifyKey.WLYS:
-//                index/order/orderInfo?order_sn=2020032109135060032
-                String url = Constants.getApi.URL + "index/order/orderInfo?order_sn=" + orderBean.getOrderCode();
-                Intent intent = new Intent(MineOrderActivity.this, NamePayActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("url", url);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                title = "未来运势";
+                startOrderInfo(orderBean, title);
                 break;
         }
+    }
+
+    private void startOrderInfo(MineOrderBean orderBean, String title) {
+        //              index/order/orderInfo?order_sn=2020032109135060032
+        String url = Constants.getApi.URL + "index/order/orderInfo?order_sn=" + orderBean.getOrderCode();
+        Intent intent = new Intent(MineOrderActivity.this, NamePayActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("url", url);
+        bundle.putString("title", title);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void getNameDataFromServer(MineOrderBean orderBean) {
@@ -217,7 +242,7 @@ public class MineOrderActivity extends BaseActivity implements AdapterView.OnIte
             String user_name = userData.getString("user_name");
             String birthday = userData.getString("birthday");
             String gender = userData.getString("gender");
-//    String date_type = "1"; // 日期类型  公历还是农历
+//          String date_type = "1"; // 日期类型  公历还是农历
             Map map = new HashMap<String, String>();
             map.put("user_name", user_name);
             map.put("birthday", birthday);

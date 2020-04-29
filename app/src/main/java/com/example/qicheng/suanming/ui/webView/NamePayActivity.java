@@ -44,10 +44,16 @@ public class NamePayActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        hideTitleBar();
+//        hideTitleBar();
         Bundle bundle = this.getIntent().getExtras(); //读取intent的数据给bundle对象
         String url = bundle.getString("url"); //通过key得到value
+        String title = bundle.getString("title"); //通过key得到value
 //        headers.put("Referer", "http://app.zhouyi999.cn");
+        if (title != null && title != "") {
+            setTitleText(title);
+        } else {
+            hideTitleBar();
+        }
         addWeb(url);
     }
 
