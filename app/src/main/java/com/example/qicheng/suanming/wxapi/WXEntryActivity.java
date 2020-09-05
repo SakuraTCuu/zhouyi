@@ -76,7 +76,6 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     @Override
     public void onResp(BaseResp baseResp) {
         //登录回调
-
         if (baseResp.getType() == WX_LOGIN) {
             switch (baseResp.errCode) {
                 case BaseResp.ErrCode.ERR_OK:

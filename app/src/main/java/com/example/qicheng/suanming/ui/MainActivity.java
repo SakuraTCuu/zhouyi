@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.qicheng.suanming.bean.DaShiKeFuBean;
+import com.example.qicheng.suanming.ui.fragment.CommunityFragment;
+import com.example.qicheng.suanming.ui.fragment.MasterListFragment;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.annotation.RequestType;
 import com.example.qicheng.suanming.R;
@@ -54,6 +56,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     BaziFragment baziFragment;//八字
     QimingFragment qimingFragment;//起名
     MineFragment mineFragment;//起名
+    CommunityFragment communityFragment;//vip
+    MasterListFragment masterListFragment;//大师列表
 
     @Override
     protected int setLayoutId() {
@@ -75,8 +79,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.setBarBackgroundColor("#D7E6EF");
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.mipmap.home, "首页").setInActiveColor(R.color.black).setActiveColorResource(R.color.qiming_select_color).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.home1)))
+                .addItem(new BottomNavigationItem(R.mipmap.index_dashiliebiao, "大师列表").setActiveColorResource(R.color.home_bg).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.index_dashiliebiaohuise)))
                 .addItem(new BottomNavigationItem(R.mipmap.bazi, "八字排盘").setInActiveColor(R.color.black).setActiveColorResource(R.color.qiming_select_color).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.bazi1)))
                 .addItem(new BottomNavigationItem(R.mipmap.qiming, "大师起名").setInActiveColor(R.color.black).setActiveColorResource(R.color.qiming_select_color).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.qiming1)))
+                .addItem(new BottomNavigationItem(R.mipmap.index_shequ, "VIP服务").setActiveColorResource(R.color.home_bg).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.index_shequhuise)))
                 .addItem(new BottomNavigationItem(R.mipmap.mine, "个人中心").setInActiveColor(R.color.black).setActiveColorResource(R.color.qiming_select_color).setInactiveIcon(ContextCompat.getDrawable(this, R.mipmap.mine1)))
                 .setFirstSelectedPosition(0)
                 .initialise();
@@ -107,15 +113,21 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         baziFragment = new BaziFragment();
         qimingFragment = new QimingFragment();
         mineFragment = new MineFragment();
+        communityFragment = new CommunityFragment();
+        masterListFragment = new MasterListFragment();
 
         manager.beginTransaction()
                 .add(R.id.container, homeFragment, HomeFragment.class.getName())
                 .add(R.id.container, baziFragment, BaziFragment.class.getName())
+                .add(R.id.container, communityFragment, CommunityFragment.class.getName())
+                .add(R.id.container, masterListFragment, MasterListFragment.class.getName())
                 .add(R.id.container, qimingFragment, QimingFragment.class.getName())
                 .add(R.id.container, mineFragment, MineFragment.class.getName())
                 .hide(baziFragment)
                 .hide(qimingFragment)
                 .hide(mineFragment)
+                .hide(communityFragment)
+                .hide(masterListFragment)
                 .commit();
     }
 
@@ -202,6 +214,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .hide(baziFragment)
                 .hide(mineFragment)
                 .hide(homeFragment)
+                .hide(communityFragment)
+                .hide(masterListFragment)
                 .commit();
     }
 
@@ -210,6 +224,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //被选中时
         Log.e("onTabSelected", String.valueOf(position));
 
+        hideAllFragment();
 //        UpdataokHttop();
         //被选中时
         LogUtils.e("onTabSelected", String.valueOf(position));
@@ -217,16 +232,32 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         FragmentTransaction transaction = manager.beginTransaction();
         switch (position) {
             case 0:
+                hideTitleBar();
                 transaction.show(homeFragment);
                 break;
             case 1:
-                transaction.show(baziFragment);
+                hideTitleBar();
+                transaction.show(masterListFragment);
                 break;
             case 2:
-                transaction.show(qimingFragment);
+                hideTitleBar();
+                transaction.show(baziFragment);
+//                setStatusBarColor(ContextCompat.getColor(this, R.color.dashi_info_statusbar));
                 break;
             case 3:
+                hideTitleBar();
+                transaction.show(qimingFragment);
+                break;
+            case 4:
+//                hideTitleBar();
+                transaction.show(communityFragment);
+                setTitleText("VIP服务");
+                hideExitImg();
+                break;
+            case 5:
+                hideTitleBar();
                 transaction.show(mineFragment);
+//                setStatusBarColor(ContextCompat.getColor(this, R.color.white));
                 break;
         }
         transaction.commit();
@@ -241,13 +272,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 transaction.hide(homeFragment);
                 break;
             case 1:
-                transaction.hide(baziFragment);
+                transaction.hide(masterListFragment);
                 break;
             case 2:
-                transaction.hide(qimingFragment);
+                transaction.hide(baziFragment);
                 break;
             case 3:
+                transaction.hide(qimingFragment);
+                break;
+            case 5:
                 transaction.hide(mineFragment);
+                break;
+            case 4:
+                transaction.hide(communityFragment);
                 break;
         }
         transaction.commit();

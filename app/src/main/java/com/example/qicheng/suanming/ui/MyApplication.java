@@ -41,7 +41,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         init();
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
+//        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
     public void init() {

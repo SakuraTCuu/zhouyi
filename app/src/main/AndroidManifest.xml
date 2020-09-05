@@ -61,6 +61,10 @@
         <activity android:name=".ui.jiemeng.JiemengDetailActivity" />
         <activity android:name=".ui.webView.PrivacyActivty" />
         <activity android:name=".ui.BindPhoneActivity" />
+        <activity android:name=".ui.Article.ArticleActivity" />
+        <activity android:name=".ui.Article.ArticleDetailActivity" />
+        <activity android:name=".ui.DashiZixunPayActivity" />
+
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -81,7 +85,6 @@
             android:theme="@style/dialogStyle" />
 
         <activity
-
             android:name="com.chuanglan.shanyan_sdk.view.CTCCPrivacyProtocolActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"

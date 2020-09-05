@@ -1,10 +1,18 @@
 package com.example.qicheng.suanming.common;
 
+import android.util.Log;
+
 import com.example.qicheng.suanming.bean.DaShiKeFuBean;
 import com.example.qicheng.suanming.bean.UserModel;
 import com.example.qicheng.suanming.ui.MyApplication;
 
+import com.example.qicheng.suanming.utils.MD5Utils;
+import com.example.qicheng.suanming.utils.MapUtils;
 import com.example.qicheng.suanming.utils.SPUtils;
+
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Constants {
 
@@ -14,9 +22,15 @@ public class Constants {
     public static boolean isLogin = false;
     public static String os_type = "";
     public static UserModel userInfo;
+    public static String session_key = "";
     public static DaShiKeFuBean kefuInfo;
     public static String localUrl;
     public static String nickName;
+
+    public static class payType {
+        public static String goods = "ShopPayActivity";
+        public static String virtual = "ConfirmOrderActivity";
+    }
 
     public static String getUid() {
         return (String) SPUtils.get(MyApplication.getInstance(), "uid", "");
@@ -56,6 +70,23 @@ public class Constants {
         SPUtils.put(MyApplication.getInstance(), "userInfo", uModel.toString());
     }
 
+    /**
+     * 公共参数
+     * 拼接get请求参数  签名
+     */
+    public static String joinStrParams(Map map) {
+        map.put("platform", "app");
+        map.put("tm", String.valueOf(new Date().getTime() / 1000));
+        //TreeMap 默认按key排序
+        TreeMap treemap = new TreeMap(map);
+        String strA = MapUtils.Map2String(treemap);
+        String signTemp = strA + "&key=LgcD6nx7mRCPweZT3C9fhESdRVkdIzIplxw8Q";
+        Log.d("signTemp-->>", signTemp);
+        String sign = MD5Utils.digest(signTemp).toUpperCase(); //生成签名
+        Log.d("sign-->>", sign);
+        return sign;
+    }
+
     // key
 //    public static final String shanyanKey = "BCtJkQBB";
     //      appid
@@ -75,8 +106,42 @@ public class Constants {
         public static final String CSFX = "csfx";//测试分类
     }
 
+    public static class getApi2 {
+        public static final String URL = "http://dsj.zhouyi999.cn/";
+
+        //大师列表
+        public static final String DASHILIST = URL + "api/v1/dashi/list";
+
+        //擅长技能列表
+        public static final String SKILLLIST = URL + "api/v1/dashi/skill";
+
+        //社区首页顶部分类
+        public static final String VIPCATEGORY = URL + "api/v1/article/category";
+
+        //社区首页
+        public static final String VIPHOME = URL + "api/v1/community/index";
+
+        //创建咨询订单
+        public static final String CREATEZIXUNORDER = URL + "api/v1/zixun/create";
+
+        //商品订单
+        public static final String SHOPCREATEORDER = URL + "api/v1/order/create";
+
+        //wx支付
+        public static final String WXPAY = URL + "api/v1/order/wxpay";
+
+        //文章详情
+        public static final String ARTICLEDETAIL = URL + "api/v1/article/detail";
+
+        //用户测算信息
+        public static final String USERCESUANINFO = URL + "api/v1/user/ce_info";
+
+        //文章列表
+        public static final String ARTICLELIST = URL + "api/v1/article/list";
+    }
+
     public static class getApi {
-                public static final String URL = "http://app.zhouyi999.cn/";
+        public static final String URL = "http://app.zhouyi999.cn/";
 //        public static final String URL = "http://192.168.2.248/"; //临时域名
 
         // 起名接口

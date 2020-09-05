@@ -14,6 +14,10 @@
     <color name="titlebarColor">#435F72</color>
     <color name="qiming_bazi_text_title">#CAA27B</color>
     <color name="qiming_bazi_text_content">#587588</color>
+    <color name="home_bg">#673B00</color>
+    <color name="dashiListItemGray">#F1F1F3</color>
+    <color name="gray_line">#F1F1F3</color>
+    <color name="gray_333">#333333</color>
 
 
     <color name="shunian_content_bg">#B52E2A</color>
@@ -21,5 +25,6 @@
     <color name="shunian_input_textcolor">#000000</color>
     <color name="caiyun_content_bg">#F4D59C</color>
     <color name="gray">#eee</color>
-
+    <color name="btn_background">#6E3C00</color>
+    <color name="dashi_info_statusbar">#6E3C00</color>
 </resources>

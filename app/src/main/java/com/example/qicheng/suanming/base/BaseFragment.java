@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment implements BaseHandler.CallB
 
     public Context mContext;
     private BaseHandler mainHandler;
-    private LoadingDialog loadingDialog;//加载提示框
+    public LoadingDialog loadingDialog;//加载提示框
     private Unbinder unbinder;
     public Bundle savedInstanceState;       //MainActivity防止出现fragment重叠时使用
 
@@ -45,6 +45,10 @@ public abstract class BaseFragment extends Fragment implements BaseHandler.CallB
         //绑定控件
         unbinder = ButterKnife.bind(this,view);
         mContext = getActivity();
+
+        loadingDialog = getLoadingDialog();
+
+
         initView();
         initData();
         return view;

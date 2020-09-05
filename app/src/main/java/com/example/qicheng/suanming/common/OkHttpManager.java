@@ -2,6 +2,7 @@ package com.example.qicheng.suanming.common;
 
 import android.util.Log;
 
+import com.example.qicheng.suanming.utils.MapUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.OkHttpUtil;
 
@@ -10,7 +11,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
+import java.util.TreeMap;
 
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -52,6 +55,48 @@ public class OkHttpManager {
 //                            }else{
 //                                requestListener.Success(info);
 //                            }
+                        requestListener.Success(info);
+                    }
+
+                    @Override
+                    public void onFailure(HttpInfo info) throws IOException {
+                        Log.d("onFailure--->", info.getRetDetail());
+                        requestListener.Fail(info);
+                    }
+                });
+    }
+
+    /**
+     * 兼容大师集的后台
+     *
+     * @param url
+     * @param type
+     * @param params
+     * @param requestListener
+     */
+    public static void requestByDashiji(String url, int type, Map<String, Object> params, RequestListener requestListener) {
+//        Log.d("params-->>>", params.toString());
+//        params.put("tm", params.get("tm"));
+//        params.put("platform", "app");
+        String sign = Constants.joinStrParams(params);
+//        params.put("sign", sign);
+        TreeMap treemap = new TreeMap(params);
+        String strA = MapUtils.Map2String(treemap);
+        Log.d("strA-->>>", strA);
+        url += "?" + strA + "&sign=" + sign;
+        Log.d("url-->>>", url);
+        OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
+//                        .addHead("access-token", Constants.session_key)
+                        .setUrl(url)
+                        .setRequestType(type)//设置请求方式
+//                        .addParam("tm", String.valueOf(new Date().getTime() / 1000))
+//                        .addParams(params)
+//                        .addParam("platform", "app")
+                        .build(),
+                new com.okhttplib.callback.Callback() {
+                    @Override
+                    public void onSuccess(HttpInfo info) throws IOException {
+                        //TODO 哪里处理好呢？
                         requestListener.Success(info);
                     }
 

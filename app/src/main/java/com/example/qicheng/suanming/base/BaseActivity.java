@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qicheng.suanming.R;
+import com.example.qicheng.suanming.utils.LoadingDialog;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
@@ -26,6 +27,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private RelativeLayout rl_title_bar;
     private TextView text_title;
     private ImageView img_exit;
+    private  int statusBarHeight;
+
+    protected LoadingDialog waitDialog;
+
 
     protected Context mContext;
     protected Bundle mSavedInstanceState;       //防止出现Fragment重叠时使用
@@ -33,6 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 获得状态栏高度
+//        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+//        statusBarHeight = getResources().getDimensionPixelSize(resourceId);
 
         //添加一个title bar
         // 隐藏状态栏  标题栏
@@ -62,12 +71,26 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         this.mSavedInstanceState = savedInstanceState;
 
+        waitDialog = new LoadingDialog(this);
+
         //初始化View控件
         initView();
         //初始化数据
         initData();
         //设置监听
         setListener();
+    }
+
+    public void showLoading() {
+        if (waitDialog != null && !waitDialog.isShowing()) {
+            waitDialog.show();
+        }
+    }
+
+    public void hideLoading() {
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
     }
 
     protected void onResume() {
