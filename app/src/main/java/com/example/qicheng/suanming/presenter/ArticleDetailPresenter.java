@@ -36,6 +36,11 @@ public class ArticleDetailPresenter implements ArticleDetailContract.Presenter {
     }
 
     @Override
+    public void getArticleUserInfo(Map map) {
+        mModel.getArticleUserInfo(map);
+    }
+
+    @Override
     public void addUserInfoSuc(String data) {
         mView.addUserInfoSuc(data);
     }
@@ -43,5 +48,10 @@ public class ArticleDetailPresenter implements ArticleDetailContract.Presenter {
     @Override
     public void getArticleDetailSuc(String data) {
         mView.getArticleDetailSuc(data);
+    }
+
+    @Override
+    public void getArticleUserInfoSuc(String data) {
+        mView.getArticleUserInfoSuc(data);
     }
 }

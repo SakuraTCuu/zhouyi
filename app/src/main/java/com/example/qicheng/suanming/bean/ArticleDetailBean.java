@@ -8,15 +8,15 @@ public class ArticleDetailBean {
      * data : {"id":73,"title":"财运官运","name":"未来一个月我的财运如何？","category_id":4,"detail_pic":"https://dsj.zhouyi999.cn//uploads/","content":"<p style=\"text-indent: 28px;\"><span style=\";font-family:宋体;font-size:19px\"><span style=\"font-family:宋体\">在财运这条大道上，有人正财收入颇丰且平稳，有人偏财运十分好，随便买个彩票都能中。未来一个月你的财运又将如何？之前的投资是否有收益？周围朋友会给你带来合作？工作努力得到意外奖金？一测便见分晓。<\/span><\/span><\/p>","use_num":247424,"recomment_num":1282,"good_rate":"96.0","label":"20","price":"98.00","banner":"https://dsj.zhouyi999.cn//uploads/20200606/2020-06-06_1591431816_5edb52884ff21.png","ce_info":{"id":9,"uid":1,"name":"王","sex":1,"birthday":"2016-6-11","phone":"13520917230","created_at":"2020-06-10 17:57:32"},"coupon_amount":0,"pay_amount":"98.00"}
      */
 
-    private int code;
+    private boolean code;
     private String msg;
     private DataBean data;
 
-    public int getCode() {
+    public boolean getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(boolean code) {
         this.code = code;
     }
 

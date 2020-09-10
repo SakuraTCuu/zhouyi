@@ -107,6 +107,7 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
                 map.put("ds_id", ds_id);
             }
             map.put("info_id", info_id);
+            map.put("uid", Constants.getUid());
             mPresenter.getOrderInfo(map);
             showLoading();
         } else if (type.equals("goods")) {
@@ -151,6 +152,8 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
             } else {
                 map.put("order_type", "goods");
             }
+            map.put("device_type", "android");
+            map.put("uid", Constants.getUid());
             map.put("order_sn", payOrder_sn);
             //先调用支付
             mPresenter.getWxPayInfo(map);
@@ -164,7 +167,7 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
     public void getOrderInfoSuc(String data) {
         hideLoading();
         CreateOrderBean bean = new Gson().fromJson(data, CreateOrderBean.class);
-        if (bean.getCode() == 200) {
+        if (bean.getCode()) {
             result = bean.getData();
             payOrder_sn = result.getOrder_no();
             tv_order_sn.setText(payOrder_sn);

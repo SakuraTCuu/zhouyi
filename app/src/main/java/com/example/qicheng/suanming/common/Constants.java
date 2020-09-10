@@ -138,11 +138,44 @@ public class Constants {
 
         //文章列表
         public static final String ARTICLELIST = URL + "api/v1/article/list";
+
+        //文章 用户测算信息
+        public static final String ARTICLEUSERINFO = URL + "index/dsj/service_detail";
+
+        //===========================
+
+        //大师详情url
+        public static final String DASHIDETAIL = URL + "api/v1/dashi/detail";
+
+        //大师详情评论url
+        public static final String DASHIDETAILCOMMENT = URL + "api/v1/comment";
+
+        //关注大师
+        public static final String DASHIATTENTION = URL + "api/v1/dashi/concern";
+
+        //大师详情评论url
+//        public static final String DASHIDETAILCOMMENT = URL + "api/v1/comment";
+
     }
 
     public static class getApi {
         public static final String URL = "http://app.zhouyi999.cn/";
 //        public static final String URL = "http://192.168.2.248/"; //临时域名
+
+        //文章 用户测算信息
+        public static final String ARTICLEUSERINFO = URL + "index/dsj/service_detail";
+
+        //wx支付
+        public static final String WXPAY = URL + "index/dsj/pay_detail";
+
+        //创建咨询订单
+        public static final String CREATEZIXUNORDER = URL + "index/dsj/create_order";
+
+        //测算信息
+        public static final String USERCESUANINFO = URL + "index/dsj/ce_info";
+
+        //关注大师
+        public static final String DASHIATTENTION = URL + "index/dsj/concern";
 
         // 起名接口
         public static final String QIMING = URL + "index/names/addQiMing";

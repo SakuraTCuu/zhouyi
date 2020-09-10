@@ -30,7 +30,7 @@ public class DashiZixunPayModel implements DashiZixunPayContract.Model {
     public void getOrderInfo(Map map) {
 //        String sign = Constants.joinStrParams(map);
 //        map.put("sign", sign);
-        OkHttpManager.requestByDashiji(Constants.getApi2.CREATEZIXUNORDER, RequestType.GET, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.requestByDashiji(Constants.getApi.CREATEZIXUNORDER, RequestType.GET, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 mPresenter.getOrderInfoSuc(info.getRetDetail());
@@ -64,7 +64,7 @@ public class DashiZixunPayModel implements DashiZixunPayContract.Model {
     public void getWxPayInfo(Map map) {
 //        String sign = Constants.joinStrParams(map);
 //        map.put("sign", sign);
-        OkHttpManager.requestByDashiji(Constants.getApi2.WXPAY, RequestType.GET, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.requestByDashiji(Constants.getApi.WXPAY, RequestType.GET, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 mPresenter.getWxPayInfoSuc(info.getRetDetail());

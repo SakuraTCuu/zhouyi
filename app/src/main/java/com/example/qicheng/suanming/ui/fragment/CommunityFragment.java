@@ -17,6 +17,7 @@ import com.example.qicheng.suanming.bean.VIPListDataBean;
 import com.example.qicheng.suanming.contract.CommunityContract;
 import com.example.qicheng.suanming.presenter.CommunityPresenter;
 import com.example.qicheng.suanming.ui.Article.ArticleActivity;
+import com.example.qicheng.suanming.ui.Article.ArticleDetailActivity;
 import com.example.qicheng.suanming.utils.ToastUtils;
 import com.example.qicheng.suanming.widget.CustomListView;
 import com.google.gson.Gson;
@@ -159,9 +160,9 @@ public class CommunityFragment extends BaseFragment implements CommunityContract
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent(mContext, ArticleDetailActivity.class);
-//        intent.putExtra("name", result.get(position).getName());
-//        intent.putExtra("id", vipListInfo.get(position).getId() + "");
-//        startActivity(intent);
+        Intent intent = new Intent(mContext, ArticleDetailActivity.class);
+        intent.putExtra("name", result.get(position).getName());
+        intent.putExtra("id", vipListInfo.get(position).getId() + "");
+        startActivity(intent);
     }
 }

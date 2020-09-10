@@ -8,15 +8,15 @@ public class CreateOrderBean {
      * data : {"order_no":"202005281747587190191813","created_at":"2020-05-28 17:47:58"}
      */
 
-    private int code;
+    private boolean code;
     private String msg;
     private DataBean data;
 
-    public int getCode() {
+    public boolean getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(boolean code) {
         this.code = code;
     }
 

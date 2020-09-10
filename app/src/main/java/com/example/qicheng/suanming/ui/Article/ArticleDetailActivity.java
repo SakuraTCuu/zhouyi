@@ -21,6 +21,7 @@ import com.example.qicheng.suanming.R;
 import com.example.qicheng.suanming.base.BaseActivity;
 import com.example.qicheng.suanming.bean.ArticleDetailBean;
 import com.example.qicheng.suanming.bean.UserCeSuanInfo;
+import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.contract.ArticleDetailContract;
 import com.example.qicheng.suanming.presenter.ArticleDetailPresenter;
 import com.example.qicheng.suanming.ui.DashiZixunPayActivity;
@@ -109,17 +110,20 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     protected void initView() {
         title = getIntent().getStringExtra("name");
         articleId = getIntent().getStringExtra("id");
-
         setTitleText(title);
-
         mPresenter = new ArticleDetailPresenter(this);
     }
 
     @Override
     protected void initData() {
-        Map<String, String> map = new HashMap<>();
-        map.put("article_id", articleId);
-        mPresenter.getArticleDetail(map);
+//        Map<String, String> map = new HashMap<>();
+//        map.put("article_id", articleId);
+//        mPresenter.getArticleDetail(map);
+
+        Map<String, String> newMap = new HashMap<>();
+        newMap.put("article_id", articleId);
+        newMap.put("uid", Constants.getUid());
+        mPresenter.getArticleUserInfo(newMap);
         showLoading();
     }
 
@@ -129,7 +133,7 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     }
 
     @Override
-    public void getArticleDetailSuc(String data) {
+    public void getArticleUserInfoSuc(String data) {
         hideLoading();
         Log.d("getArticleDetailSuc-->>", data);
         ArticleDetailBean bean = new Gson().fromJson(data, ArticleDetailBean.class);
@@ -157,10 +161,15 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
     }
 
     @Override
+    public void getArticleDetailSuc(String data) {
+
+    }
+
+    @Override
     public void addUserInfoSuc(String data) {
         hideLoading();
         UserCeSuanInfo bean = new Gson().fromJson(data, UserCeSuanInfo.class);
-        if (bean.getCode() == 200) {
+        if (bean.getCode()) {
             info_id = bean.getData().getInfo_id();
             //关闭窗口
             popupWindow.close();
@@ -169,6 +178,14 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleDetail
             ToastUtils.showShortToast("错误," + bean.getMsg());
         }
     }
+
+//    @Override
+//    public void getArticleUserInfoSuc(String data) {
+//        Log.d("ArticleUserInfo-->>", data);
+//        /**
+//         * {"code":true,"msg":"success","data":{"id":32,"name":"我的命中注定的人在哪里呢","title":"精准测算","category_id":3,"index_pic":"20200606\/2020-06-06_1591430821_5edb4ea511923.png","thumb":"20200730\/2020-07-30_1596076080_5f2230308bc67.jpg","detail_pic":"https:\/\/dsj.zhouyi999.cn\/uploads\/20200606\/2020-06-06_1591430721_5edb4e413ed67.png","content":"<p>所谓“命中注定”，并不是从看到的第一眼起，就笃定下一秒你们就会结婚，一辈子生活在一起。这样的“命中注定”就太玄乎，太不切实际了。<\/p><p>“命中注定”就是两个人在未来可以长期共同生活、和谐相处，可以彼此理解和支持，享受一种轻松愉悦的相处氛围。<\/p><p>遇到这样一个命中注定的爱人，无疑是幸运和幸福的。如果你的身边出现了这样一个人，请一定要牢牢抓住。<\/p><p><br\/><\/p>","use_num":233013,"recomment_num":453,"good_rate":"99.0","status":1,"is_show":1,"label":"精准","price":"49.00","created_at":"2020-06-06 16:07:11","updated_at":"2020-07-30 10:28:01","banner":"https:\/\/dsj.zhouyi999.cn\/uploads\/20200619\/2020-06-19_1592552217_5eec6b1989f87.png","ce_info":{"id":8,"uid":375,"name":"王坤","sex":1,"birthday":"1987-9-10","phone":"13073704201","created_at":"2020-09-10 17:50:22"},"coupon_amount":0,"pay_amount":"49.00"}}
+//         */
+//    }
 
     public void gotoPay(int info_id) {
         Intent intent = new Intent(ArticleDetailActivity.this, DashiZixunPayActivity.class);

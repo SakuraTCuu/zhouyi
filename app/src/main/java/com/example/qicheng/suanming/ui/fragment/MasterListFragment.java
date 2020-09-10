@@ -18,6 +18,7 @@ import com.example.qicheng.suanming.bean.DashiListBean;
 import com.example.qicheng.suanming.bean.DashiSkillListBean;
 import com.example.qicheng.suanming.contract.MasterListContract;
 import com.example.qicheng.suanming.presenter.MasterListPresenter;
+import com.example.qicheng.suanming.ui.DashiInfoActivity;
 import com.example.qicheng.suanming.widget.CustomListView;
 import com.google.gson.Gson;
 
@@ -191,8 +192,8 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent(mContext, DashiInfoActivity.class);
-//        intent.putExtra("id", dashiList.get(position).getId() + "");
-//        startActivity(intent);
+        Intent intent = new Intent(mContext, DashiInfoActivity.class);
+        intent.putExtra("id", dashiList.get(position).getId() + "");
+        startActivity(intent);
     }
 }

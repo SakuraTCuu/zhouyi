@@ -8,15 +8,15 @@ public class UserCeSuanInfo {
      *      * data : {"info_id":9}
      */
 
-    private int code;
+    private boolean code;
     private String msg;
     private DataBean data;
 
-    public int getCode() {
+    public boolean getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(boolean code) {
         this.code = code;
     }
 
