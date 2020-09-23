@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.qicheng.suanming.utils.MapUtils;
 import com.okhttplib.HttpInfo;
 import com.okhttplib.OkHttpUtil;
+import com.okhttplib.annotation.RequestType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,17 +75,20 @@ public class OkHttpManager {
      * @param params
      * @param requestListener
      */
-    public static void requestByDashiji(String url, int type, Map<String, Object> params, RequestListener requestListener) {
+    public static void requestByDashiji(String url, int type, Map<String, String> params, RequestListener requestListener) {
 //        Log.d("params-->>>", params.toString());
 //        params.put("tm", params.get("tm"));
 //        params.put("platform", "app");
-        String sign = Constants.joinStrParams(params);
+        if(type == RequestType.GET){
+            String sign = Constants.joinStrParams(params);
 //        params.put("sign", sign);
-        TreeMap treemap = new TreeMap(params);
-        String strA = MapUtils.Map2String(treemap);
-        Log.d("strA-->>>", strA);
-        url += "?" + strA + "&sign=" + sign;
-        Log.d("url-->>>", url);
+            TreeMap treemap = new TreeMap(params);
+            String strA = MapUtils.Map2String(treemap);
+            Log.d("strA-->>>", strA);
+            url += "?" + strA + "&sign=" + sign;
+            Log.d("url-->>>", url);
+        }
+
         OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
 //                        .addHead("access-token", Constants.session_key)
                         .setUrl(url)
@@ -107,6 +111,40 @@ public class OkHttpManager {
                     }
                 });
     }
+
+
+    /**
+     * 兼容大师集的后台
+     *
+     * @param url
+     * @param type
+     * @param params
+     * @param requestListener
+     */
+    public static void requestByDashijiPost(String url, int type, Map<String, String> params, RequestListener requestListener) {
+        OkHttpUtil.getDefault().doAsync(HttpInfo.Builder()
+//                        .addHead("access-token", Constants.session_key)
+                        .setUrl(url)
+                        .setRequestType(type)//设置请求方式
+//                        .addParam("tm", String.valueOf(new Date().getTime() / 1000))
+                        .addParams(params)
+//                        .addParam("platform", "app")
+                        .build(),
+                new com.okhttplib.callback.Callback() {
+                    @Override
+                    public void onSuccess(HttpInfo info) throws IOException {
+                        //TODO 哪里处理好呢？
+                        requestListener.Success(info);
+                    }
+
+                    @Override
+                    public void onFailure(HttpInfo info) throws IOException {
+                        Log.d("onFailure--->", info.getRetDetail());
+                        requestListener.Fail(info);
+                    }
+                });
+    }
+
 
     /**
      * 不携带id

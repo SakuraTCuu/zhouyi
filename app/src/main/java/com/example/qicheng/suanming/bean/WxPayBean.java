@@ -1,22 +1,24 @@
 package com.example.qicheng.suanming.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class WxPayBean {
 
     /**
-     * code : 200
+     * code : true
      * msg : success
-     * data : {"appid":"wxf7bbdb9bdc782bb3","partnerid":"1511101771","prepayid":"wx26104314882440abe77d59f21231726800","timestamp":"1590460994","noncestr":"hlRv5EwM8xhbAns1","sign":"B6572F0ED1D2BB61E27983E6E6D1C6C9","pkg":"Sign=WXPay"}
+     * data : {"appid":"wxf7bbdb9bdc782bb3","partnerid":"1511101771","prepayid":"wx151756309863134a9acc106817ec300000","timestamp":"1600163791","noncestr":"fRbq9kmrbncags1A","package":"Sign=WXPay","sign":"6E3A2FAC4C07AAFFB118890103F7908F","out_trade_no":"202009155f608fceba44b4327"}
      */
 
-    private int code;
+    private boolean code;
     private String msg;
     private DataBean data;
 
-    public int getCode() {
+    public boolean isCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(boolean code) {
         this.code = code;
     }
 
@@ -40,11 +42,12 @@ public class WxPayBean {
         /**
          * appid : wxf7bbdb9bdc782bb3
          * partnerid : 1511101771
-         * prepayid : wx26104314882440abe77d59f21231726800
-         * timestamp : 1590460994
-         * noncestr : hlRv5EwM8xhbAns1
-         * sign : B6572F0ED1D2BB61E27983E6E6D1C6C9
-         * pkg : Sign=WXPay
+         * prepayid : wx151756309863134a9acc106817ec300000
+         * timestamp : 1600163791
+         * noncestr : fRbq9kmrbncags1A
+         * package : Sign=WXPay
+         * sign : 6E3A2FAC4C07AAFFB118890103F7908F
+         * out_trade_no : 202009155f608fceba44b4327
          */
 
         private String appid;
@@ -52,8 +55,10 @@ public class WxPayBean {
         private String prepayid;
         private String timestamp;
         private String noncestr;
+        @SerializedName("package")
+        private String packageX;
         private String sign;
-        private String pkg;
+        private String out_trade_no;
 
         public String getAppid() {
             return appid;
@@ -95,6 +100,14 @@ public class WxPayBean {
             this.noncestr = noncestr;
         }
 
+        public String getPackageX() {
+            return packageX;
+        }
+
+        public void setPackageX(String packageX) {
+            this.packageX = packageX;
+        }
+
         public String getSign() {
             return sign;
         }
@@ -103,12 +116,12 @@ public class WxPayBean {
             this.sign = sign;
         }
 
-        public String getPkg() {
-            return pkg;
+        public String getOut_trade_no() {
+            return out_trade_no;
         }
 
-        public void setPkg(String pkg) {
-            this.pkg = pkg;
+        public void setOut_trade_no(String out_trade_no) {
+            this.out_trade_no = out_trade_no;
         }
     }
 }

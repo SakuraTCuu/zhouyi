@@ -54,4 +54,24 @@ public class DashiZixunPayPresenter implements DashiZixunPayContract.Presenter {
     public void getOrderInfoSuc(String data) {
         mView.getOrderInfoSuc(data);
     }
+
+    @Override
+    public void getAliPayInfo(Map map) {
+        mModel.getAliPayInfo(map);
+    }
+
+    @Override
+    public void getAliPayInfoSuc(String data) {
+        mView.getAliPayInfoSuc(data);
+    }
+
+    @Override
+    public void getPayStateInfo(Map map) {
+        mModel.getPayStateInfo(map);
+    }
+
+    @Override
+    public void getPayStateInfoSuc(String data) {
+        mView.getPayStateInfoSuc(data);
+    }
 }

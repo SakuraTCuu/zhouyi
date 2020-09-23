@@ -165,8 +165,17 @@ public class Constants {
         //文章 用户测算信息
         public static final String ARTICLEUSERINFO = URL + "index/dsj/service_detail";
 
-        //wx支付
-        public static final String WXPAY = URL + "index/dsj/pay_detail";
+        // H5 wx支付
+        public static final String H5WXPAY = URL + "index/dsj/pay_detail";
+
+        // app wx支付
+        public static final String APPWXPAY = URL + "index/dsj/wxpay_app";
+
+        // app ali支付
+        public static final String APPALPAY = URL + "index/dsj/alipay_app";
+
+        // app支付状态查询
+        public static final String APPPAYSTATE = URL + "index/dsj/get_order_status";
 
         //创建咨询订单
         public static final String CREATEZIXUNORDER = URL + "index/dsj/create_order";

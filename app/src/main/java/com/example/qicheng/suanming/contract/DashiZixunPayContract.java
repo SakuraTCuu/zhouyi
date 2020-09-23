@@ -13,6 +13,10 @@ public interface DashiZixunPayContract {
         void getShopOrderInfoSuc(String data);
 
         void getWxPayInfoSuc(String data);
+
+        void getAliPayInfoSuc(String data);
+
+        void getPayStateInfoSuc(String data);
     }
 
     interface Model extends BaseModel<Presenter> {
@@ -21,6 +25,10 @@ public interface DashiZixunPayContract {
         void getShopOrderInfo(Map map);
 
         void getWxPayInfo(Map map);
+
+        void getAliPayInfo(Map map);
+
+        void getPayStateInfo(Map map);
     }
 
     interface Presenter extends BasePresenter {
@@ -36,5 +44,12 @@ public interface DashiZixunPayContract {
 
         void getOrderInfoSuc(String data);
 
+        void getAliPayInfo(Map map);
+
+        void getAliPayInfoSuc(String data);
+
+        void getPayStateInfo(Map map);
+
+        void getPayStateInfoSuc(String data);
     }
 }

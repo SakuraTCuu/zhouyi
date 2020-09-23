@@ -1,5 +1,7 @@
 package com.example.qicheng.suanming.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +15,10 @@ import com.example.qicheng.suanming.bean.WxPayExtBean;
 import com.example.qicheng.suanming.common.Constants;
 import com.example.qicheng.suanming.contract.DashiZixunPayContract;
 import com.example.qicheng.suanming.presenter.DashiZixunPayPresenter;
+import com.example.qicheng.suanming.ui.bazi.BaziHehunActivity;
+import com.example.qicheng.suanming.ui.webView.NamePayActivity;
+import com.example.qicheng.suanming.ui.webView.WxH5PayActivity;
+import com.example.qicheng.suanming.utils.MapUtils;
 import com.example.qicheng.suanming.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -20,6 +26,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +50,6 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
 
     @BindView(R.id.iv_ali_pay)
     ImageView iv_ali_pay;
-
 
     private DashiZixunPayPresenter mPresenter;
 
@@ -141,7 +147,9 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
     }
 
     public void clickBuy() {
-        if (payType == 1) { //wx支付
+        if (payType == 1) {
+            this.wxpay();
+        }else{ //ali支付
             Map<String, String> map = new HashMap<>();
             if (!type.equals("goods")) {
                 if (type.equals("vip") || type.equals("vip_pay")) { //TODO 服务器没分
@@ -156,11 +164,38 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
             map.put("uid", Constants.getUid());
             map.put("order_sn", payOrder_sn);
             //先调用支付
-            mPresenter.getWxPayInfo(map);
+            mPresenter.getAliPayInfo(map);
             showLoading();
-        } else { // 支付宝
-
         }
+    }
+
+    private void wxpay() { //wx支付
+        Map<String, String> map = new HashMap<>();
+        if (!type.equals("goods")) {
+            if (type.equals("vip") || type.equals("vip_pay")) { //TODO 服务器没分
+                map.put("order_type", "zixun");
+            } else {
+                map.put("order_type", "zixun");
+            }
+        } else {
+            map.put("order_type", "goods");
+        }
+        map.put("device_type", "android");
+        map.put("uid", Constants.getUid());
+        map.put("order_sn", payOrder_sn);
+        //先调用支付
+//            mPresenter.getWxPayInfo(map);
+        TreeMap treemap = new TreeMap(map);
+        String strA = MapUtils.Map2String(treemap);
+        Log.d("strA-->>>", strA);
+        String url = Constants.getApi.H5WXPAY + "?" + strA;
+
+//        Intent intent = new Intent(DashiZixunPayActivity.this, NamePayActivity.class);
+        Intent intent = new Intent(DashiZixunPayActivity.this, WxH5PayActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("url", url);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -172,6 +207,9 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
             payOrder_sn = result.getOrder_no();
             tv_order_sn.setText(payOrder_sn);
             tv_order_time.setText(result.getCreated_at());
+            wxpay();
+
+            finish();
         } else {
             ToastUtils.showShortToast("错误," + bean.getMsg());
         }
@@ -187,28 +225,41 @@ public class DashiZixunPayActivity extends BaseActivity implements DashiZixunPay
         hideLoading();
         //获取订单成功, 调起微信支付
         Log.d("getWxPayInfoSuc-->>", data);
-        WxPayBean bean = new Gson().fromJson(data, WxPayBean.class);
 
-        WxPayBean.DataBean result = bean.getData();
-        IWXAPI api = MyApplication.getInstance().getWxApi();
-        PayReq request = new PayReq();
-        request.appId = result.getAppid();
-        request.partnerId = result.getPartnerid();
-        request.prepayId = result.getPrepayid();
-        request.packageValue = result.getPkg();
-        request.nonceStr = result.getNoncestr();
-        request.timeStamp = result.getTimestamp();
-        request.sign = result.getSign();
-        WxPayExtBean payExtBean;
-        if (type.equals("goods")) {
-            payExtBean = new WxPayExtBean(Constants.payType.goods, payOrder_sn);
-        } else {
-            payExtBean = new WxPayExtBean(Constants.payType.virtual, payOrder_sn);
-        }
-        //传入一个标识，以便区分回调
-        String ext = new Gson().toJson(payExtBean);
-        request.extData = ext;
-        api.sendReq(request);
+//        WxPayBean bean = new Gson().fromJson(data, WxPayBean.class);
+//
+//        WxPayBean.DataBean result = bean.getData();
+//        IWXAPI api = MyApplication.getInstance().getWxApi();
+//        PayReq request = new PayReq();
+//        request.appId = result.getAppid();
+//        request.partnerId = result.getPartnerid();
+//        request.prepayId = result.getPrepayid();
+//        request.packageValue = result.getPackageX();
+//        request.nonceStr = result.getNoncestr();
+//        request.timeStamp = result.getTimestamp();
+//        request.sign = result.getSign();
+//        WxPayExtBean payExtBean;
+//        if (type.equals("goods")) {
+//            payExtBean = new WxPayExtBean(Constants.payType.goods, payOrder_sn);
+//        } else {
+//            payExtBean = new WxPayExtBean(Constants.payType.virtual, payOrder_sn);
+//        }
+//        //传入一个标识，以便区分回调
+//        String ext = new Gson().toJson(payExtBean);
+//        request.extData = ext;
+//        api.sendReq(request);
+    }
+
+    @Override
+    public void getAliPayInfoSuc(String data) {
+        hideLoading();
+        //获取订单成功, 调起ali支付
+        Log.d("getWxPayInfoSuc-->>", data);
+    }
+
+    @Override
+    public void getPayStateInfoSuc(String data) {
+
     }
 
     @Override

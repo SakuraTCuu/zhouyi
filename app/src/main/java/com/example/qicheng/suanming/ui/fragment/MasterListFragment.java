@@ -156,7 +156,7 @@ public class MasterListFragment extends BaseFragment implements MasterListContra
                 type = 2;
                 break;
         }
-        this.initData();
+        this.getDashiList();
     }
 
     @Override

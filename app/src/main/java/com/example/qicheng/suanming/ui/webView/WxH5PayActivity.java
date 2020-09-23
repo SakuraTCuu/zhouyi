@@ -28,7 +28,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class NamePayActivity extends BaseActivity {
+public class WxH5PayActivity extends BaseActivity {
 
     //    @BindView(R.id.webview_order)
 //    WebView webview_order;
@@ -58,7 +58,7 @@ public class NamePayActivity extends BaseActivity {
     }
 
     public void addWeb(String url) {
-        WebView webview_order = new WebView(NamePayActivity.this);
+        WebView webview_order = new WebView(WxH5PayActivity.this);
         fl_view.addView(webview_order);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -125,29 +125,7 @@ public class NamePayActivity extends BaseActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url == null) return false;
             Log.d("url1111--->>", url);
-            if (url.startsWith("js://webview")) {
-                //大小吉名支付成功;
-                //返回到选名界面,然后
-                Log.d("url--->>", url);
-                String status = Uri.parse(url).getQueryParameter("back_status");
-                Intent intent = new Intent();
-                if (status.equals("1")) {
-                    intent.putExtra("status", 1);
-                } else {
-                    intent.putExtra("status", -1);
-                }
-                setResult(RESULT_OK, intent);
-                finish();
-                return false;
-            }
-//            else if (url.startsWith("js://wxShare")) {
-//                Log.d("wxShareurl--->>", url);
-//                String shareUrl = Uri.parse(url).getQueryParameter("share_url");
-//                int type = Integer.parseInt(Uri.parse(url).getQueryParameter("type"));
-//
-//                WxShareUtils.showWxShare(shareUrl, type);
-//                return false;
-//            }
+//            view.loadUrl(url);
             try {
                 if (url.startsWith("weixin://") || url.startsWith("alipays://")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

@@ -32,7 +32,9 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
     // APP_ID 替换为你的应用从官方网站申请到的合法appId
-    public static final String APP_ID = "wx10f0e8af9e8031c3";
+//    public static final String APP_ID = "wx10f0e8af9e8031c3";
+    public static final String APP_ID = "wxf7bbdb9bdc782bb3";
+
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
 

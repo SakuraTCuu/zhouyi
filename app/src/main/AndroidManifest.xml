@@ -67,6 +67,7 @@
         <activity android:name=".ui.SelectServerActivity" />
         <activity android:name=".ui.MoreEvaluateActivity" />
         <activity android:name=".ui.DashiInfoActivity" />
+        <activity android:name=".ui.webView.WxH5PayActivity" />
 
         <activity
             android:name="com.chuanglan.shanyan_sdk.view.CmccLoginActivity"

@@ -64,10 +64,44 @@ public class DashiZixunPayModel implements DashiZixunPayContract.Model {
     public void getWxPayInfo(Map map) {
 //        String sign = Constants.joinStrParams(map);
 //        map.put("sign", sign);
-        OkHttpManager.requestByDashiji(Constants.getApi.WXPAY, RequestType.GET, map, new OkHttpManager.RequestListener() {
+        OkHttpManager.requestByDashiji(Constants.getApi.H5WXPAY, RequestType.GET, map, new OkHttpManager.RequestListener() {
             @Override
             public void Success(HttpInfo info) {
                 mPresenter.getWxPayInfoSuc(info.getRetDetail());
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.e("DashiList.err->", info.getRetDetail());
+            }
+        });
+    }
+
+    @Override
+    public void getAliPayInfo(Map map) {
+//        String sign = Constants.joinStrParams(map);
+//        map.put("sign", sign);
+        OkHttpManager.requestByDashijiPost(Constants.getApi.APPALPAY, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                mPresenter.getAliPayInfoSuc(info.getRetDetail());
+            }
+
+            @Override
+            public void Fail(HttpInfo info) {
+                Log.e("DashiList.err->", info.getRetDetail());
+            }
+        });
+    }
+
+    @Override
+    public void getPayStateInfo(Map map) {
+//        String sign = Constants.joinStrParams(map);
+//        map.put("sign", sign);
+        OkHttpManager.requestByDashijiPost(Constants.getApi.APPPAYSTATE, RequestType.POST, map, new OkHttpManager.RequestListener() {
+            @Override
+            public void Success(HttpInfo info) {
+                mPresenter.getPayStateInfoSuc(info.getRetDetail());
             }
 
             @Override
